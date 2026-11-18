@@ -169,7 +169,7 @@ Recursos editoriales [O]: **letra capitular** en la capa Historia ("A finales de
   - Ancho y alto de diseño: **375 × 812 (D1, §15)**. Se revisa en **360 × 800** y en un iPhone real antes de cerrar cada pantalla.
   - Alto útil en el navegador: controles críticos dentro de los primeros ~640 px; margen lateral 16–24 px.
   - **Zona del pulgar:** las acciones frecuentes (Volver, Mapa, Siguiente, reproducir, cambiar capa) en el tercio inferior; arriba solo información (dónde estoy, progreso).
-  - **Una sola barra inferior por tipo de pantalla** (D2 provisional, §15); la tarjeta de estación se recalcula para que no quede tapada.
+  - **Una sola barra inferior por tipo de pantalla** (D2, §15); la tarjeta de estación se recalcula para que no quede tapada.
   - Áreas táctiles de 48 × 48 mínimo, separadas al menos 8 px entre sí.
   - Orientación vertical. El prototipo de Figma en horizontal se ve ampliado y obliga a desplazar: es una **limitación declarada**; las páginas web 360/AR sí deben funcionar en horizontal.
 - **Estructura de una pantalla de estación** [O], de atrás hacia adelante: fondo de escenario (imagen) → sombra superior (degradado para legibilidad) → barra superior → pieza en pedestal con punto dorado → tarjeta inferior (desde y = 372) con título, subtítulo, relato, reproductor y controles → botón contraer/desplegar.
@@ -222,7 +222,7 @@ Nota: Figma no permite "Al tocar" y "Al pasar el cursor" en la misma capa; por e
 
 **Matriz de microinteracciones** (disparador · regla · respuesta · cierre) [O, texto de la lámina]:
 
-1. **Tocar un punto dorado** → valida la estación, actualiza el progreso (0/4 → 1/4; en la vista previa de Figma solo "Estación N de 4", ver D3) y carga el audio **en pausa (0:00)** → el punto pulsa en carmesí, la cámara enfoca el pedestal y sube la tarjeta **sin sonido automático** → queda en Resumen con audio y carrusel listos.
+1. **Tocar un punto dorado** → valida la estación, actualiza el progreso (0/4 → 1/4; en Figma con variables, ver D3) y carga el audio **en pausa (0:00)** → el punto pulsa en carmesí, la cámara enfoca el pedestal y sube la tarjeta **sin sonido automático** → queda en Resumen con audio y carrusel listos.
 2. **Pulsar play** → "Nada suena solo" y "El sonido nunca va solo"; detiene cualquier audio previo → icono pausa con aro dorado, ondas, tiempo avanza, subtítulo sincronizado resaltado → al terminar o pausar vuelve a Normal y el subtítulo sigue legible.
 3. **Cambiar pestaña o tocar ⌄/⌃** → alterna Resumen / Historia / Galería o colapsa (295 → 133 px) → transición suave, la flecha rota → la tarjeta queda estable sin cortar el audio.
 4. **Ver en 2D** → inicio quieto obligatorio y alternativa sin cámara ni WebGL → escenario 3D con anillo 360° y 3 pines, o lámina 2D con despiece y el mismo audio → al tocar ← vuelve a la estación conservando el avance.
@@ -294,7 +294,7 @@ Nota: Figma no permite "Al tocar" y "Al pasar el cursor" en la misma capa; por e
 9. **Íconos en inglés y con tamaños mixtos** (18–30 px). [O] → [P] nombres en español y tamaños 20/24.
 10. **Estados por duplicación de frames:** 40 pantallas para una sala; frágil al iterar tras el testing. [O] → [P] variables o componentes interactivos donde reduzcan frames.
 11. **Grises de maqueta en pantallas** (`#383838`, `#D9D9D9`) y frames de prototipo con rectángulos de bloqueo. [O] → [P] reemplazar por contenido real.
-12. **Contenido de las estaciones del prototipo** ("Tríada instrumental" en la estación 1) distinto del guion del Corte 1 ("Qué es y dónde nace", 1968, Consuelo Araújo, Piloneras). [O][C1] → aclarar con la docente cuál manda.
+12. **Contenido de las estaciones del prototipo** ("Tríada instrumental" en la estación 1) distinto del guion del Corte 1 ("Qué es y dónde nace", 1968, Consuelo Araújo, Piloneras). [O][C1] → resuelto: manda el guion del Corte 1, confirmado por el Corte 2 (§18).
 13. **Ámbar como color de texto o ícono fino sobre crema** (1.78:1). [O medido] → prohibido.
 14. **Diseño pensado con cursor:** 202 interacciones de hover que no existen en el celular. [O] → estado Presionado (§7).
 15. **93 % de áreas táctiles bajo 44 px y 73 % de textos bajo 12 px** en el prototipo. [O] → §1.1, §3 y §5.
@@ -313,13 +313,13 @@ No se observan puntos de quiebre: todo está diseñado a 375 × 667. [O]
 ## 14. Guía para agentes (invariantes)
 
 - Usar **solo** las variables de `Tokens Base` y `Componentes`; nunca hex escrito a mano salvo los anotados en §2.1 mientras no tengan variable.
-- Reutilizar los componentes `Botón`, `Tarjeta / Sala` e `Interactivo / *` antes de dibujar algo nuevo.
+- Reutilizar los componentes `Botón`, `Tarjeta / Sala` e `Interactivo / *` antes de dibujar algo nuevo, ajustados al canon del Corte 2 (§18). Cuando el Corte 2 difiere del archivo de la profesora, manda el Corte 2.
 - Tipografía: solo los 5 estilos; nada por debajo de 13 px.
 - Espaciado en múltiplos de 4; radios 4 · 8 · 999 (más 12 · 16 si se aprueba §12.3).
 - Transiciones: 300 ms ease-in-out entre pantallas, 150 ms ease-out en el estado Presionado (Cursor solo en escritorio).
 - Ningún audio arranca solo y ningún audio va sin subtítulo; todo momento inmersivo arranca quieto y tiene alternativa 2D.
 - No comunicar estados solo con color; el foco siempre visible y distinto del activo.
-- **Móvil primero:** frames de 375 × 812 (D1), área táctil mínima 48 × 48, relato a 16 px, nada bajo 13 px; progreso en Figma solo como "Estación N de 4" (D3), acciones frecuentes en el tercio inferior, controles críticos dentro del alto útil del navegador (~640 px).
+- **Móvil primero:** frames de 375 × 812 (D1), área táctil mínima 48 × 48, relato a 16 px, nada bajo 13 px; progreso con variables de Figma: Visitada y "parada X de 4" (D3); "Plaza" en lugar de "Pasillo" (§18), acciones frecuentes en el tercio inferior, controles críticos dentro del alto útil del navegador (~640 px).
 - El dorado tocable siempre con borde o ícono en Cuero de Caja y halo ≥ 3:1; foco con anillo doble.
 - Ningún estado depende del cursor: el feedback visual es **Presionado**; todo arrastre tiene alternativa de un toque.
 - No mezclar con el sistema de diseño anterior del estudiante (descartado).
