@@ -21,8 +21,8 @@
 |---|---|---|
 | `DESIGN.md` con D1–D3 cerradas | Claude | ✅ En repo y Proyecto |
 | `CRITERIOS.md` con acuerdos de pendientes | Claude | ✅ En repo y Proyecto |
-| `PLAN.md` (este documento) | Claude | Kevin lo aprueba |
-| `CLAUDE.md` para Claude Code | Claude | Apunta a los tres documentos y a las reglas de proceso |
+| `PLAN.md` (este documento) | Claude | ✅ Aprobado |
+| `CLAUDE.md` para Claude Code | Claude | ✅ En repo y Proyecto |
 
 ---
 
