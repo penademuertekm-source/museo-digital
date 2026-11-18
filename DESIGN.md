@@ -119,7 +119,7 @@ Colores usados en la lámina sin variable [O]: `#EDE3CE`, `#F7F3EC`, `#FDF9F1`, 
 | `Encabezado / H2` | 20–22 | Máximo 2 líneas |
 | `Encabezado / H3 (Interfaz)` | 16 | Etiquetas de botón y títulos de interfaz |
 | `Cuerpo / Regular` | **16 / 24** | El relato se lee de pie: 14 px queda corto en celular; líneas de 35–45 caracteres |
-| `Leyenda / Interfaz` | **13 mínimo** (14 recomendado) | Nada por debajo de 13 px (D1): ni contadores, ni créditos, ni etiquetas de onda. Interlineado 16 en 12 px (o 20 en 14 px); hoy es 12/20 |
+| `Leyenda / Interfaz` | **13 mínimo** (14 recomendado) | Nada por debajo de 13 px (D1): ni contadores, ni créditos, ni etiquetas de onda. Interlineado 18 en 13 px (o 20 en 14 px); hoy es 12/20 |
 
 **Espaciado entre letras** [P]: el −2 % en todos los estilos junta las letras a 12–16 px y al sol. Se propone **0 % en cuerpo y leyendas** y −1 a −2 % solo en titulares de 20 px o más.
 
@@ -222,7 +222,7 @@ Nota: Figma no permite "Al tocar" y "Al pasar el cursor" en la misma capa; por e
 
 **Matriz de microinteracciones** (disparador · regla · respuesta · cierre) [O, texto de la lámina]:
 
-1. **Tocar un punto dorado** → valida la estación, actualiza el progreso (0/4 → 1/4) y carga el audio **en pausa (0:00)** → el punto pulsa en carmesí, la cámara enfoca el pedestal y sube la tarjeta **sin sonido automático** → queda en Resumen con audio y carrusel listos.
+1. **Tocar un punto dorado** → valida la estación, actualiza el progreso (0/4 → 1/4; en la vista previa de Figma solo "Estación N de 4", ver D3) y carga el audio **en pausa (0:00)** → el punto pulsa en carmesí, la cámara enfoca el pedestal y sube la tarjeta **sin sonido automático** → queda en Resumen con audio y carrusel listos.
 2. **Pulsar play** → "Nada suena solo" y "El sonido nunca va solo"; detiene cualquier audio previo → icono pausa con aro dorado, ondas, tiempo avanza, subtítulo sincronizado resaltado → al terminar o pausar vuelve a Normal y el subtítulo sigue legible.
 3. **Cambiar pestaña o tocar ⌄/⌃** → alterna Resumen / Historia / Galería o colapsa (295 → 133 px) → transición suave, la flecha rota → la tarjeta queda estable sin cortar el audio.
 4. **Ver en 2D** → inicio quieto obligatorio y alternativa sin cámara ni WebGL → escenario 3D con anillo 360° y 3 pines, o lámina 2D con despiece y el mismo audio → al tocar ← vuelve a la estación conservando el avance.
@@ -235,7 +235,7 @@ Nota: Figma no permite "Al tocar" y "Al pasar el cursor" en la misma capa; por e
 - **Foco de teclado visible:** anillo azul `#1D63B8`, distinto del estado activo. [O][C2]
 - **Inicio quieto:** el visor 3D/360 no gira solo; conmutador directo a Vista 2D con el mismo contenido y audio. [O][C1]
 - **Nunca solo color:** cada sala se reconoce por nombre, ícono, hito y sonido; los estados llevan texto ("Visitada", "Se abre al terminar la Sala Núcleo"). [C1]
-- **Áreas de toque de 44–48 px** (Fitts) y alternativa a cada gesto. [C2] Hoy el 93 % de los elementos tocables del prototipo no lo cumple [O] → corregir con marcos táctiles (§1.1).
+- **Áreas de toque de 44–48 px** (Fitts) y alternativa a cada gesto. [C2] Con D1 se fija **48 px**. Hoy el 93 % de los elementos tocables del prototipo no lo cumple [O] → corregir con marcos táctiles (§1.1).
 - **Todo gesto con alternativa de un toque:** deslizamientos (WCAG 2.5.1) y arrastres como el del 360 (WCAG 2.5.7). [P]
 - **Sonido con un toque y sin sorpresas:** los navegadores móviles solo permiten audio después de una acción del visitante; el diseño ya parte de esa regla. [O][P]
 - **Lectores de pantalla:** el prototipo de Figma no los soporta (limitación declarada); las páginas web del 360/AR tendrán etiquetas, orden de lectura y respeto por "reducir movimiento", y se probarán con VoiceOver y TalkBack. [P]
