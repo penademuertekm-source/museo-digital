@@ -31,9 +31,9 @@
 ### Etapa 1 · Guion de interacción y contenido propuesto 🔁
 | Tarea | Quién | Listo cuando |
 |---|---|---|
-| Proponer el contenido de las 4 estaciones (título, resumen, historia, galería, pieza sonora, fuente de cada dato) | Claude redacta · Kevin aprueba | Cada dato tiene fuente (E2) y nombre único (E3) |
+| Redactar el contenido de las 4 estaciones del Corte 1 (Qué es y dónde nace · 1968 · Consuelo Araújo, sin interacción · Piloneras): título, resumen, historia, galería, pieza sonora y fuente de cada dato | Claude redacta · Kevin aprueba | Cada dato tiene fuente (E2) y nombre único (E3) |
 | Guion de interacción: lista de pantallas, qué se toca en cada una y a dónde lleva (con D2 aplicada) | Claude | Mapa de conexiones completo, sin pantallas huérfanas |
-| **Momento inmersivo (provisional, se cambiará según lo que se acuerde en clase):** RA con el modelo **Antique Accordion, de Canicule** (Sketchfab, CC Attribution, 5.2k triángulos, GLTF) en `<model-viewer>`. Es un acordeón genérico, no vallenato de botones: se dice al presentar | Kevin eligió ✅ | Crédito anotado y alternativa sin cámara (D2 de criterios) 🔁 |
+| **Momento inmersivo (provisional, se cambiará según lo que se acuerde en clase):** RA con el modelo **Antique Accordion, de Canicule** (Sketchfab, CC Attribution, 5.2k triángulos, GLTF) en `<model-viewer>`, en la **estación 1**. Es un acordeón genérico, no vallenato de botones: se dice al presentar | Kevin eligió ✅ | Crédito anotado y alternativa sin cámara (D2 de criterios) 🔁 |
 | Mostrar la propuesta a la docente | Kevin | Se anotan sus cambios 🔁 |
 
 ### Etapa 2 · Assets
@@ -52,9 +52,9 @@
 |---|---|---|
 | Crear el archivo nuevo **dentro de un proyecto de equipo** (en Borradores el video no se sube), separado del Figma de clase | Claude Code | Archivo creado y con permiso de edición |
 | Pasar los tokens y estilos de `DESIGN.md` a variables del archivo nuevo, con alcances y mínimos de D1 | Claude Code | Variables y estilos verificados |
-| Componentes con estados Normal · Presionado · Foco · Activo y área táctil de 48 px | Claude Code | Variantes completas (B3, C1, C4) |
-| **Primer grupo de pantallas** (Portada, Pasillo, una estación completa) y prueba de la barra D2 en el teléfono | Claude Code arma · Kevin prueba | D2 confirmada o ajustada antes de seguir |
-| Resto de pantallas de 375 × 812, conexiones, transiciones, video del aire y enlace al momento inmersivo (pestaña nueva) | Claude Code | Recorrido completo sin callejones |
+| Componentes del canon del Corte 2: botón con 6 estados (48 y 56 px), control de audio Escuchar · Sonando, marcador de sala, tarjetas Bloqueada · Disponible · Completada, menú y barras de D2 | Claude Code | Variantes completas (B3, C1, C4) y fieles a `DESIGN.md` §18 |
+| **Primer grupo de pantallas** (Portada, Plaza, una estación completa) con las variables de progreso (D3) y prueba de las barras D2 en el teléfono | Claude Code arma · Kevin prueba | D2 y D3 confirmadas o ajustadas antes de seguir |
+| Resto de pantallas de 375 × 812, conexiones, overlays para fichas flotantes, transiciones, video del aire y enlace al momento inmersivo (pestaña nueva) | Claude Code | Recorrido completo sin callejones |
 | Revisión contra `CRITERIOS.md` | Claude | Lista de chequeo sin pendientes graves; limitaciones declaradas (G5) |
 
 ### Etapa 4 · Página del momento inmersivo

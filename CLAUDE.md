@@ -8,7 +8,7 @@ Responde siempre en **español**, con lenguaje claro y sin jerga innecesaria.
 ## Lee antes de hacer cualquier cosa
 
 1. `CRITERIOS.md` — reglas que no se negocian (sonido, accesibilidad, móvil, inmersivo, licencias, IA, proceso).
-2. `DESIGN.md` — lenguaje visual extraído del Figma de la profesora y adaptado a móvil (D1–D3 cerradas).
+2. `DESIGN.md` — lenguaje visual extraído del Figma de la profesora, adaptado a móvil (D1–D3 cerradas) y ajustado al canon del Corte 2 (§18). **Cuando difieren, manda el Corte 2.**
 3. `PLAN.md` — etapas, responsables y condición de "listo cuando". Trabaja solo en la etapa activa.
 
 Si una instrucción choca con estos documentos, **detente y pregunta**. Si dos criterios chocan, usa el orden de `CRITERIOS.md` ("Si dos criterios chocan").
@@ -37,9 +37,9 @@ Si una instrucción choca con estos documentos, **detente y pregunta**. Si dos c
 - ✅ Etapa 0: `DESIGN.md`, `CRITERIOS.md`, `PLAN.md`, este `CLAUDE.md`.
 - ⏭️ Siguiente: **Etapa 1** — guion de interacción y contenido propuesto de las 4 estaciones.
 - **Provisionales (cambiarán tras la revisión de la docente):**
-  - Contenido de las estaciones: lo propone el equipo.
+  - Contenido: las 4 estaciones del Corte 1 (Qué es y dónde nace · 1968 · Consuelo Araújo · Piloneras); el texto lo redacta el equipo.
   - Audio del aire: pista de referencia de YouTube con crédito, marcada como temporal. Riesgo aceptado por Kevin; se revisa antes de publicar.
-  - Momento inmersivo: RA con el modelo "Antique Accordion" de Canicule (Sketchfab, CC Attribution), en `<model-viewer>`. Acordeón genérico, se declara así.
+  - Momento inmersivo: RA con el modelo "Antique Accordion" de Canicule (Sketchfab, CC Attribution), en `<model-viewer>`, en la estación 1. Acordeón genérico, se declara así.
 
 ## Herramientas
 

@@ -4,7 +4,7 @@
 > Este documento dice **qué** debe cumplirse siempre. El **cómo se ve** está en `DESIGN.md`; el **cuándo y quién** en `PLAN.md`.
 > Aplica a las dos versiones: la **vista previa en Figma** y la **versión final en código**. Si una regla no se puede cumplir en Figma, se declara como limitación y se cumple en código.
 
-**Origen:** [C1] Corte 1 · [C2] Corte 2 · [D] decisión tomada en `DESIGN.md` · [W] WCAG 2.2.
+**Origen:** [C1] Corte 1 · [C2] Corte 2 (versión válida cuando difiere del Corte 1 o del Figma de la profesora) · [D] decisión tomada en `DESIGN.md` · [W] WCAG 2.2.
 **Columnas:** qué se exige en Figma · qué se exige en código · cómo se comprueba.
 
 ---
@@ -40,7 +40,7 @@
 | C3 | **Controles críticos dentro de ~640 px de alto**; acciones frecuentes en el tercio inferior. [D1][C1] | Frames de 375 × 812 | Diseño fluido de 320 a 430 px | Abrir en el teléfono sin desplazar |
 | C4 | **Nada depende del cursor:** el estado de respuesta es Presionado. [D] | Disparador al presionar | `:active` + `:hover` solo con `@media (hover: hover)` | Probar con el dedo |
 | C5 | **Peso total < 15 MB**; imágenes < 300 KB; video del aire ≤ 10 MB. [D] | Archivo de prototipo aparte | Imágenes optimizadas y carga diferida | Carga con 4G en un Android de gama baja |
-| C6 | **Navegación constante:** "Volver", "Mapa" y "Siguiente" siempre en el mismo lugar; siempre "Volver", nunca "Atrás". [C1][D2] | Barra inferior según D2 | Igual | Recorrer las 4 estaciones |
+| C6 | **Navegación constante (canon del Corte 2):** menú Plaza · Pasaporte · Audio · Perfil fuera de las estaciones; dentro, encabezado Volver · [S0·E1] parada X de 4 · Mapa y barra Volver · Mapa · Siguiente, siempre en el mismo lugar; siempre "Volver", nunca "Atrás". [C1][C2][D2] | Según D2 | Igual | Recorrer las 4 estaciones |
 
 ## D. Momento inmersivo
 
@@ -94,3 +94,4 @@
 - **Audio:** por ahora, **pista de referencia de YouTube con crédito y marcada como temporal**. Como la propuesta podría presentarse a la Alcaldía o a otra entidad del Estado, la versión definitiva se decide tras investigar a fondo: grabación oficial, pista con licencia o muestra con IA declarada (F1).
 - **Momento inmersivo:** por ahora se usa **trabajo ya hecho por otros**: RA con el modelo **Antique Accordion, de Canicule** (Sketchfab, CC Attribution). Es un acordeón genérico, no vallenato de botones, y así se declara. No se reutiliza el 360 del grupo Moreno. Se cambiará según lo que se acuerde en clase.
 - **Licencias (Fraunces, Work Sans, audio y demás assets):** se verifican **de forma crítica al llegar a esa etapa**, comprobando que de verdad permitan el uso. Si alguna no sirve, se reemplaza.
+- **Corte 2 manda:** cuando el Corte 2 difiere del Corte 1 o del Figma de la profesora, vale el Corte 2 (`DESIGN.md` §18). El contenido y la arquitectura del Corte 1 no se reabren.

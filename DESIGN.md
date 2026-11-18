@@ -329,10 +329,10 @@ No se observan puntos de quiebre: todo está diseñado a 375 × 667. [O]
 **Enfoque:** Figma es la **vista previa** (lo que califica la Fase 1 y lo que se prueba primero); el **código** es la versión final y se construye en Claude Code. Lo que solo se resuelve en el montaje queda como propuesta para el equipo (ver §17).
 
 - **D1 · Tamaño de diseño → A: frames de 375 × 812.** Se conserva el ancho de la profesora. Como en teléfonos de 360 px todo se reduce un 4 %, los mínimos suben a **48 px táctil** y **13 px de texto**. Los controles críticos van dentro de los primeros **~640 px** de alto; lo demás se alcanza deslizando.
-- **D2 · Barra inferior → aprobada como provisional.** Menú global (Inicio · Salas · Mapa · Información) solo en el Pasillo y el Mapa; **Volver · Mapa · Siguiente** solo dentro de las estaciones, donde "Volver" sube al Pasillo y ‹ › se integran en Anterior/Siguiente. **Se valida en el teléfono con el primer grupo de pantallas antes de construir las 40.** Después se recalcula la pila vertical de la estación.
-- **D3 · Progreso y "Visitada".** Regla de comportamiento: *cada estación se marca como Visitada al entrar; el contador cuenta las visitadas en cualquier orden y se conserva durante la visita.*
-  - **Figma (vista previa):** variante simple, solo **"Estación N de 4"**, sin contador de avance ni marca "Visitada" (no se promete lo que Figma no recuerda).
-  - **Código (final):** avance real con `localStorage` en el teléfono, sin cuenta ni datos personales, compartido entre sala, 360 y RA; botón **"Reiniciar recorrido"** para teléfonos prestados en grupo.
+- **D2 · Navegación → canon del Corte 2** (reemplaza la propuesta anterior). Menú inferior global **Plaza · Pasaporte · Audio · Perfil** (con el chip "3D en el navegador · sin instalar"), solo en la Plaza y el Mapa. Dentro de las estaciones: encabezado **Volver · [S0·E1] parada X de 4 · Mapa** y barra inferior **Volver · Mapa · Siguiente**. Una sola barra inferior por tipo de pantalla. Se valida en el teléfono con el primer grupo de pantallas antes de construir el resto.
+- **D3 · Progreso → variables de Figma** (reemplaza la variante simple). El canon pide marcador de sala **Sala actual · Visitada · Disponible** (con punto, no solo color), "parada X de 4" y tarjetas **Bloqueada · Disponible · Completada**.
+  - **Figma (vista previa):** 4 variables booleanas (una por estación) que se activan al entrar; el marcador y el contador leen esas variables. Se reinicia al recargar (limitación declarada).
+  - **Código (final):** el mismo comportamiento con `localStorage` y botón **"Reiniciar recorrido"**.
 
 ## Pruebas [P]
 
@@ -363,6 +363,24 @@ Partes que **solo existen en el montaje o en código**, y que se proponen al equ
 - Publicación en **GitHub Pages** desde el repo `museo-digital`, con URL corta para el QR.
 
 Cada propuesta se presenta al equipo como: qué resuelve, qué necesita (material, permisos, tiempo) y quién la ejecuta.
+
+## 18. Ajustes del Corte 2 (canon de clase) [C2]
+
+El Corte 2 es la versión válida. No reabre el contenido ni la arquitectura del Corte 1 (las cuatro estaciones siguen: Qué es y dónde nace · 1968 · Consuelo Araújo · Piloneras), pero fija un estándar de interfaz que **prevalece sobre el archivo de la profesora** cuando difieren:
+
+| Tema | Canon del Corte 2 | Aplicación aquí |
+|---|---|---|
+| Espacio central | **Plaza / Plaza de salas** | Se usa "Plaza" en lugar de "Pasillo" en todas las pantallas y textos |
+| Navegación | Ver D2 | §15 |
+| Progreso | Ver D3 | §15 |
+| Botón | **6 estados:** Normal, Hover, Pressed, Foco (anillo azul), Deshabilitado, Solo-icono. Tamaños 44 · 48 · 56 | Se adoptan los 6 estados (Pressed = "Presionado"; Hover solo en escritorio). **Tamaños 48 y 56**: el de 44 se quita para respetar el mínimo de D1 |
+| Control de audio | **Escuchar · Sonando · Escuchar (foco)**, más silenciar, volumen y error de carga; texto "Nada suena solo: tú lo activas" | Se adopta |
+| Tarjetas y alternativa | Card e Item de sala, Puerta temática, CTA y "¿Sin 3D? Galería de fotos con el mismo audio" | Se adopta como texto de la alternativa sin cámara |
+| Método de prototipo | Frames con nombre; audio como componente con "Change to"; ficha flotante con **Open overlay**; Smart Animate; punto de inicio en la entrada | Se adopta: reduce la cantidad de pantallas frente a los 40 frames del archivo de la profesora |
+| Momento inmersivo | Base recomendada: **360 del Desfile** (estación 4) con versión sin 3D (video plano con subtítulos). La RA aparece en el puente físico (WebAR con `model-viewer`) | Se mantiene la decisión del equipo: **RA del acordeón en la estación 1**, con alternativa sin cámara. Se declara que el canon recomendaba el 360 del desfile |
+| Microinteracciones | Toda animación orienta, revela, confirma o da ritmo; mostrar antes y después de cada una | Se adopta |
+| Tema | Pide cerrar la coherencia entre claro y oscuro | Por ahora **solo claro**; se aclara en clase |
+| Contenido del Figma de la profesora | Estación 1 "Tríada instrumental" | Se reemplaza por el guion del Corte 1 (§12.12 resuelto) |
 
 ---
 
