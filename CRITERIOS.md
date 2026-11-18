@@ -54,7 +54,7 @@
 
 | # | Regla | Comprobación |
 |---|---|---|
-| E1 | **Ningún asset sin licencia y crédito** (imagen, audio, video, modelo 3D, tipografía). Cada uno queda registrado con fuente, licencia y enlace. [C1][C2] | Tabla de assets completa antes de publicar |
+| E1 | **Ningún asset sin licencia y crédito** (lo provisional va marcado como *temporal* con su crédito) (imagen, audio, video, modelo 3D, tipografía). Cada uno queda registrado con fuente, licencia y enlace. [C1][C2] | Tabla de assets completa antes de publicar |
 | E2 | **Cada dato con su fuente** (Fundación, UNESCO, MinCultura, Banrepcultural, prensa); Wikipedia solo para contrastar. [C1] | Revisión del guion |
 | E3 | **Mismo nombre en todas partes:** menú, tarjeta, encabezado, mapa y código de parada `[S0·E1]`. [C1] | Buscar variaciones de nombre |
 | E4 | Segunda persona, tono cercano; nombres de 2–3 palabras. [C1] | Lectura en voz alta |
@@ -91,5 +91,6 @@
 
 - **Dónde vive el prototipo:** se trabaja en un **Figma nuevo**. No se unifica con el Figma de clase hasta mostrarlo y recibir instrucción.
 - **Contenido de las estaciones:** lo **proponemos nosotros**; la docente lo revisa y se ajusta después.
-- **Momento inmersivo y audio:** se hacen **por nuestra cuenta** (no se reutiliza el 360 del grupo Moreno por ahora). Se ajusta según lo que diga la docente.
+- **Audio:** por ahora, **pista de referencia de YouTube con crédito y marcada como temporal**. Como la propuesta podría presentarse a la Alcaldía o a otra entidad del Estado, la versión definitiva se decide tras investigar a fondo: grabación oficial, pista con licencia o muestra con IA declarada (F1).
+- **Momento inmersivo:** por ahora se usa **trabajo ya hecho por otros**, con crédito y licencia (modelo 3D CC BY de Sketchfab para RA o video 360 insertado de YouTube). No se reutiliza el 360 del grupo Moreno. Se cambiará según lo que se acuerde en clase.
 - **Licencias (Fraunces, Work Sans, audio y demás assets):** se verifican **de forma crítica al llegar a esa etapa**, comprobando que de verdad permitan el uso. Si alguna no sirve, se reemplaza.

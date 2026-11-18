@@ -33,24 +33,24 @@
 |---|---|---|
 | Proponer el contenido de las 4 estaciones (título, resumen, historia, galería, pieza sonora, fuente de cada dato) | Claude redacta · Kevin aprueba | Cada dato tiene fuente (E2) y nombre único (E3) |
 | Guion de interacción: lista de pantallas, qué se toca en cada una y a dónde lleva (con D2 aplicada) | Claude | Mapa de conexiones completo, sin pantallas huérfanas |
-| Elegir el momento inmersivo propio: **360** (foto panorámica tomada por el equipo, licencia propia) o **RA** (requiere modelo 3D con licencia) | Kevin decide · Claude recomienda | Decisión escrita con su alternativa sin cámara (D2 de criterios) |
+| **Momento inmersivo (provisional, se cambiará según lo que se acuerde en clase):** usar trabajo ya hecho por otros. Opción 1: RA con un acordeón 3D descargable de Sketchfab con licencia CC BY (trae versión USDZ para iPhone). Opción 2: video 360 del Festival en YouTube, insertado con su reproductor oficial | Kevin decide · Claude recomienda | Opción elegida, con crédito y alternativa sin cámara (D2 de criterios) 🔁 |
 | Mostrar la propuesta a la docente | Kevin | Se anotan sus cambios 🔁 |
 
 ### Etapa 2 · Assets
 | Tarea | Quién | Listo cuando |
 |---|---|---|
 | Lista de assets: imagen, audio, video, foto 360, tipografías; con fuente, licencia, crédito y enlace | Claude arma la tabla · equipo completa | Ninguna fila sin licencia (E1) |
-| **Audio del aire:** grabación propia del equipo o pista con licencia que permita el uso | Equipo consigue · Kevin aprueba | Archivo con licencia verificada críticamente |
+| **Audio del aire (provisional):** pista de referencia tomada de YouTube, con crédito al intérprete y al canal, marcada como *temporal*. La opción definitiva (grabación oficial, pista con licencia o muestra con IA declarada) se elige después de investigar a fondo 🔁 | Kevin elige la pista · Claude investiga las opciones | Pista con crédito anotado y marcada como temporal en la tabla de assets |
 | Subtítulos del audio (texto y tiempos) | Claude redacta a partir del audio | Sincronizados con la pista (A2) |
 | Video `.mp4` para Figma: audio + subtítulos incrustados, H.264, ≤ 10 MB | Claude Code (ffmpeg) | Se reproduce en Figma y pesa ≤ 10 MB (C5) |
-| Foto 360 (si se elige 360): toma propia, equirectangular, máx. 4096 × 2048 | Equipo toma · Claude Code prepara | Se ve sin cortes en el visor |
+| Modelo 3D o video 360 provisional: descargar o enlazar, revisar licencia y crédito | Claude Code | Funciona en el visor y queda en la tabla de assets |
 | Imágenes optimizadas (~750 px, < 300 KB) con descripción escrita | Claude Code · Claude escribe las descripciones | Cumplen C5 y B7 |
 | **Verificación crítica de licencias** (Fraunces, Work Sans, audio y todo lo anterior) | Claude revisa · Kevin confirma | Cada licencia leída en su fuente oficial; lo que no sirva se reemplaza |
 
 ### Etapa 3 · Figma nuevo
 | Tarea | Quién | Listo cuando |
 |---|---|---|
-| Confirmar la cuenta de Figma y crear el archivo **dentro de un proyecto de equipo** (en Borradores el video no se sube) | Kevin confirma · Claude Code crea | Archivo creado y con permiso de edición |
+| Crear el archivo nuevo **dentro de un proyecto de equipo** (en Borradores el video no se sube), separado del Figma de clase | Claude Code | Archivo creado y con permiso de edición |
 | Pasar los tokens y estilos de `DESIGN.md` a variables del archivo nuevo, con alcances y mínimos de D1 | Claude Code | Variables y estilos verificados |
 | Componentes con estados Normal · Presionado · Foco · Activo y área táctil de 48 px | Claude Code | Variantes completas (B3, C1, C4) |
 | **Primer grupo de pantallas** (Portada, Pasillo, una estación completa) y prueba de la barra D2 en el teléfono | Claude Code arma · Kevin prueba | D2 confirmada o ajustada antes de seguir |
@@ -82,7 +82,7 @@
 ### Etapa 6 · Publicación
 | Tarea | Quién | Listo cuando |
 |---|---|---|
-| Enlace del prototipo en "Cualquiera con el enlace · puede ver" | Kevin | Abre sin iniciar sesión |
+| Enlace del prototipo en "Cualquiera con el enlace · puede ver". **Antes de abrirlo al público, decidir si la pista de YouTube se reemplaza** (un enlace público difunde el audio) | Kevin | Abre sin iniciar sesión y la decisión del audio está tomada |
 | URL corta y QR (≥ 1/10 de la distancia de escaneo) con la URL escrita de respaldo | Claude Code | QR probado en el teléfono de un desconocido |
 
 ### Etapa 7 · Documentación y sustentación
@@ -114,7 +114,8 @@ Se hace en **Claude Code**, sobre el repo `museo-digital`.
 | Riesgo | Qué hacemos |
 |---|---|
 | La docente cambia el contenido o pide unificar en el Figma de clase | Las etapas 1–3 se diseñan para cambiar el texto sin rehacer pantallas; la unificación espera su instrucción |
-| No conseguimos audio con licencia | Grabación propia del equipo |
+| La pista de YouTube tiene derechos de autor | Se usa solo como referencia temporal con crédito; se reemplaza antes de publicar si la docente o la entidad lo piden |
+| La propuesta llega a la Alcaldía o a una entidad del Estado | El audio y los assets definitivos deben tener licencia o permiso escrito; la muestra con IA solo si se declara |
 | El video no se sube a Figma | Mover el archivo a un proyecto de equipo; si falla, el audio va solo en la página web |
 | La barra D2 no funciona en el teléfono | Se ajusta en la etapa 3 antes de construir las 40 pantallas |
 | Falta un iPhone para probar | Coordinar con el compañero antes de la etapa 5 |
