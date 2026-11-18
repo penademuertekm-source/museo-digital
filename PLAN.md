@@ -33,7 +33,7 @@
 |---|---|---|
 | Proponer el contenido de las 4 estaciones (título, resumen, historia, galería, pieza sonora, fuente de cada dato) | Claude redacta · Kevin aprueba | Cada dato tiene fuente (E2) y nombre único (E3) |
 | Guion de interacción: lista de pantallas, qué se toca en cada una y a dónde lleva (con D2 aplicada) | Claude | Mapa de conexiones completo, sin pantallas huérfanas |
-| **Momento inmersivo (provisional, se cambiará según lo que se acuerde en clase):** usar trabajo ya hecho por otros. Opción 1: RA con un acordeón 3D descargable de Sketchfab con licencia CC BY (trae versión USDZ para iPhone). Opción 2: video 360 del Festival en YouTube, insertado con su reproductor oficial | Kevin decide · Claude recomienda | Opción elegida, con crédito y alternativa sin cámara (D2 de criterios) 🔁 |
+| **Momento inmersivo (provisional, se cambiará según lo que se acuerde en clase):** RA con el modelo **Antique Accordion, de Canicule** (Sketchfab, CC Attribution, 5.2k triángulos, GLTF) en `<model-viewer>`. Es un acordeón genérico, no vallenato de botones: se dice al presentar | Kevin eligió ✅ | Crédito anotado y alternativa sin cámara (D2 de criterios) 🔁 |
 | Mostrar la propuesta a la docente | Kevin | Se anotan sus cambios 🔁 |
 
 ### Etapa 2 · Assets
@@ -43,7 +43,7 @@
 | **Audio del aire (provisional):** pista de referencia tomada de YouTube, con crédito al intérprete y al canal, marcada como *temporal*. La opción definitiva (grabación oficial, pista con licencia o muestra con IA declarada) se elige después de investigar a fondo 🔁 | Kevin elige la pista · Claude investiga las opciones | Pista con crédito anotado y marcada como temporal en la tabla de assets |
 | Subtítulos del audio (texto y tiempos) | Claude redacta a partir del audio | Sincronizados con la pista (A2) |
 | Video `.mp4` para Figma: audio + subtítulos incrustados, H.264, ≤ 10 MB | Claude Code (ffmpeg) | Se reproduce en Figma y pesa ≤ 10 MB (C5) |
-| Modelo 3D o video 360 provisional: descargar o enlazar, revisar licencia y crédito | Claude Code | Funciona en el visor y queda en la tabla de assets |
+| Descargar el Antique Accordion (GLB + USDZ), revisar la licencia en su página y anotar el crédito | Claude Code | Funciona en `<model-viewer>` y Quick Look, y queda en la tabla de assets |
 | Imágenes optimizadas (~750 px, < 300 KB) con descripción escrita | Claude Code · Claude escribe las descripciones | Cumplen C5 y B7 |
 | **Verificación crítica de licencias** (Fraunces, Work Sans, audio y todo lo anterior) | Claude revisa · Kevin confirma | Cada licencia leída en su fuente oficial; lo que no sirva se reemplaza |
 
@@ -60,7 +60,7 @@
 ### Etapa 4 · Página del momento inmersivo
 | Tarea | Quién | Listo cuando |
 |---|---|---|
-| Página web con Pannellum (360) o `<model-viewer>` (RA), inicio quieto, alternativa 2D y botón "Volver al museo" | Claude Code · docente apoya | Funciona en Android e iPhone (D1–D3) |
+| Página web con `<model-viewer>` (RA) del acordeón, inicio quieto, alternativa 2D y botón "Volver al museo" | Claude Code · docente apoya | Funciona en Android e iPhone (D1–D3) |
 | Publicar en GitHub Pages y enlazar desde Figma | Claude Code | El enlace abre sin iniciar sesión |
 
 ---

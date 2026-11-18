@@ -92,5 +92,5 @@
 - **Dónde vive el prototipo:** se trabaja en un **Figma nuevo**. No se unifica con el Figma de clase hasta mostrarlo y recibir instrucción.
 - **Contenido de las estaciones:** lo **proponemos nosotros**; la docente lo revisa y se ajusta después.
 - **Audio:** por ahora, **pista de referencia de YouTube con crédito y marcada como temporal**. Como la propuesta podría presentarse a la Alcaldía o a otra entidad del Estado, la versión definitiva se decide tras investigar a fondo: grabación oficial, pista con licencia o muestra con IA declarada (F1).
-- **Momento inmersivo:** por ahora se usa **trabajo ya hecho por otros**, con crédito y licencia (modelo 3D CC BY de Sketchfab para RA o video 360 insertado de YouTube). No se reutiliza el 360 del grupo Moreno. Se cambiará según lo que se acuerde en clase.
+- **Momento inmersivo:** por ahora se usa **trabajo ya hecho por otros**: RA con el modelo **Antique Accordion, de Canicule** (Sketchfab, CC Attribution). Es un acordeón genérico, no vallenato de botones, y así se declara. No se reutiliza el 360 del grupo Moreno. Se cambiará según lo que se acuerde en clase.
 - **Licencias (Fraunces, Work Sans, audio y demás assets):** se verifican **de forma crítica al llegar a esa etapa**, comprobando que de verdad permitan el uso. Si alguna no sirve, se reemplaza.

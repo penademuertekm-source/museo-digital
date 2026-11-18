@@ -39,7 +39,7 @@ Si una instrucción choca con estos documentos, **detente y pregunta**. Si dos c
 - **Provisionales (cambiarán tras la revisión de la docente):**
   - Contenido de las estaciones: lo propone el equipo.
   - Audio del aire: pista de referencia de YouTube con crédito, marcada como temporal. Riesgo aceptado por Kevin; se revisa antes de publicar.
-  - Momento inmersivo: trabajo ya hecho por otros (opción elegida por Kevin en la Etapa 1).
+  - Momento inmersivo: RA con el modelo "Antique Accordion" de Canicule (Sketchfab, CC Attribution), en `<model-viewer>`. Acordeón genérico, se declara así.
 
 ## Herramientas
 
