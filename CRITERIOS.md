@@ -87,9 +87,9 @@
 3. Luego **C y D** (móvil e inmersivo).
 4. Si el choque sigue, se anota y se decide con el equipo o la docente; no se resuelve en silencio.
 
-## Pendientes que tocan estos criterios
+## Acuerdos sobre los pendientes (18 nov. 2026, sujetos a la revisión de la docente)
 
-- **Dónde vive el prototipo:** el Corte 2 dice "unificar el prototipo en el Figma de clase (base canónica)"; nuestro plan crea un Figma nuevo. Hay que confirmar con la docente si basta con enlazarlo o si debe ir dentro del Figma de clase.
-- **Contenido de las estaciones:** "Tríada instrumental" (Figma) o el guion del Corte 1. Decide la docente.
-- **Licencias pendientes desde el Corte 2:** Fraunces, Work Sans y las pistas de audio.
-- **Momento inmersivo existente:** el grupo Moreno ya publicó un recorrido 360 con hotspots y audio; conviene revisar si se reutiliza en lugar de hacer uno nuevo.
+- **Dónde vive el prototipo:** se trabaja en un **Figma nuevo**. No se unifica con el Figma de clase hasta mostrarlo y recibir instrucción.
+- **Contenido de las estaciones:** lo **proponemos nosotros**; la docente lo revisa y se ajusta después.
+- **Momento inmersivo y audio:** se hacen **por nuestra cuenta** (no se reutiliza el 360 del grupo Moreno por ahora). Se ajusta según lo que diga la docente.
+- **Licencias (Fraunces, Work Sans, audio y demás assets):** se verifican **de forma crítica al llegar a esa etapa**, comprobando que de verdad permitan el uso. Si alguna no sirve, se reemplaza.
