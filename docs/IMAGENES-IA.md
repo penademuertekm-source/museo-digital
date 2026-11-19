@@ -166,7 +166,7 @@ Usa la Imagen A como base exacta de composición: misma cámara, mismo encuadre,
 
 **P0 · Escena base solo con texto (plan B)**
 ```
-Render fotorrealista, vertical 9:16, de una sala de museo minimalista y vacía. Pared gris muy clara con una franja gris horizontal a media altura, piso gris pulido con un reflejo suave. En el centro, un pedestal blanco rectangular con una placa blanca lisa. Un foco cenital suave ilumina el pedestal desde arriba; sombras cortas y limpias. Cámara frontal a la altura del pedestal, perspectiva recta, lente normal. La parte superior del pedestal queda a un tercio del alto de la imagen. Sala completamente vacía y silenciosa.
+Render fotorrealista, vertical 9:16, de una sala de museo minimalista y vacía. Pared gris muy clara con una franja gris horizontal a media altura, piso gris pulido con un reflejo suave. En el centro, un pedestal blanco rectangular con una placa blanca lisa. Un foco cenital suave ilumina el pedestal desde arriba; sombras cortas y limpias. Cámara frontal a la altura del pedestal, perspectiva recta, lente normal. La parte superior del pedestal queda a la mitad del alto de la imagen, para que el objeto ocupe la zona segura (§3). Sala completamente vacía y silenciosa.
 ```
 
 **P1 · Objeto sobre el pedestal (por estación)**
