@@ -55,11 +55,35 @@ Sin esta preparación cada imagen sale distinta. La unidad se decide antes del p
    - Alternativa más rápida: **Nano Banana 2.1**.
    - Anotar el nombre exacto del modelo en la bitácora (paso 6).
 2. **Fijar formato y tamaño:** 9:16, 2K (1536 × 2752) para escenarios; 1:1 o 4:3 para objetos sueltos; exportar a ~750 px de ancho y < 300 KB (C5).
-3. **Crear la escena base y guardarla.** Primero la sala vacía con el pedestal (prompt P0, §4). Esa imagen se usa como **referencia de estilo y de composición** en todas las estaciones. Es lo que más unifica.
+3. **Partir de una imagen base, no solo de texto** (ver §2.1). Con ella se crea la sala vacía con el pedestal, que se guarda y se usa como **referencia de estilo y de composición** en todas las estaciones. Es lo que más unifica. Si no hay imagen base, el prompt P0 (solo texto) queda como plan B.
 4. **Reunir referencias reales de cada objeto:** fotos propias o con licencia de un acordeón de botones, una caja, una guacharaca, una pollera, un pilón. Sirven para que la IA no invente piezas. Solo se suben imágenes sobre las que el equipo tenga derechos; la política de Google pide tenerlos.
 5. **Escribir la lista de lo que NO se genera** (§7): personas reales, documentos, fotos "de archivo", logos y texto.
 6. **Abrir una bitácora** (`docs/bitacora-ia.md`). Por imagen se anota: fecha, modelo, prompt, referencias usadas, número de intentos, correcciones y quién la aprobó. Es la base de la declaración de IA (F1).
 7. **Activar la marca visible o anotar la invisible.** Gemini mantiene SynthID y metadatos C2PA aunque se quite la marca visible. No se borran ni se ocultan.
+
+### 2.1 Ruta recomendada: imagen base + estilo
+
+**Por qué.** Con solo texto, la IA decide la cámara, la altura del pedestal y el encuadre, y cada intento sale distinto. Con una imagen base, esas decisiones ya están tomadas: la IA solo "viste" la escena. Es la técnica de *boceto a render*: la imagen se sube como referencia y el prompt pide conservar su composición y cambiar el acabado. Es muy probable que la docente trabajara así:
+- Sus cuatro estaciones repiten la misma sala, cámara y pedestal al milímetro, algo difícil de lograr solo con texto.
+- En su archivo hay una galería gris de 941 × 1672, casi exactamente 9:16, que podría ser un paso previo del pasillo. **Es una pista, no una prueba:** se confirma preguntándole.
+
+**Tres opciones de imagen base** (de más a menos control):
+
+| Opción | Cómo se hace | Ventaja | Cuidado |
+|---|---|---|---|
+| **A · Foto propia** | Foto vertical de una pared lisa con una caja o un banco blanco centrado, con la cámara a la altura de la caja, de frente y con luz de arriba | Proporciones y luz reales; el equipo tiene todos los derechos | Tomarla en 9:16 y sin objetos al fondo |
+| **B · Boceto** | Dibujo a mano o bloques grises en un frame de Figma de 9:16: pared, franja, piso, pedestal y objeto como silueta | Controla la zona segura (§3) desde el primer intento | Las guías y anotaciones van en otra capa y se quitan antes de subir la imagen |
+| **C · Captura 3D** | Captura del modelo en `<model-viewer>` (por ejemplo, el Antique Accordion de la estación 1) sobre fondo neutro | El objeto de la imagen coincide con el de la RA | Respetar la licencia CC BY del modelo y dar el crédito también en la imagen |
+
+**Cómo se usa:**
+1. Se prepara la base en 9:16. Si es la opción B, se exporta solo la capa del dibujo.
+2. Se genera la **escena base** con P0b (§4) y se guarda. Desde ahí se sigue con P1 en cada estación, igual que antes.
+3. Si algo se mueve, se corrige con P4 y no se reescribe todo el prompt. Conviene cambiar una sola cosa por intento.
+4. En la bitácora se anota también la imagen base usada.
+
+**Consejos de redacción para la base:**
+- Decir qué controla cada imagen: "la Imagen A manda en la composición y la cámara; la Imagen B, en el objeto".
+- Ubicar las cosas con "parte superior del encuadre" o "primer plano" y no con izquierda y derecha, porque el modelo a veces las confunde.
 
 ---
 
@@ -100,7 +124,13 @@ Sin esta preparación cada imagen sale distinta. La unidad se decide antes del p
 
 Escríbelas en español o en inglés; Gemini rinde bien en `es-MX`. Sigue la estructura de la guía oficial: sujeto, composición, acción, lugar, estilo, cámara y luz. Lo que no se quiere se describe **en positivo** ("placa lisa sin texto" en vez de "sin texto").
 
-**P0 · Escena base (una sola vez)**
+**P0b · Escena base desde una imagen base (ruta recomendada, §2.1)**
+Adjunta: [Imagen A] la foto, el boceto o la captura.
+```
+Usa la Imagen A como base exacta de composición: misma cámara, mismo encuadre, mismas proporciones y misma posición del pedestal. Conviértela en un render fotorrealista, vertical 9:16, de una sala de museo minimalista y vacía. Pared gris muy clara con una franja gris horizontal a media altura, piso gris pulido con un reflejo suave, pedestal blanco con una placa blanca lisa. Un foco cenital suave ilumina el pedestal; sombras cortas y limpias. Sala completamente vacía y silenciosa.
+```
+
+**P0 · Escena base solo con texto (plan B)**
 ```
 Render fotorrealista, vertical 9:16, de una sala de museo minimalista y vacía. Pared gris muy clara con una franja gris horizontal a media altura, piso gris pulido con un reflejo suave. En el centro, un pedestal blanco rectangular con una placa blanca lisa. Un foco cenital suave ilumina el pedestal desde arriba; sombras cortas y limpias. Cámara frontal a la altura del pedestal, perspectiva recta, lente normal. La parte superior del pedestal queda a un tercio del alto de la imagen. Sala completamente vacía y silenciosa.
 ```
@@ -201,6 +231,7 @@ En el Figma solo existe la Sala Núcleo. El Corte 1 ya definió **seis salas amp
 3. **Decidir el cuadro de la estación 4:** se adapta al render realista o se reemplaza por un objeto (pilón y pollera, acorde con Piloneras). 🔁
 4. **Conseguir las fotos de referencia** de los instrumentos y del vestuario (propias o con licencia).
 5. **Crear la bitácora de IA** (`docs/bitacora-ia.md`) antes de la primera imagen.
+6. **Elegir la imagen base** (foto propia, boceto o captura 3D, §2.1) y preguntarle a la docente si ella partió de una.
 
 ---
 
@@ -214,5 +245,8 @@ En el Figma solo existe la Sala Núcleo. El Corte 1 ya definió **seis salas amp
 - Google Ayuda — Verify AI-generated images, videos, and audio: https://support.google.com/gemini/answer/16722517
 - PCWorld (14 ago. 2026) — Gemini permite quitar la marca visible; SynthID y metadatos se mantienen: https://www.pcworld.com/article/3213409
 - Runway — Why do AI images look weird (manos, objetos, texto): https://runway.com/resources/why-do-ai-images-look-weird
+- Scenario — Sketch to render (Nano Banana respeta la estructura y la composición del boceto): https://help.scenario.com/articles/4604382336-sketch-to-render
+- WeShop AI — Nano Banana 2.1 Sketch to Render (base exacta de composición; cambiar una variable por intento): https://www.weshop.ai/solutions/models/nano-banana-2-1-sketch-to-render
+- Flick — Image Generation Prompts Guide (qué controla cada referencia; evitar izquierda y derecha): https://flick.art/docs/Image-Generation-prompts
 
 **Uso de IA (F1):** esta guía se redactó con Claude a partir de la lectura del Figma y de las fuentes listadas (búsqueda con Apify y buscador web).
