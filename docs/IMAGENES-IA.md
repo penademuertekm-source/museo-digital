@@ -114,7 +114,7 @@ Usa la Imagen A como escena exacta: misma sala, misma cámara, misma luz y mismo
 **P2 · Pasillo de una sala**
 Adjunta: [Imagen A] el pasillo de la Sala Núcleo como referencia de estilo.
 ```
-Con el estilo de la Imagen A: galería de museo en perspectiva central, vertical 9:16, toda en escala de grises. A los lados, pedestales con siluetas de [piezas de la sala]. Rieles de luz en el techo, piso pulido. Sin personas.
+Con el estilo de la Imagen A: galería de museo en perspectiva central, vertical 9:16, toda en escala de grises. A los lados, pedestales con siluetas de [piezas de la sala]. Rieles de luz en el techo, piso pulido. Galería vacía y silenciosa.
 ```
 
 **P3 · Portada ilustrada de sala**
