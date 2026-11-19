@@ -81,6 +81,40 @@ Sin esta preparación cada imagen sale distinta. La unidad se decide antes del p
 3. Si algo se mueve, se corrige con P4 y no se reescribe todo el prompt. Conviene cambiar una sola cosa por intento.
 4. En la bitácora se anota también la imagen base usada.
 
+### 2.2 Referencias aprobadas (por partes)
+
+**Parte 1 · Escena base.** Aprobadas por Kevin el 19 nov. 2026. Se usan como **referencia de estilo**, no como imagen base: ninguna tiene el encuadre 9:16 frontal con el pedestal centrado.
+
+| # | Imagen | Autor y fuente | Licencia | Qué aporta | Qué NO se toma |
+|---|---|---|---|---|---|
+| R1 | Pedestal cilíndrico en sala blanca vacía (render 3D) | Rodion Kutsaiev · [Unsplash](https://unsplash.com/photos/white-and-brown-round-frame-TMa_5BLvDqQ) | Licencia Unsplash (uso libre; el crédito se da igual, por E1) | Pedestal solo, luz suave, sala limpia y minimalista | La forma cilíndrica y el color beige: el pedestal del museo es rectangular y blanco |
+| R2 | Sala vacía de la Tate Modern con una banca al centro | Elena Soroka · [Unsplash](https://unsplash.com/photos/an-empty-building-with-a-bench-in-the-middle-of-it-yiBWViwSLzY) | Licencia Unsplash (uso libre; el crédito se da igual) | Ambiente de sala real: pared, piso y luz de galería | La banca, el tono morado y cualquier detalle que identifique a la Tate |
+
+**Parte 2 · Instrumentos de la estación 1:** pendiente.
+
+### 2.3 Primer prompt: escena base (prueba 1)
+
+Adjunta: [Imagen A] R1 · [Imagen B] R2. Si el equipo tiene una foto propia o un boceto (§2.1), se adjunta como [Imagen C] y manda en la composición.
+```
+Crea un render fotorrealista, vertical 9:16, de una sala de museo minimalista y completamente vacía.
+
+Qué tomar de cada imagen:
+- De la Imagen A, solo el carácter del pedestal: limpio, minimalista, con luz suave sobre él. No copies su forma ni su color.
+- De la Imagen B, solo el ambiente de galería real: la textura de la pared, el piso y la calidad de la luz. No incluyas la banca ni el color morado.
+
+La escena:
+- Pared gris muy clara, con una franja gris un poco más oscura a media altura que cruza todo el ancho.
+- Piso gris pulido con un reflejo suave del pedestal.
+- En el centro, un pedestal blanco mate, rectangular, con una placa blanca lisa en el frente.
+- La parte superior del pedestal queda a la mitad del alto de la imagen. Sobre el pedestal hay espacio libre para colocar luego un objeto.
+- Un solo foco cenital suave ilumina el pedestal desde arriba; sombras cortas y limpias; luz blanca neutra.
+- Cámara frontal a la altura del pedestal, perspectiva recta y lente normal.
+- La parte superior del encuadre es pared lisa; la parte inferior del encuadre es piso liso.
+
+Sala silenciosa: en la imagen solo están la pared, la franja, el piso, el pedestal y su placa lisa.
+```
+**Qué revisar en el resultado:** que salga vertical; que el pedestal sea rectangular, blanco y esté centrado; que no aparezcan la banca ni el tono morado; que haya espacio sobre el pedestal; y que el tercio inferior quede limpio para la tarjeta (§3, zona segura). Si falla una sola cosa, se corrige con P4 en la misma conversación. Todo se anota en la bitácora.
+
 **Consejos de redacción para la base:**
 - Decir qué controla cada imagen: "la Imagen A manda en la composición y la cámara; la Imagen B, en el objeto".
 - Ubicar las cosas con "parte superior del encuadre" o "primer plano" y no con izquierda y derecha, porque el modelo a veces las confunde.
@@ -247,6 +281,8 @@ En el Figma solo existe la Sala Núcleo. El Corte 1 ya definió **seis salas amp
 - Runway — Why do AI images look weird (manos, objetos, texto): https://runway.com/resources/why-do-ai-images-look-weird
 - Scenario — Sketch to render (Nano Banana respeta la estructura y la composición del boceto): https://help.scenario.com/articles/4604382336-sketch-to-render
 - WeShop AI — Nano Banana 2.1 Sketch to Render (base exacta de composición; cambiar una variable por intento): https://www.weshop.ai/solutions/models/nano-banana-2-1-sketch-to-render
+- Unsplash — Rodion Kutsaiev, R1 (licencia Unsplash): https://unsplash.com/photos/white-and-brown-round-frame-TMa_5BLvDqQ
+- Unsplash — Elena Soroka, R2 (licencia Unsplash): https://unsplash.com/photos/an-empty-building-with-a-bench-in-the-middle-of-it-yiBWViwSLzY
 - Flick — Image Generation Prompts Guide (qué controla cada referencia; evitar izquierda y derecha): https://flick.art/docs/Image-Generation-prompts
 
 **Uso de IA (F1):** esta guía se redactó con Claude a partir de la lectura del Figma y de las fuentes listadas (búsqueda con Apify y buscador web).
