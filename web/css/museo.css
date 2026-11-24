@@ -1,0 +1,108 @@
+/* Museo Vallenata · Sala Núcleo — réplica en código del prototipo "2.3 Prototipo navegable" (Figma de la docente).
+   Cada pantalla es un lienzo de 375 × 667 como en Figma; app.js lo escala al ancho del teléfono. */
+
+:root {
+  --primario: #8a1f2b;
+  --secundario: #3f5e3a;
+  --acento: #e0a92e;
+  --sobre-marca: #f4ead6;
+  --texto: #241611;
+  --texto-2: #63514a;
+  --linea: #d0bfa6;
+  --crema: #ede3ce;
+  --papel: #fdf9f1;
+  --s: 1; /* escala del lienzo, la fija app.js */
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: #241611;
+  font-family: "Work Sans", system-ui, sans-serif;
+  color: var(--texto);
+  overflow: hidden;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.marco {
+  position: fixed; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.escenario {
+  position: relative;
+  width: 375px; height: 667px;
+  flex: none;
+  transform: scale(var(--s));
+  overflow: hidden;
+}
+.pantalla { position: absolute; inset: 0; overflow: hidden; background: #f5f5f5; }
+
+/* Utilidades */
+.a { position: absolute; }
+.fr { font-family: "Fraunces", Georgia, serif; font-variation-settings: "SOFT" 0, "WONK" 1; }
+.b { font-weight: 700; } .sb { font-weight: 600; } .m { font-weight: 500; }
+.nw { white-space: nowrap; }
+.c { text-align: center; }
+img { display: block; max-width: none; }
+.cubre { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+
+button, a.btn {
+  font: inherit; color: inherit; background: none; border: 0;
+  cursor: pointer; text-align: inherit; text-decoration: none; display: block;
+}
+button:focus-visible, a.btn:focus-visible {
+  outline: 2px solid #1d63b8; outline-offset: 2px; box-shadow: 0 0 0 4px var(--sobre-marca);
+}
+/* Estado Hover de los componentes "Interactivo / *" (en Figma: Mientras pasa el cursor → Cambiar a, 0.15 s) */
+@media (hover: hover) {
+  .hov { transition: filter .15s ease-out, transform .15s ease-out; }
+  .hov:hover { filter: brightness(1.08); transform: scale(1.06); }
+}
+.hov:active { transform: scale(.96); }
+
+/* Barra superior (crema) */
+.barra-sup {
+  position: absolute; height: 34px; top: 16px; right: 16px;
+  background: var(--sobre-marca); border-radius: 12px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.barra-sup .izq { display: flex; align-items: center; gap: 3px; }
+.barra-sup .der { display: flex; align-items: center; gap: 8px; }
+.titulo-barra { font-weight: 600; font-size: 14px; letter-spacing: -0.28px; white-space: nowrap; }
+.insignia { border-radius: 99px; padding: 3px 8px; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.parlante { width: 26px; height: 26px; border-radius: 13px; position: relative; }
+
+/* Menú inferior del museo */
+.menu-inf {
+  position: absolute; left: 50px; top: 595px; width: 276px; height: 54px;
+  background: var(--sobre-marca); border-radius: 18px; padding: 5px 14px;
+  box-shadow: 0 6px 14px rgba(36, 22, 17, .28);
+  display: flex; align-items: center; justify-content: space-between;
+}
+.menu-inf .item {
+  width: 52px; height: 44px; border-radius: 14px; background: rgba(237, 227, 206, .02);
+  display: flex; align-items: center; justify-content: center;
+}
+.menu-inf .item.activo { background: rgba(138, 31, 43, .15); border-radius: 12px; }
+/* tamaño de cada ícono: en menuInferior() */
+
+/* Onda acústica del reproductor */
+.onda { position: absolute; left: 78px; top: 537px; width: 206px; height: 18px; }
+.onda i { position: absolute; display: block; }
+
+/* Transiciones (View Transitions API ≈ Smart Animate / Disolver de Figma) */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--vt-dur, .3s);
+  animation-timing-function: cubic-bezier(.42, 0, .58, 1); /* EASE_IN_AND_OUT */
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
+  .hov, .hov:hover { transition: none; transform: none; }
+}
+
+/* Lectura con desplazamiento de la Historia: barra propia como en Figma */
+.lectura { overflow-x: hidden; overflow-y: auto; scrollbar-width: none; }
+.lectura::-webkit-scrollbar { display: none; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }

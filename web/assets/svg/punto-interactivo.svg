@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Punto Interactivo">
+<g id="Elipse 1" filter="url(#filter0_d_0_104)">
+<circle cx="15" cy="15" r="8.25" fill="#E0A92E" fill-opacity="0.25" stroke-width="1.5" stroke="#E0A92E" shape-rendering="crispEdges"/>
+</g>
+<circle id="Elipse 5" cx="15" cy="15" r="2.25" fill="#E0A92E" stroke-width="1.5" stroke="#E0A92E"/>
+</g>
+<defs>
+<filter id="filter0_d_0_104" x="0" y="0" width="30" height="30" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="3"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0.878431 0 0 0 0 0.662745 0 0 0 0 0.180392 0 0 0 0.6 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_0_104"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_0_104" result="shape"/>
+</filter>
+</defs>
+</svg>
