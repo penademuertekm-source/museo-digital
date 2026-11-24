@@ -97,10 +97,6 @@ button:focus-visible, a.btn:focus-visible {
   animation-duration: var(--vt-dur, .3s);
   animation-timing-function: cubic-bezier(.42, 0, .58, 1); /* EASE_IN_AND_OUT */
 }
-/* Cada capa conserva su tamaño real mientras se mueve (por defecto el navegador la estira o la agranda). */
-::view-transition-old(*), ::view-transition-new(*) { width: auto; height: auto; }
-/* La animación no sale del lienzo de 375 × 667 (el fondo de la estación es más grande que la pantalla). */
-::view-transition { clip-path: inset(var(--vt-y, 0px) var(--vt-x, 0px)); }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
   .hov, .hov:hover { transition: none; transform: none; }

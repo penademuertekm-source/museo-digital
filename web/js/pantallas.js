@@ -3,6 +3,9 @@
 
 const S = 'assets/svg/';
 const px = (l, t, w, h) => `left:${l}px;top:${t}px;` + (w != null ? `width:${w}px;` : '') + (h != null ? `height:${h}px;` : '');
+/* Fondo recortado al lienzo: la capa animada mide siempre 375 × 667, así nada se sale de la pantalla
+   ni queda una línea o un salto al terminar la animación en el teléfono. */
+const fondo = img => `<div class="a" style="${px(0, 0, 375, 667)}overflow:hidden" data-vt="fondo">${img}</div>`;
 const go = (ruta, d = 0.3, t = 'smart') => `data-go="${ruta}" data-t="${t}" data-d="${d}"`;
 
 /* ---------- 00 · Portada / Inicio (228:5172) ---------- */
@@ -53,10 +56,10 @@ function pasillo(sonido) {
   };
   return `
   <section class="pantalla">
-    <img class="cubre" src="assets/img/pasillo.jpg" alt="Pasillo de la Sala Núcleo con vitrinas de instrumentos y retratos" style="height:672px" data-vt="fondo">
+    ${fondo(`<img class="cubre" src="assets/img/pasillo.jpg" alt="Pasillo de la Sala Núcleo con vitrinas de instrumentos y retratos" style="height:672px">`)}
     <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))" data-vt="degradado-sup"></div>
     <div class="a" style="${px(0, 517, 375, 150)}background:linear-gradient(180deg,rgba(36,22,17,0),rgba(36,22,17,.68))"></div>
-    <header class="barra-sup" style="left:16px;opacity:.9;padding:0 10px 0 12px" data-vt="barra-sup">
+    <header class="barra-sup" style="left:16px;opacity:.9;padding:0 10px 0 12px" data-vt="barra-pasillo">
       <div class="izq"><img src="${S}ubicacion.svg" alt="" width="20" height="20"><h1 class="titulo-barra">Sala Núcleo</h1></div>
       <div class="der">
         <span class="insignia" style="background:rgba(36,22,17,.1)" aria-label="0 de 4 estaciones visitadas">0/4</span>
@@ -100,7 +103,7 @@ function mapa() {
   const destMenu = { inicio: { r: 'pasillo' }, salas: { r: 'e1' } };
   return `
   <section class="pantalla">
-    <img class="cubre" src="assets/img/pasillo.jpg" alt="" style="height:672px" data-vt="fondo">
+    ${fondo(`<img class="cubre" src="assets/img/pasillo.jpg" alt="" style="height:672px">`)}
     <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))" data-vt="degradado-sup"></div>
     <div class="a" style="${px(0, 517, 375, 150)}background:linear-gradient(180deg,rgba(36,22,17,0),rgba(36,22,17,.68))"></div>
     ${[[62, 389], [94, 288], [232, 309], [287, 418]].map(([x, y]) => `<img class="a" src="${S}punto-interactivo.svg" alt="" style="${px(x - 6, y - 6, 30, 30)}">`).join('')}
@@ -143,7 +146,7 @@ function flechasEstacion(st) {
 }
 
 function pildoraInmersiva(st) {
-  return `<button class="a sb hov" ${go(st.id + '/visor', 0.35)} style="${px(...(st.pildoraXY || [118, 336, 148]), 28)}background:rgba(36,22,17,.9);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:0 0 0 16px;white-space:pre" data-vt="pildora">${st.pildora}</button>`;
+  return `<button class="a sb hov" ${go(st.id + '/visor', 0.35)} style="${px(...(st.pildoraXY || [118, 336, 148]), 28)}background:rgba(36,22,17,.9);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:0 0 0 16px;white-space:pre" data-vt="pildora${st.pildoraXY ? '-360' : ''}">${st.pildora}</button>`;
 }
 
 function selectorPestanas(st, actual) {
@@ -185,7 +188,7 @@ function subtitulos(st, sonando, top = 572) {
 
 function fondoEstacion(st) {
   return `
-    <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="left:-20px;bottom:0;width:414px;height:742px;object-fit:cover" data-vt="fondo">
+    ${fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="left:-20px;bottom:0;width:414px;height:742px;object-fit:cover">`)}
     <div class="a" style="${px(0, 0, 375, 105)}background:linear-gradient(180deg,rgba(36,22,17,.48),rgba(36,22,17,0))" data-vt="degradado-sup"></div>`;
 }
 

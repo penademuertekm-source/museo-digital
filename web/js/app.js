@@ -6,11 +6,8 @@
 
   // Escala el lienzo de 375 × 667 al tamaño de la ventana, sin recortar.
   function escalar() {
-    const s = Math.min(innerWidth / 375, innerHeight / 667), r = document.documentElement.style;
-    r.setProperty('--s', s.toFixed(4));
-    // Márgenes fuera del lienzo: la animación se recorta ahí para que nada se vea más grande que la pantalla.
-    r.setProperty('--vt-x', ((innerWidth - 375 * s) / 2).toFixed(1) + 'px');
-    r.setProperty('--vt-y', ((innerHeight - 667 * s) / 2).toFixed(1) + 'px');
+    const s = Math.min(innerWidth / 375, innerHeight / 667);
+    document.documentElement.style.setProperty('--s', s.toFixed(4));
   }
   addEventListener('resize', escalar);
   escalar();
@@ -76,7 +73,12 @@
     const t = pendiente || { t: 'smart', d: 0.3 };
     pendiente = null;
     const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!document.startViewTransition || reducir || document.hidden || !app.innerHTML) { pintar(ruta); return; }
+    if (reducir || document.hidden || !app.innerHTML) { pintar(ruta); return; }
+    if (!document.startViewTransition) { // navegadores sin View Transitions: al menos un fundido de la pantalla nueva
+      pintar(ruta);
+      app.firstElementChild.animate([{ opacity: 0 }, { opacity: 1 }], { duration: t.d * 1000, easing: 'cubic-bezier(.42,0,.58,1)' });
+      return;
+    }
     document.documentElement.style.setProperty('--vt-dur', t.d + 's');
     const smart = t.t === 'smart';
     nombrar(smart); // Disolver = fundido de la pantalla completa, sin capas

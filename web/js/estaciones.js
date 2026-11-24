@@ -18,7 +18,7 @@ function cabeceraPanel(st, sub, top = 372) {
   const d = top - 372;
   return `
     <div class="a" style="${px(0, top, 375, 667 - top)}background:var(--papel);border-radius:24px 24px 0 0" data-vt="panel"></div>
-    <h2 class="a fr sb nw" style="${px(24, 388 + d)}font-size:20px;letter-spacing:-0.4px" data-vt="titulo">${st.titulo}</h2>
+    <h2 class="a fr sb nw" style="${px(24, 388 + d, 327)}font-size:20px;letter-spacing:-0.4px" data-vt="titulo">${st.titulo}</h2>
     <div class="a" style="${px(24, 420 + d, 3, 13)}background:var(--acento);border-radius:1.5px" data-vt="acento"></div>
     <p class="a sb nw" style="${px(33, 416.5 + d, 280)}color:var(--primario);font-size:12px;line-height:20px;letter-spacing:.12px" data-vt="subtitulo">${sub}</p>`;
 }
@@ -108,7 +108,7 @@ function visor(st, sonando) {
   const p = st.pieza, dest = sonando ? st.id + '/visor' : st.id + '/visor/audio';
   return `
   <section class="pantalla" style="background:#140c09">
-    <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover" data-vt="fondo">
+    ${fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover">`)}
     <div class="a" style="${px(0, 0, 375, 460)}background:linear-gradient(180deg,rgba(18,11,8,.65) 0%,rgba(18,11,8,.1) 35%,rgba(18,11,8,.18) 75%,rgba(18,11,8,.78) 100%)" data-vt="degradado-sup"></div>
     <button class="a hov" aria-label="Salir del visor" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <nav class="a" aria-label="Modo de vista" style="${px(58, 16, 301, 34)}background:rgba(237,227,206,.94);border:1px solid rgba(224,169,46,.4);border-radius:17px;overflow:hidden" data-vt="modo">
