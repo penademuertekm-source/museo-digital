@@ -2,6 +2,9 @@
   "hosting": {
     "public": "web",
     "ignore": ["**/.*"],
+    "redirects": [
+      { "source": "/qr", "destination": "/", "type": 302 }
+    ],
     "headers": [
       { "source": "**/*.@(jpg|png|svg)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=604800" }] },
       { "source": "**/*.@(html|js|css)", "headers": [{ "key": "Cache-Control", "value": "no-cache" }] },
