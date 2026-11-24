@@ -90,10 +90,10 @@ const centro = 'display:flex;align-items:center;justify-content:center;line-heig
 
 /* Panel inferior del visor y de la vista 2D: fichas 1·2·3, título, reproductor y subtítulos (desde y = 428). */
 function panelPieza(st, sonando, dest, sub, colorSub) {
-  const p = st.pieza, xs = p.chipsX || [[24, 104], [136, 72], [216, 104]];
+  const p = st.pieza;
   return `
     <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
-    ${p.chips.map((c, i) => `<span class="a sb nw" style="${px(xs[i][0], 446, xs[i][1], 26)}border-radius:13px;font-size:10px;padding:6px 0 0 14px;overflow:hidden;${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${i === 0 ? '● ' : ''}${c}</span>`).join('')}
+    <div class="a" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.chips.map((c, i) => `<span class="sb nw" style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${c}</span>`).join('')}</div>
     <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
     <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
     <p class="a sb nw" style="${px(33, 512)}color:${colorSub};font-size:11px">${sub}</p>
@@ -112,8 +112,8 @@ function visor(st, sonando) {
     <div class="a" style="${px(0, 0, 375, 460)}background:linear-gradient(180deg,rgba(18,11,8,.65) 0%,rgba(18,11,8,.1) 35%,rgba(18,11,8,.18) 75%,rgba(18,11,8,.78) 100%)" data-vt="degradado-sup"></div>
     <button class="a hov" aria-label="Salir del visor" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <nav class="a" aria-label="Modo de vista" style="${px(58, 16, 301, 34)}background:rgba(237,227,206,.94);border:1px solid rgba(224,169,46,.4);border-radius:17px;overflow:hidden" data-vt="modo">
-      <span class="a sb nw" aria-current="page" style="${px(2, 2, 144, 28)}background:var(--primario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:7px 0 0 24px">● ${p.modo}</span>
-      <button class="a sb nw" ${go(st.id + '/2d')} style="${px(151, 2, 146, 28)}background:rgba(247,243,236,.85);border-radius:14px;font-size:10.5px;padding:0 0 0 44px">Ver en 2D</button>
+      <span class="a sb nw" aria-current="page" style="${px(2, 2, 144, 28)}background:var(--primario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;${centro}">● ${p.modo}</span>
+      <button class="a sb nw" ${go(st.id + '/2d')} style="${px(151, 2, 146, 28)}background:rgba(247,243,236,.85);border-radius:14px;font-size:10.5px;${centro}">Ver en 2D</button>
     </nav>
     <img class="a" src="${S}anillo-360.svg" alt="" style="${px(44, 286, 286, 68)}">
     <img class="a" src="${S}hotspot-activo.svg" alt="" style="${px(168, 182, 34, 34)}">
@@ -142,12 +142,12 @@ function vista2d(st, sonando) {
   <section class="pantalla" style="background:#ebe1cd">
     <button class="a hov" aria-label="Salir de la vista 2D" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <nav class="a" aria-label="Modo de vista" style="${px(58, 16, 301, 34)}background:#f7f3ec;border:1px solid rgba(63,94,58,.45);border-radius:17px;overflow:hidden" data-vt="modo">
-      <span class="a sb nw" aria-current="page" style="${px(135, 2, 162, 28)}background:var(--secundario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:7px 0 0 46px">✓ Vista 2D</span>
-      <button class="a sb nw" ${go(st.id + '/visor')} style="${px(2, 2, 130, 28)}background:rgba(237,227,206,.7);border-radius:14px;font-size:10.5px;padding:0 0 0 ${p.tab3dX || 26}px">${p.modo}</button>
+      <span class="a sb nw" aria-current="page" style="${px(135, 2, 162, 28)}background:var(--secundario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;${centro}">✓ Vista 2D</span>
+      <button class="a sb nw" ${go(st.id + '/visor')} style="${px(2, 2, 130, 28)}background:rgba(237,227,206,.7);border-radius:14px;font-size:10.5px;${centro}">${p.modo}</button>
     </nav>
     <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
       <img class="a" src="${p.foto2d}" alt="${p.titulo}" style="${px(12, 12, 307, 216)}object-fit:cover;border-radius:14px">
-      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}justify-content:flex-start;padding-left:12px">✓ Lámina fija · Sin giros ni cámara</span>
+      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">✓ Lámina fija · Sin giros ni cámara</span>
       ${marcas.map(([x, y], i) => `<span class="a b" aria-hidden="true" style="${px(x - 1, y - 1, 26, 26)}background:var(--primario);border:2px solid var(--sobre-marca);border-radius:13px;color:var(--sobre-marca);font-size:10.5px;${centro}">${i + 1}</span>`).join('')}
       ${p.partes.map(([n, d], i) => `
       <div class="a" style="${px(12 + i * 105, 242, 97, 80)}background:rgba(237,227,206,.65);border-radius:12px">

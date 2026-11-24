@@ -110,7 +110,6 @@ Object.assign(ESTACIONES.e4, {
     fotos: ['1/3 · Parque de la Leyenda', '2/3 · Plaza Alfonso López', '3/3 · Río Guatapurí'],
     nota: 'Toca cualquier fotografía para ampliar la imagen de archivo.' },
   pieza: { modo: 'Visor 360°', chips: ['1. Río Guatapurí', '2. Plaza', '3. Sierra'],
-    chipsX: [[24, 112], [144, 72], [224, 104]], tab3dX: 36,
     titulo: 'Valledupar y el Río Guatapurí', sub: 'Vista panorámica 360° · Plaza Alfonso López y Sierra',
     audio: 'Audio 360°/2D: Paisaje sonoro del río',
     subtitulos: 'Rumor del río Guatapurí entre cantos de vaquería y brisa de la Sierra Nevada.',
