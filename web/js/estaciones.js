@@ -85,6 +85,9 @@ function contraida(st) {
     <button class="a hov" aria-label="Desplegar tarjeta" aria-expanded="false" ${go(st.id)} style="${px(311, 514, 40, 40)}" data-vt="contraer"><img src="${S}desplegar.svg" alt="" width="40" height="40"></button>`);
 }
 
+/* Centra el contenido en su caja (números dentro de su círculo, texto dentro de su cápsula). */
+const centro = 'display:flex;align-items:center;justify-content:center;line-height:1;';
+
 /* Panel inferior del visor y de la vista 2D: fichas 1·2·3, título, reproductor y subtítulos (desde y = 428). */
 function panelPieza(st, sonando, dest, sub, colorSub) {
   const p = st.pieza, xs = p.chipsX || [[24, 104], [136, 72], [216, 104]];
@@ -114,11 +117,11 @@ function visor(st, sonando) {
     </nav>
     <img class="a" src="${S}anillo-360.svg" alt="" style="${px(44, 286, 286, 68)}">
     <img class="a" src="${S}hotspot-activo.svg" alt="" style="${px(168, 182, 34, 34)}">
-    <span class="a b nw" style="${px(182, 192)}color:var(--sobre-marca);font-size:10px">1</span>
+    <span class="a b" style="${px(168, 182, 34, 34)}${centro}color:var(--sobre-marca);font-size:10px">1</span>
     <img class="a" src="${S}hotspot.svg" alt="" style="${px(84, 248, 28, 28)}">
-    <span class="a b nw" style="${px(95, 256)}font-size:9.5px">2</span>
+    <span class="a b" style="${px(84, 248, 28, 28)}${centro}font-size:9.5px">2</span>
     <img class="a" src="${S}hotspot.svg" alt="" style="${px(246, 234, 28, 28)}">
-    <span class="a b nw" style="${px(257, 242)}font-size:9.5px">3</span>
+    <span class="a b" style="${px(246, 234, 28, 28)}${centro}font-size:9.5px">3</span>
     <div class="a b" aria-hidden="true" style="${px(327, 168, 32, 96)}background:rgba(28,17,13,.78);border:1px solid rgba(224,169,46,.4);border-radius:16px;overflow:hidden;color:var(--sobre-marca)">
       <span class="a" style="${px(9, 5)}font-size:14px">+</span>
       <span class="a" style="${px(4, 30, 20, 1)}background:rgba(244,234,214,.18)"></span>
@@ -126,7 +129,7 @@ function visor(st, sonando) {
       <span class="a" style="${px(4, 62, 20, 1)}background:rgba(244,234,214,.18)"></span>
       <span class="a" style="${px(8, 68)}font-size:12.5px;color:var(--acento)">↺</span>
     </div>
-    <p class="a m nw" style="${px(52, 378, 271, 28)}background:rgba(28,17,13,.84);border:1px solid rgba(224,169,46,.45);border-radius:14px;color:var(--sobre-marca);font-size:10px;padding:5px 0 0 18px">↻ Inicio quieto · Arrastra 360° o toca 1, 2, 3</p>
+    <p class="a m nw" style="${px(52, 378, 271, 28)}background:rgba(28,17,13,.84);border:1px solid rgba(224,169,46,.45);border-radius:14px;color:var(--sobre-marca);font-size:10px;${centro}">↻ Inicio quieto · Arrastra 360° o toca 1, 2, 3</p>
     ${panelPieza(st, sonando, dest, p.sub, 'var(--primario)')}
   </section>`;
 }
@@ -144,11 +147,11 @@ function vista2d(st, sonando) {
     </nav>
     <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
       <img class="a" src="${p.foto2d}" alt="${p.titulo}" style="${px(12, 12, 307, 216)}object-fit:cover;border-radius:14px">
-      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;padding:5px 0 0 12px">✓ Lámina fija · Sin giros ni cámara</span>
-      ${marcas.map(([x, y], i) => `<span class="a b" aria-hidden="true" style="${px(x - 1, y - 1, 26, 26)}background:var(--primario);border:2px solid var(--sobre-marca);border-radius:13px;color:var(--sobre-marca);font-size:10.5px;padding:1px 0 0 5px">${i + 1}</span>`).join('')}
+      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}justify-content:flex-start;padding-left:12px">✓ Lámina fija · Sin giros ni cámara</span>
+      ${marcas.map(([x, y], i) => `<span class="a b" aria-hidden="true" style="${px(x - 1, y - 1, 26, 26)}background:var(--primario);border:2px solid var(--sobre-marca);border-radius:13px;color:var(--sobre-marca);font-size:10.5px;${centro}">${i + 1}</span>`).join('')}
       ${p.partes.map(([n, d], i) => `
       <div class="a" style="${px(12 + i * 105, 242, 97, 80)}background:rgba(237,227,206,.65);border-radius:12px">
-        <span class="a b" style="${px(10, 10, 20, 20)}background:var(--primario);border-radius:10px;color:var(--sobre-marca);font-size:9.5px;padding:3px 0 0 6.5px">${i + 1}</span>
+        <span class="a b" style="${px(10, 10, 20, 20)}background:var(--primario);border-radius:10px;color:var(--sobre-marca);font-size:9.5px;${centro}">${i + 1}</span>
         <p class="a b nw" style="${px(10, 36)}font-size:11px">${n}</p>
         <p class="a nw" style="${px(10, 53)}color:var(--texto-2);font-size:9.5px">${d}</p>
       </div>`).join('')}
