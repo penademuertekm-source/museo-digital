@@ -30,7 +30,7 @@ function menuInferior(activo, destinos) {
     ['inicio', 'Inicio', 'inicio.svg', 22.5, 20.5], ['salas', 'Salas', 'salas.svg', 21.7, 22.5],
     ['mapa', 'Mapa', 'mapa.svg', 22.5, 15.3], ['info', 'Información', 'informacion.svg', 30, 30],
   ];
-  return `<nav class="menu-inf" aria-label="Menú del museo" data-vt="menu">${items.map(([k, label, ic, w, h]) => {
+  return `<nav class="menu-inf" aria-label="Menú del museo">${items.map(([k, label, ic, w, h]) => {
     const dest = destinos[k];
     const cls = 'item' + (k === activo ? ' activo' : '');
     const inner = `<img src="${S + ic}" alt="" style="width:${w}px;height:${h}px">`;
@@ -49,8 +49,8 @@ function pasillo(sonido) {
   };
   return `
   <section class="pantalla">
-    <img class="cubre" src="assets/img/pasillo.jpg" alt="Pasillo de la Sala Núcleo con vitrinas de instrumentos y retratos" style="height:672px" data-vt="fondo-pasillo">
-    <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))"></div>
+    <img class="cubre" src="assets/img/pasillo.jpg" alt="Pasillo de la Sala Núcleo con vitrinas de instrumentos y retratos" style="height:672px" data-vt="fondo">
+    <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))" data-vt="degradado-sup"></div>
     <div class="a" style="${px(0, 517, 375, 150)}background:linear-gradient(180deg,rgba(36,22,17,0),rgba(36,22,17,.68))"></div>
     <header class="barra-sup" style="left:16px;opacity:.9;padding:0 10px 0 12px" data-vt="barra-sup">
       <div class="izq"><img src="${S}ubicacion.svg" alt="" width="20" height="20"><h1 class="titulo-barra">Sala Núcleo</h1></div>
@@ -96,8 +96,8 @@ function mapa() {
   const destMenu = { inicio: { r: 'pasillo' }, salas: { r: 'e1' } };
   return `
   <section class="pantalla">
-    <img class="cubre" src="assets/img/pasillo.jpg" alt="" style="height:672px" data-vt="fondo-pasillo">
-    <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))"></div>
+    <img class="cubre" src="assets/img/pasillo.jpg" alt="" style="height:672px" data-vt="fondo">
+    <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))" data-vt="degradado-sup"></div>
     <div class="a" style="${px(0, 517, 375, 150)}background:linear-gradient(180deg,rgba(36,22,17,0),rgba(36,22,17,.68))"></div>
     ${[[62, 389], [94, 288], [232, 309], [287, 418]].map(([x, y]) => `<img class="a" src="${S}punto-interactivo.svg" alt="" style="${px(x - 6, y - 6, 30, 30)}">`).join('')}
     <div class="a" style="${px(0, 0, 375, 667)}background:rgba(20,12,9,.8)"></div>
@@ -181,7 +181,7 @@ function subtitulos(st, sonando, top = 572) {
 
 function fondoEstacion(st) {
   return `
-    <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="left:-20px;bottom:0;width:414px;height:742px;object-fit:cover" data-vt="escenario">
-    <div class="a" style="${px(0, 0, 375, 105)}background:linear-gradient(180deg,rgba(36,22,17,.48),rgba(36,22,17,0))"></div>`;
+    <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="left:-20px;bottom:0;width:414px;height:742px;object-fit:cover" data-vt="fondo">
+    <div class="a" style="${px(0, 0, 375, 105)}background:linear-gradient(180deg,rgba(36,22,17,.48),rgba(36,22,17,0))" data-vt="degradado-sup"></div>`;
 }
 

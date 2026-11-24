@@ -6,8 +6,11 @@
 
   // Escala el lienzo de 375 × 667 al tamaño de la ventana, sin recortar.
   function escalar() {
-    const s = Math.min(innerWidth / 375, innerHeight / 667);
-    document.documentElement.style.setProperty('--s', s.toFixed(4));
+    const s = Math.min(innerWidth / 375, innerHeight / 667), r = document.documentElement.style;
+    r.setProperty('--s', s.toFixed(4));
+    // Márgenes fuera del lienzo: la animación se recorta ahí para que nada se vea más grande que la pantalla.
+    r.setProperty('--vt-x', ((innerWidth - 375 * s) / 2).toFixed(1) + 'px');
+    r.setProperty('--vt-y', ((innerHeight - 667 * s) / 2).toFixed(1) + 'px');
   }
   addEventListener('resize', escalar);
   escalar();
@@ -29,9 +32,27 @@
     return portada();
   }
 
-  function nombrar(on) {
-    app.querySelectorAll('[data-vt]').forEach(el => { el.style.viewTransitionName = on ? el.dataset.vt : ''; });
+  /* Smart Animate de Figma: cada capa de la pantalla se anima por separado y en su mismo orden de apilado.
+     - data-vt: la misma capa en las dos pantallas (se desliza a su nueva posición, como el panel al contraer).
+     - Sin data-vt: el nombre sale de su contenido, así una capa idéntica se queda quieta y una distinta
+       se funde, sin quedar escondida debajo del fondo durante la animación. */
+  function hashCapa(txt) {
+    let h = 5381;
+    for (let i = 0; i < txt.length; i++) h = (h * 33 + txt.charCodeAt(i)) | 0;
+    return 'k' + (h >>> 0).toString(36);
   }
+  function nombrar(on) {
+    const capas = app.querySelectorAll('.pantalla > *'), usados = {};
+    capas.forEach(el => { el.style.viewTransitionName = ''; });
+    if (!on) return;
+    capas.forEach(el => {
+      let n = el.dataset.vt || hashCapa(el.outerHTML);
+      usados[n] = (usados[n] || 0) + 1;
+      if (usados[n] > 1) n += '-' + usados[n];
+      el.style.viewTransitionName = n;
+    });
+  }
+  let transicion = null;
 
   function pintar(ruta) {
     app.innerHTML = pantallaDe(ruta);
@@ -54,8 +75,10 @@
     if (!document.startViewTransition || reducir || document.hidden || !app.innerHTML) { pintar(ruta); return; }
     document.documentElement.style.setProperty('--vt-dur', t.d + 's');
     const smart = t.t === 'smart';
-    if (smart) nombrar(true);
-    document.startViewTransition(() => { pintar(ruta); if (smart) nombrar(true); }).ready.catch(() => {}); // si el navegador cancela la animación, la pantalla igual cambia
+    nombrar(smart); // Disolver = fundido de la pantalla completa, sin capas
+    const vt = transicion = document.startViewTransition(() => { pintar(ruta); nombrar(smart); });
+    vt.ready.catch(() => {}); // si el navegador cancela la animación, la pantalla igual cambia
+    vt.finished.finally(() => { if (transicion === vt) nombrar(false); });
   }
 
   app.addEventListener('click', e => {

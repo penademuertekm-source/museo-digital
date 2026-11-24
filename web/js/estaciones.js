@@ -89,9 +89,9 @@ function contraida(st) {
 function panelPieza(st, sonando, dest, sub, colorSub) {
   const p = st.pieza, xs = p.chipsX || [[24, 104], [136, 72], [216, 104]];
   return `
-    <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0" data-vt="panel"></div>
+    <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
     ${p.chips.map((c, i) => `<span class="a sb nw" style="${px(xs[i][0], 446, xs[i][1], 26)}border-radius:13px;font-size:10px;padding:6px 0 0 14px;overflow:hidden;${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${i === 0 ? '● ' : ''}${c}</span>`).join('')}
-    <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px" data-vt="titulo">${p.titulo}</h2>
+    <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
     <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
     <p class="a sb nw" style="${px(33, 512)}color:${colorSub};font-size:11px">${sub}</p>
     ${reproductor(p, sonando, dest, 536)}
@@ -105,8 +105,8 @@ function visor(st, sonando) {
   const p = st.pieza, dest = sonando ? st.id + '/visor' : st.id + '/visor/audio';
   return `
   <section class="pantalla" style="background:#140c09">
-    <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover" data-vt="escenario">
-    <div class="a" style="${px(0, 0, 375, 460)}background:linear-gradient(180deg,rgba(18,11,8,.65) 0%,rgba(18,11,8,.1) 35%,rgba(18,11,8,.18) 75%,rgba(18,11,8,.78) 100%)"></div>
+    <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover" data-vt="fondo">
+    <div class="a" style="${px(0, 0, 375, 460)}background:linear-gradient(180deg,rgba(18,11,8,.65) 0%,rgba(18,11,8,.1) 35%,rgba(18,11,8,.18) 75%,rgba(18,11,8,.78) 100%)" data-vt="degradado-sup"></div>
     <button class="a hov" aria-label="Salir del visor" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <nav class="a" aria-label="Modo de vista" style="${px(58, 16, 301, 34)}background:rgba(237,227,206,.94);border:1px solid rgba(224,169,46,.4);border-radius:17px;overflow:hidden" data-vt="modo">
       <span class="a sb nw" aria-current="page" style="${px(2, 2, 144, 28)}background:var(--primario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:7px 0 0 24px">● ${p.modo}</span>
