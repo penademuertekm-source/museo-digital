@@ -56,6 +56,10 @@
 
   function pintar(ruta) {
     app.innerHTML = pantallaDe(ruta);
+    if (!avisoVisto && ESTACIONES[ruta.split('/')[0]]) {
+      avisoVisto = true;
+      try { sessionStorage.setItem('avisoVisto', '1'); } catch (e) { /* sin almacenamiento: se recuerda hasta recargar */ }
+    }
     sonido(ruta);
     const titulo = app.querySelector('h2') || app.querySelector('h1');
     document.title = (titulo ? titulo.innerText.replace(/\s+/g, ' ').trim() + ' · ' : '') + 'Museo Festival de la Leyenda Vallenata';

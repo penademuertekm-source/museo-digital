@@ -40,6 +40,10 @@ function menuInferior(activo, destinos) {
   }).join('')}</nav>`;
 }
 
+/* El aviso "Toca un punto dorado" se muestra hasta que el visitante entra a su primera estación (por el aviso, un punto o el mapa);
+   después el pasillo queda libre. Se recuerda mientras la pestaña siga abierta, aunque se recargue. */
+let avisoVisto = (() => { try { return sessionStorage.getItem('avisoVisto') === '1'; } catch (e) { return false; } })();
+
 /* ---------- 01 · Sala Núcleo / Pasillo (232:5933) y 01B con sonido (232:6003) ---------- */
 function pasillo(sonido) {
   const puntos = [[282, 413, 1], [57, 384, 2], [89, 283, 3], [227, 304, 4]]; // [x, y, estación], como en Figma: el aviso señala la 1
@@ -63,7 +67,7 @@ function pasillo(sonido) {
       <img src="${S}buscar.svg" alt="" width="18" height="18">
       <span style="font-size:12px;color:var(--texto-2)">Buscar sala, instrumento o juglar...</span>
     </button>
-    <button class="a" ${go('e1', 0.35)} style="${px(184, 362, 176, 54)}" aria-label="Toca un punto dorado. Ejemplo: Tríada Instrumental">
+    ${avisoVisto ? '' : `<button class="a" ${go('e1', 0.35)} style="${px(184, 362, 176, 54)}" aria-label="Toca un punto dorado. Ejemplo: Tríada Instrumental">
       <span class="a" style="left:0;top:0;background:rgba(36,22,17,.92);border:1px solid var(--acento);border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;padding:7px 12px 7px 10px">
         <img src="${S}toque-ar.svg" alt="" style="width:12.6px;height:19.25px;margin:1.4px 4.6px 1.4px 4.8px">
         <span style="display:flex;flex-direction:column;gap:1px;font-size:10px;white-space:nowrap;text-align:left">
@@ -72,7 +76,7 @@ function pasillo(sonido) {
         </span>
       </span>
       <img class="a" src="${S}puntero-aviso.svg" alt="" style="${px(106.8, 41, 10.4, 5.25)}transform:rotate(180deg)">
-    </button>
+    </button>`}
     ${puntos.map(([x, y, n]) => `<button class="a hov" aria-label="Estación ${n}" ${go('e' + n, 0.35)} style="${px(x, y, 28, 28)}"><img src="${S}punto-dorado.svg" alt="" width="28" height="28"></button>`).join('')}
     ${menuInferior('inicio', destMenu)}
   </section>`;
