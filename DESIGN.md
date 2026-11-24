@@ -8,6 +8,8 @@
 - **[C1] / [C2]:** regla que viene de los PDFs del Corte 1 o del Corte 2 (el *porqué*).
 - **[P] Propuesta:** aclaración o ajuste que proponemos para el prototipo; no existe en el archivo de la profesora. Cada propuesta se aprueba antes de aplicarse.
 
+> **Cambio del 24 nov. 2026:** el diseño final es el prototipo de la docente **tal cual** (página `2.3 Prototipo navegable`, 40 pantallas de 375 × 667). La web app en `web/` lo copia sin ajustes. Las propuestas [P], el canon del Corte 2 (§18), D2 y D3 quedan **en espera** hasta que el equipo decida; si vuelven, se aplican como correcciones después de la prueba crítica.
+
 Fuente: `https://www.figma.com/design/7PTatcnprqstUq7NNzXgR3/SYSTEM-DESING`
 Páginas: `1. Exploración Inicial` · `2.1 Sistema de Diseño` · `2.2 Wireframe Baja - UI/Interacción` · `2.3 Prototipo navegable`
 

@@ -11,7 +11,24 @@
 - **Equipo:** grabar o conseguir material, opinar sobre las propuestas.
 - **Docente:** revisa el contenido y apoya en lo técnico pesado.
 
-**Estado:** ✅ hecho · ⏳ en curso · ⬜ por hacer · 🔁 depende de la revisión de la docente
+**Estado:** ✅ hecho · ⏳ en curso · ⬜ por hacer · 🔁 depende de la revisión de la docente · ⏸️ en espera
+
+---
+
+## Fase actual · Equipo de Apoyo: web app del prototipo de la docente ⏳
+
+> Desde el 24 nov. 2026, tras el cambio de grupos, el diseño final es el **Figma de la docente** (página `2.3 Prototipo navegable`). Esta fase reemplaza a las Fases 1–3 de abajo, que quedan como referencia. **Entrega: jueves 26 nov. 2026.**
+
+| Tarea | Quién | Listo cuando |
+|---|---|---|
+| A1 · Pasar a código las 40 pantallas **tal cual**: maquetación, textos, conexiones y transiciones de los 3 flows (Recorrido completo, Sala Núcleo desde el pasillo, Pieza inmersiva 3D vs 2D) | Claude Code | ⏳ Las 40 pantallas y sus conexiones funcionan en el navegador del teléfono |
+| A2 · Publicar en Firebase Hosting (`*.web.app`) | Kevin crea la cuenta institucional · Claude Code publica | El enlace abre en el teléfono sin iniciar sesión |
+| A3 · Prueba crítica y lista de errores | Kevin · Claude | Lista priorizada; **se corrige solo cuando Kevin lo diga** |
+| A4 · Integrar los elementos 3D e interactivos (visor 3D/RA y 360° de la estación 4) | Equipo entrega los assets en GLB / foto 360 · Claude Code integra | Funciona en Android e iPhone, con la vista 2D como alternativa |
+| A5 · Audios definitivos (hoy: pista de YouTube temporal) | Equipo | Archivos propios con subtítulos; reemplazan la pista temporal |
+| A6 · Pasaporte en código (registro de quién entró y qué estaciones visitó) | Claude Code | Pendiente de que Kevin defina qué guarda |
+
+**En espera hasta nuevo aviso (⏸️):** la RA del acordeón de Canicule, los demás elementos 3D/RA que propusimos, la Plaza, el contador D3 y los íconos propuestos (Material Icons) del Figma propio.
 
 ---
 
