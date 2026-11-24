@@ -44,7 +44,9 @@ const ESTACIONES = {
     resumen: 'Creado en 1968 en Valledupar y declarado Patrimonio Cultural Inmaterial en Salvaguardia Urgente por la UNESCO en 2015.',
     audio: 'Audio: Paisaje sonoro de Valledupar',
     subtitulos: 'Murmullo festivo en la Plaza Alfonso López, brisa del río Guatapurí y notas de acordeón a lo lejos.',
-    pildora: '✦  Explorar en 360°', pildoraXY: [125, 272, 136],
+    pildora: '✦  Explorar en 360°', pildoraXY: [125, 312, 136],
+    // Ajuste aprobado por Kevin (24 nov.): el cuadro se ve 32 % más grande, centrado en el cuadro, y la píldora baja al espacio libre.
+    zoomEscenario: { escala: 1.32, origen: '208px 265px' },
     escenario: 'assets/img/e4-escenario.jpg',
     altEscenario: '',
     audioSrc: '',

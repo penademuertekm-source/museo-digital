@@ -188,7 +188,7 @@ function subtitulos(st, sonando, top = 572) {
 
 function fondoEstacion(st) {
   return `
-    ${fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="left:-20px;bottom:0;width:414px;height:742px;object-fit:cover">`)}
+    ${fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="left:-20px;bottom:0;width:414px;height:742px;object-fit:cover${st.zoomEscenario ? `;transform-origin:${st.zoomEscenario.origen};transform:scale(${st.zoomEscenario.escala})` : ''}">`)}
     <div class="a" style="${px(0, 0, 375, 105)}background:linear-gradient(180deg,rgba(36,22,17,.48),rgba(36,22,17,0))" data-vt="degradado-sup"></div>`;
 }
 
