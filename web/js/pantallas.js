@@ -117,7 +117,7 @@ function mapa() {
       <div class="a" style="${px(29.8, 130.8, 2, 368)}background:rgba(224,169,46,.45)"></div>
       <img class="a" src="${S}elipse-actual.svg" alt="" style="${px(23.8, 129.8, 14, 14)}">
       ${tarjeta(100.8, 'SALA NÚCLEO · 1/4 ESTACIONES', 'var(--primario)', 'El Festival y la Leyenda', 'Tríada, orígenes, historia y territorio.', 'e1', 'rgba(237,227,206,.95)',
-        `<span class="a sb nw" style="${px(196, 23, 55, 26)}background:var(--primario);border-radius:13px;color:var(--sobre-marca);font-size:9.5px;padding:6px 12px">Actual</span>`)}
+        `<span class="a sb nw" style="${px(196, 23, 55, 26)}background:var(--primario);border-radius:13px;color:var(--sobre-marca);font-size:9.5px;display:flex;align-items:center;justify-content:center;line-height:1">Actual</span>`)}
       ${salas.map(([eti, tit, desc, dest], i) => `
       <img class="a" src="${S}elipse.svg" alt="" style="${px(23.8, 215.8 + i * 86, 14, 14)}">
       ${tarjeta(186.8 + i * 86, eti, 'var(--secundario)', tit, desc, dest, 'rgba(255,255,255,.85)', `<img class="a" src="${S}flecha-sala.svg" alt="" style="${px(219, 20, 32, 32)}">`)}`).join('')}
