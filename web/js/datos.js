@@ -93,6 +93,11 @@ Object.assign(ESTACIONES.e2, {
     nota: 'Toca cualquier fotografía para ampliar la imagen de archivo.' },
   pieza: { modo: 'Visor 3D / AR', chips: ['1. Acordeón', '2. Sombrero', '3. Crónica'],
     titulo: 'Reliquias del Juglar', sub: 'Insignias del canto viajero en el Magdalena Grande',
+    modelo: 'assets/modelos/juglar-palo-de-mango.glb', exposicion: 0.6, altModelo: 'Escultura en bronce de un juglar con sombrero tocando la caja bajo un palo de mango, sobre un pedestal',
+    puntos: [
+      { pos: '0.012m 0.812m 0.111m', nor: '0.48m 0.63m 0.62m', orbita: '0deg 70deg 1m', nombre: 'Palo de mango' },
+      { pos: '0.063m 0.630m 0.041m', nor: '0.30m 0.10m 0.95m', orbita: '10deg 80deg 0.8m', nombre: 'Sombrero' },
+      { pos: '0.069m 0.370m 0.090m', nor: '0.05m -0.23m 0.97m', orbita: '15deg 85deg 0.8m', nombre: 'Caja' }],
     audio: 'Audio 3D/2D: Paseo de Alejo Durán',
     subtitulos: 'Canto nostálgico de Alejo Durán marcando el paso lento por los caminos de la sabana.',
     partes: [['Acordeón', 'Dos hileras'], ['Caja', 'Cuero templado'], ['Canto', 'Crónica oral']],
