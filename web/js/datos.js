@@ -25,7 +25,6 @@ const ESTACIONES = {
     pildora: '✦  Explorar en 3D / AR',
     escenario: 'assets/img/e2-escenario.jpg',
     altEscenario: '',
-    // Antes: assets/audio/e2-parranda-el-mejoral.mp3 (se guarda hasta que Kevin apruebe la Carta).
     audioSrc: 'assets/audio/e2-carta-vallenata.mp3',
     subs: [[0, '[Un narrador lee la Carta Vallenata de Consuelo Araújo] «Y así son todos nuestros cantos: descriptivos, anecdóticos, históricos,'], [8.2, 'porque con ello suplimos durante muchos años la carencia de periódicos, de radiorreceptores, de comunicaciones,'], [18.4, 'mientras escribíamos con notas musicales la historia de una buena parte del territorio nacional…»']],
   },

@@ -11,7 +11,7 @@ La música con IA se descartó (no convenció a Kevin). El 25 nov. la docente au
 |---|---|---|---|
 | E1-A | `e1-paseo-cachucha.mp3` | Paseo «La cachucha bacana», Alejo Durán: acordeón, caja y guacharaca | 35 s |
 | E1-B | `e1-solo-acordeon.mp3` | Acordeón de Alejo Durán en «Pedazo de acordeón», Rey de Reyes 1987 | 28 s |
-| E2-A | `e2-carta-vallenata.mp3` (en prueba; reserva: `e2-parranda-el-mejoral.mp3`) | Un narrador lee la «Carta Vallenata» de Consuelo Araújo: los cantos como periódico de la provincia | 27 s |
+| E2-A | `e2-carta-vallenata.mp3` | Un narrador lee la «Carta Vallenata» de Consuelo Araújo: los cantos como periódico de la provincia | 27 s |
 | E2-B | `e2-paseo-039.mp3` | Paseo «039», Alejo Durán | 35 s |
 | E3-A | `e3-consuelo.mp3` | Voz real de Consuelo Araújo (discurso de clausura como ministra, iVoox), dos frases unidas con una pausa | 21 s |
 | E3-B | `e3-puya-final-2003.mp3` | Puya «La bizca», Ciro Meza Reales en la final de 2003 (tarima Francisco el Hombre) | 35 s |
