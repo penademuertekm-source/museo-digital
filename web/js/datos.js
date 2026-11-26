@@ -1,5 +1,6 @@
 /* Contenido de las 4 estaciones, copiado tal cual del Figma de la docente (página "2.3 Prototipo navegable").
-   audioSrc: vacío hasta que lleguen los audios definitivos; mientras tanto la pantalla "Audio Activo" se ve como en Figma. */
+   audioSrc y subs: grabaciones reales con permiso académico de la docente (créditos en docs/assets.md).
+   subs = [segundo, texto]: describen la música (sin letras) y transcriben la voz de Consuelo. */
 const ESTACIONES = {
   e1: {
     id: 'e1', n: 1, anterior: 'e4', siguiente: 'e2',
@@ -11,7 +12,8 @@ const ESTACIONES = {
     pildora: '✦  Explorar en 3D / AR',
     escenario: 'assets/img/e1-escenario.jpg',
     altEscenario: 'Acordeón, caja y guacharaca sobre un pedestal blanco',
-    audioSrc: '',
+    audioSrc: 'assets/audio/e1-paseo-cachucha.mp3',
+    subs: [[0, '[Paseo] «La cachucha bacana», de Alejo Durán: acordeón diatónico, caja y guacharaca.'], [7, '[Canto] Durán canta sobre el golpe seco de la caja y el rasgueo constante de la guacharaca.'], [25.3, '[Acordeón] Vuelve el acordeón con el paso del paseo.']],
   },
   e2: {
     id: 'e2', n: 2, anterior: 'e1', siguiente: 'e3',
@@ -23,7 +25,9 @@ const ESTACIONES = {
     pildora: '✦  Explorar en 3D / AR',
     escenario: 'assets/img/e2-escenario.jpg',
     altEscenario: '',
-    audioSrc: '',
+    // Antes: assets/audio/e2-parranda-el-mejoral.mp3 (se guarda hasta que Kevin apruebe la Carta).
+    audioSrc: 'assets/audio/e2-carta-vallenata.mp3',
+    subs: [[0, '[Un narrador lee la Carta Vallenata de Consuelo Araújo] «Y así son todos nuestros cantos: descriptivos, anecdóticos, históricos,'], [8.2, 'porque con ello suplimos durante muchos años la carencia de periódicos, de radiorreceptores, de comunicaciones,'], [18.4, 'mientras escribíamos con notas musicales la historia de una buena parte del territorio nacional…»']],
   },
   e3: {
     id: 'e3', n: 3, anterior: 'e2', siguiente: 'e4',
@@ -35,7 +39,8 @@ const ESTACIONES = {
     pildora: '✦  Explorar en 3D / AR',
     escenario: 'assets/img/e3-escenario.jpg',
     altEscenario: '',
-    audioSrc: '',
+    audioSrc: 'assets/audio/e3-consuelo.mp3',
+    subs: [[0, '«Yo estoy orgullosa, repito, como ciudadana de este país hermoso,'], [5.5, 'donde la diversidad cultural es básicamente el sostén de su propio alma.'], [13.6, '[…] El derecho a la vida, que es fundamentalmente el derecho a la cultura. Muchas gracias.»']],
   },
   e4: {
     id: 'e4', n: 4, anterior: 'e3', siguiente: 'e1',
@@ -49,7 +54,8 @@ const ESTACIONES = {
     zoomEscenario: { escala: 1.32, origen: '208px 265px' },
     escenario: 'assets/img/e4-escenario.jpg',
     altEscenario: '',
-    audioSrc: '',
+    audioSrc: 'assets/audio/e4-plaza-rio.mp3',
+    subs: [[0, '[Ambiente] Murmullo festivo en la Plaza Alfonso López durante el Festival.'], [12, '[Ambiente] Notas de acordeón a lo lejos, sobre la brisa del río Guatapurí.']],
   },
 };
 
@@ -68,7 +74,9 @@ Object.assign(ESTACIONES.e1, {
     audio: 'Audio pieza 1: Solo de acordeón',
     subtitulos: 'Escucha el fraseo de los pitos agudos mientras los bajos marcan el compás de cuatro tiempos.',
     partes: [['Diapasón', '31 pitos agudos'], ['Fuelle', 'Abanico de cuero'], ['Cabezal', '12 bajos rítmicos']],
-    sub2d: 'Despiece 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e1-2d.jpg' },
+    sub2d: 'Despiece 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e1-2d.jpg',
+    audioSrc: 'assets/audio/e1-solo-acordeon.mp3',
+    subs: [[0, '[Acordeón] Alejo Durán toca «Pedazo de acordeón» (Rey de Reyes, 1987).'], [14, '[Acordeón] Los pitos llevan la melodía y los bajos marcan el compás.']] },
 });
 Object.assign(ESTACIONES.e2, {
   historia: { sub: 'Crónica cantada de la provincia', letra: 'B',
@@ -84,7 +92,9 @@ Object.assign(ESTACIONES.e2, {
     audio: 'Audio 3D/2D: Paseo de Alejo Durán',
     subtitulos: 'Canto nostálgico de Alejo Durán marcando el paso lento por los caminos de la sabana.',
     partes: [['Acordeón', 'Dos hileras'], ['Caja', 'Cuero templado'], ['Canto', 'Crónica oral']],
-    sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e2-galeria-1.jpg' },
+    sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e2-galeria-1.jpg',
+    audioSrc: 'assets/audio/e2-paseo-039.mp3',
+    subs: [[0, '[Paseo] «039», en la voz y el acordeón de Alejo Durán.']] },
 });
 Object.assign(ESTACIONES.e3, {
   historia: { sub: 'Vida y legado de «La Cacica»', letra: 'N',
@@ -100,7 +110,9 @@ Object.assign(ESTACIONES.e3, {
     audio: 'Audio 3D/2D: Puya de competencia',
     subtitulos: 'Redoble vertiginoso de puya en la final de la tarima Francisco el Hombre.',
     partes: [['Estatuilla', 'Cacique de oro'], ['Pedestal', 'Madera tallada'], ['Placa', 'Reyes desde 1968']],
-    sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e3-galeria-1.jpg' },
+    sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e3-galeria-1.jpg',
+    audioSrc: 'assets/audio/e3-puya-final-2003.mp3',
+    subs: [[0, '[Puya] Ciro Meza Reales toca «La bizca» en la final del Festival de 2003, en la tarima Francisco el Hombre.'], [17, '[Puya] Redoble de acordeón, caja y guacharaca a toda velocidad. Ese año fue Rey Vallenato.']] },
 });
 Object.assign(ESTACIONES.e4, {
   historia: { sub: 'De la fiesta del milagro al mundo', letra: 'C',
@@ -116,5 +128,7 @@ Object.assign(ESTACIONES.e4, {
     audio: 'Audio 360°/2D: Paisaje sonoro del río',
     subtitulos: 'Rumor del río Guatapurí entre cantos de vaquería y brisa de la Sierra Nevada.',
     partes: [['Guatapurí', 'Aguas de la Sierra'], ['La Plaza', 'Tarima histórica'], ['La Sierra', 'Cumbres sagradas']],
-    sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e4-galeria-1.jpg' },
+    sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e4-galeria-1.jpg',
+    audioSrc: 'assets/audio/e4-rio-vaqueria.mp3',
+    subs: [[0, '[Ambiente] Rumor del río Guatapurí.'], [3, '[Canto de vaquería] Ismael Herrera llama al ganado con su voz, sobre el agua del río.']] },
 });

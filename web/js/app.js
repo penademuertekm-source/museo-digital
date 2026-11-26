@@ -104,10 +104,14 @@
     const partes = ruta.split('/');
     const st = ESTACIONES[partes[0]];
     const activo = partes[partes.length - 1] === 'audio' && st;
-    if (!activo || !st.audioSrc) { audio.pause(); return; }
-    if (!audio.src.endsWith(st.audioSrc)) audio.src = st.audioSrc;
+    // El visor y la vista 2D tienen el audio de su pieza; el resto, el de la estación.
+    const fuente = activo && (partes[1] === 'visor' || partes[1] === '2d') ? st.pieza : st;
+    if (!activo || !fuente.audioSrc) { audio.pause(); subs = null; return; }
+    subs = fuente.subs;
+    if (!audio.src.endsWith(fuente.audioSrc)) audio.src = fuente.audioSrc;
     audio.play().catch(() => {});
   }
+  let subs = null; // subtítulos [segundo, texto] del audio que suena
   // Con un archivo real, el tiempo y la onda siguen la reproducción.
   audio.addEventListener('timeupdate', () => {
     const t = app.querySelector('[data-tiempo]');
@@ -117,7 +121,13 @@
       const k = Math.floor(p * 30);
       b.style.background = i < k ? 'var(--primario)' : i === k ? 'var(--acento)' : 'var(--linea)';
     });
+    const s = app.querySelector('[data-sub]');
+    if (s && subs) {
+      const texto = subs.filter(c => c[0] <= audio.currentTime).pop()[1];
+      if (s.textContent !== texto) s.textContent = texto;
+    }
   });
+
 
   mostrar();
 })();

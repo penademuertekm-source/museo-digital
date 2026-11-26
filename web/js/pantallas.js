@@ -183,7 +183,7 @@ function subtitulos(st, sonando, top = 572) {
   return `
     <div class="a" style="${px(24, top, 327, 50)}background:#f6eedf;border-radius:8px;${sonando ? 'border:1.2px solid rgba(138,31,43,.5)' : ''}"></div>
     ${sonando ? `<div class="a" style="${px(24, top, 4, 50)}background:var(--primario);border-radius:2px"></div>` : ''}
-    <p class="a m" style="${px(36, top + 6, 303, 38)}font-size:10px;line-height:15px;display:flex;align-items:center">♪ [Subtítulos]: ${st.subtitulos}</p>`;
+    <p class="a m" style="${px(36, top + 6, 303, 38)}font-size:10px;line-height:15px;display:flex;align-items:center"><span>♪ [Subtítulos]: <span data-sub>${st.subs ? st.subs[0][1] : st.subtitulos}</span></span></p>`;
 }
 
 function fondoEstacion(st) {
