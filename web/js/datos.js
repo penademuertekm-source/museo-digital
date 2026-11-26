@@ -25,8 +25,8 @@ const ESTACIONES = {
     pildora: '✦  Explorar en 3D / AR',
     escenario: 'assets/img/e2-escenario.jpg',
     altEscenario: '',
-    audioSrc: 'assets/audio/e2-carta-vallenata.mp3',
-    subs: [[0, '[Un narrador lee la Carta Vallenata de Consuelo Araújo] «Y así son todos nuestros cantos: descriptivos, anecdóticos, históricos,'], [8.2, 'porque con ello suplimos durante muchos años la carencia de periódicos, de radiorreceptores, de comunicaciones,'], [18.4, 'mientras escribíamos con notas musicales la historia de una buena parte del territorio nacional…»']],
+    audioSrc: 'assets/audio/e2-parranda-el-mejoral.mp3',
+    subs: [[0, '[Parranda] Alejo Durán toca y canta el paseo «El mejoral».'], [19, '[Canto y acordeón] Grabación de parranda: la voz del juglar sobre caja y guacharaca.']],
   },
   e3: {
     id: 'e3', n: 3, anterior: 'e2', siguiente: 'e4',
@@ -150,6 +150,6 @@ Object.assign(ESTACIONES.e4, {
     subtitulos: 'Rumor del río Guatapurí entre cantos de vaquería y brisa de la Sierra Nevada.',
     partes: [['Guatapurí', 'Aguas de la Sierra'], ['La Plaza', 'Tarima histórica'], ['La Sierra', 'Cumbres sagradas']],
     sub2d: 'Lámina 2D accesible · Mismo contenido y audio', foto2d: 'assets/img/e4-galeria-1.jpg',
-    audioSrc: 'assets/audio/e4-rio-vaqueria.mp3',
-    subs: [[0, '[Ambiente] Rumor del río Guatapurí.'], [3, '[Canto de vaquería] Ismael Herrera llama al ganado con su voz, sobre el agua del río.']] },
+    audioSrc: 'assets/audio/e4-rio-guatapuri.mp3',
+    subs: [[0, '[Río y acordeón] Rumor del río Guatapurí; entra el paseo «Frente al río Guatapurí».'], [6.9, '[Canto] «Sentado frente al río Guatapurí, me puse a recordar, me puse a recordar…»'], [13.9, '[Canto] «…que hace un año estabas junto a mí, coqueteándome en la arena, y me invitaste a bañar.»'], [22.9, '[Canto] «Sentado frente al río Guatapurí, me puse a recordar, me puse a recordar…»'], [30.9, '[Canto] «…que hace un año estabas junto a mí, coqueteándome en la arena, y me invitaste a bañar.»']] },
 });
