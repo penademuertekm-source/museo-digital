@@ -37,7 +37,8 @@ Si una instrucción choca con estos documentos, **detente y pregunta**. Si dos c
 - **Nuevo rol: Equipo de Apoyo.** Tras el cambio de grupos, el diseño final es el Figma de la docente. Nos toca: 1) pasarlo a una web app en código, 2) corregir sus errores y 3) integrar los elementos 3D e interactivos que entregue el equipo. **Entrega: jueves 26 nov. 2026.**
 - ✅ Etapas 0 y 1 (documentos y guion). El Figma propio (`TufL7J0OTmhs7cytKHZuPP`) queda solo como referencia.
 - ⏳ Web app en `web/`: las 40 pantallas del prototipo de la docente con sus conexiones y transiciones.
-- **En espera hasta nuevo aviso:** la RA del acordeón y los demás elementos 3D/RA propuestos por nosotros, la Plaza y el contador del Corte 2.
+- **Visor 3D y RA activos (26 nov. 2026, por orden de Kevin):** `<model-viewer>` en el visor de la Est. 1 (trío vallenato) y la Est. 3 (busto de Consuelo). Las Est. 2 y 4 siguen con su lámina del Figma hasta que llegue su modelo o foto 360°. Los textos del panel de la Est. 3 (trofeo vs. busto) esperan la decisión del grupo.
+- **En espera hasta nuevo aviso:** la Plaza y el contador del Corte 2.
 - **Se mantiene para hacer en código:** el Pasaporte (registro de quién entró y qué visitó).
 - **Provisionales:**
   - Audio: sigue la pista de referencia de YouTube hasta que lleguen los audios definitivos; lo más probable es que pasen de enlace embebido a archivos propios en el sitio.
