@@ -26,6 +26,7 @@
       if (sub === 'contraida') return contraida(st);
       if (sub === 'visor') return visor(st, extra === 'audio');
       if (sub === '2d') return vista2d(st, extra === 'audio');
+      if (sub === 'consola') return consola(st, extra === 'audio');
     }
     return portada();
   }
@@ -113,13 +114,56 @@
     const activo = partes[partes.length - 1] === 'audio' && st;
     // El visor y la vista 2D tienen el audio de su pieza; la lámina, el del punto elegido; el resto, el de la estación.
     const fuente = !activo ? st : partes[1] === 'pieza' ? st.pieza.puntos[Number(partes[2]) - 1]
-      : partes[1] === 'visor' || partes[1] === '2d' ? st.pieza : st;
+      : partes[1] === 'visor' || partes[1] === '2d' || partes[1] === 'consola' ? st.pieza : st;
+    prepararConsola(st && partes[1] === 'consola' ? st : null);
     if (!activo || !fuente.audioSrc) { audio.pause(); subs = null; return; }
     subs = fuente.subs;
     if (!audio.src.endsWith(fuente.audioSrc)) audio.src = fuente.audioSrc;
     audio.play().catch(() => {});
   }
   let subs = null; // subtítulos [segundo, texto] del audio que suena
+
+  /* Consola multipista: #audio lleva el primer canal y los demás suenan en <audio> extra, sincronizados con él.
+     Así la barra, el tiempo, los subtítulos y "un solo audio a la vez" siguen funcionando igual. */
+  const extras = [];
+  let enConsola = null;
+  function prepararConsola(st) {
+    enConsola = st;
+    const pistas = st ? st.pieza.pistas.slice(1) : [];
+    while (extras.length < pistas.length) extras.push(new Audio());
+    extras.forEach((a, i) => {
+      if (i >= pistas.length) { a.pause(); return; }
+      if (!a.src.endsWith(pistas[i].src)) { a.preload = 'auto'; a.src = pistas[i].src; }
+    });
+    mezclar();
+  }
+  function mezclar() { // aplica los canales silenciados y pinta su estado
+    const mudos = enConsola ? mezcla[enConsola.id] || new Set() : new Set();
+    audio.muted = mudos.has(0);
+    extras.forEach((a, i) => { a.muted = mudos.has(i + 1); });
+    app.querySelectorAll('[data-canal]').forEach(b => b.setAttribute('aria-pressed', !mudos.has(Number(b.dataset.canal))));
+  }
+  const activas = () => enConsola ? extras.slice(0, enConsola.pieza.pistas.length - 1) : [];
+  audio.addEventListener('play', () => { activas().forEach(a => { a.currentTime = audio.currentTime; a.play().catch(() => {}); }); latir(); });
+  audio.addEventListener('pause', () => extras.forEach(a => a.pause()));
+  audio.addEventListener('seeked', () => activas().forEach(a => { a.currentTime = audio.currentTime; }));
+  audio.addEventListener('timeupdate', () => activas().forEach(a => { if (Math.abs(a.currentTime - audio.currentTime) > 0.15) a.currentTime = audio.currentTime; }));
+  app.addEventListener('click', e => {
+    const canal = e.target.closest('[data-canal]'), solo = e.target.closest('[data-solo]');
+    if (!enConsola || !(canal || solo)) return;
+    const mudos = mezcla[enConsola.id];
+    if (canal) { const i = Number(canal.dataset.canal); mudos.has(i) ? mudos.delete(i) : mudos.add(i); }
+    else { const deja = solo.dataset.solo.split(',').map(Number); mudos.clear(); enConsola.pieza.pistas.forEach((c, i) => { if (!deja.includes(i)) mudos.add(i); }); }
+    mezclar();
+  });
+  // Puntos del compás: avanzan con el pulso medido mientras suena la consola.
+  function latir() {
+    const fila = app.querySelector('[data-pulsos]');
+    if (!fila || audio.paused) { if (fila) fila.querySelectorAll('.pulso').forEach(p => p.classList.remove('on')); return; }
+    const n = Number(fila.dataset.pulsos), k = Math.floor(audio.currentTime * Number(fila.dataset.bpm) / 60) % n;
+    fila.querySelectorAll('.pulso').forEach((p, i) => p.classList.toggle('on', i === k));
+    requestAnimationFrame(latir);
+  }
   // Con un archivo real, el tiempo y la onda siguen la reproducción.
   audio.addEventListener('timeupdate', () => {
     const t = app.querySelector('[data-tiempo]');

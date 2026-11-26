@@ -127,3 +127,15 @@ model-viewer { --poster-color: transparent; --progress-bar-color: var(--acento);
 .disco.gira { animation: girar 1.8s linear infinite; }
 @keyframes girar { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .disco.gira { animation: none; } }
+
+/* Consola multipista (Sala 3) */
+.canal { background: var(--sobre-marca); border-radius: 12px; text-align: left; box-shadow: inset 0 0 0 1.5px var(--primario); }
+.canal .estado { background: var(--primario); color: var(--sobre-marca); }
+.canal .estado::after { content: 'Suena'; }
+.canal[aria-pressed="false"] { background: rgba(237,227,206,.65); box-shadow: none; }
+.canal[aria-pressed="false"] .b { color: var(--texto-2); }
+.canal[aria-pressed="false"] .estado { background: var(--linea); color: var(--texto); }
+.canal[aria-pressed="false"] .estado::after { content: 'Mudo'; }
+.pulso { width: 12px; height: 12px; border-radius: 6px; background: var(--linea); transition: transform .08s; }
+.pulso.on { background: var(--acento); transform: scale(1.25); }
+.pulso.on:first-child { background: var(--primario); }

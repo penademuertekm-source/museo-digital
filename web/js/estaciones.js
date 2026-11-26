@@ -206,3 +206,34 @@ function lamina(st, n, sonando) {
     ${subtitulos(pt, sonando, 596)}
   </section>`;
 }
+
+/* Consola multipista (Sala 3): los canales salen de separar la grabación con Demucs (IA, F1).
+   Tocar un canal lo silencia o lo vuelve a encender sin cambiar de pantalla; los puntos marcan el pulso del compás. */
+const mezcla = {}; // id de estación → canales silenciados (se conserva al pausar o volver)
+function consola(st, sonando) {
+  const p = st.pieza, mudos = mezcla[st.id] || (mezcla[st.id] = new Set());
+  const dest = st.id + '/consola' + (sonando ? '' : '/audio');
+  return `
+  <section class="pantalla" style="background:#ebe1cd">
+    <button class="a hov" aria-label="Salir de la consola" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
+    <p class="a sb nw" style="${px(58, 16, 301, 34)}background:var(--primario);border:1px solid rgba(224,169,46,.4);border-radius:17px;color:var(--sobre-marca);font-size:10.5px;${centro}" data-vt="modo">● Consola multipista · Compás ${p.compas}</p>
+    <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
+      <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(12, 12, 307, 150)}object-fit:cover;object-position:50% ${p.encuadre};border-radius:14px">
+      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">✓ Toca un canal para silenciarlo</span>
+      <p class="a b nw" style="${px(14, 174)}font-size:11px">${p.aire} · Compás ${p.compas}</p>
+      <div class="a" data-pulsos="${p.pulsos}" data-bpm="${p.bpm}" aria-hidden="true" style="${px(321 - p.pulsos * 18, 172, p.pulsos * 18, 16)}display:flex;gap:6px;align-items:center">${'<i class="pulso"></i>'.repeat(p.pulsos)}</div>
+      ${p.pistas.map((c, i) => `<button class="a canal" data-canal="${i}" aria-pressed="${!mudos.has(i)}" aria-label="Canal ${c.nombre}" style="${px(12 + (i % 2) * 159, 198 + Math.floor(i / 2) * 66, 151, 58)}">
+        <span class="a b nw" style="${px(12, 11)}font-size:11.5px">${c.nombre}</span>
+        <span class="a nw" style="${px(12, 30)}font-size:9.5px;color:var(--texto-2)">${c.detalle}</span>
+        <span class="a estado sb nw" style="${px(105, 10, 36, 18)}border-radius:9px;font-size:8.5px;${centro}"></span></button>`).join('')}
+    </div>
+    <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
+    <nav class="a" aria-label="Mezclas rápidas" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.solos.map(([t, canales]) =>
+      `<button class="sb nw" data-solo="${canales.join(',')}" style="height:26px;border-radius:13px;font-size:10px;padding:0 12px;${centro}background:var(--crema)">${t}</button>`).join('')}</nav>
+    <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
+    <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
+    <p class="a sb nw" style="${px(33, 512)}color:var(--primario);font-size:11px">${p.sub}</p>
+    ${reproductor(p, sonando, dest, 536)}
+    ${subtitulos(p, sonando, 596)}
+  </section>`;
+}
