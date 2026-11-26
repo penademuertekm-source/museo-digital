@@ -114,7 +114,7 @@ function visor(st, sonando) {
         : fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover">`)}
     ${m ? `<img class="a" data-anillo src="${S}anillo-360.svg" alt="" style="${px(44, 286, 286, 68)}transition:opacity .3s">
     <model-viewer class="a" src="${m}" alt="${p.altModelo}" camera-controls touch-action="pan-y" camera-orbit="0deg 80deg auto" min-camera-orbit="auto auto 0.45m"
-      interaction-prompt="none" shadow-intensity="1" exposure="1.5" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor" ar-scale="auto"
+      interaction-prompt="none" shadow-intensity="1" exposure="${p.exposicion || 1.2}" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor" ar-scale="auto"
       data-orbita-inicial="0deg 80deg auto" style="${px(0, 40, 375, 388)}">
       ${p.puntos.map(punto).join('')}
       <span slot="ar-button" hidden></span>
