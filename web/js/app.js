@@ -13,11 +13,12 @@
   escalar();
 
   function pantallaDe(ruta) {
-    const [base, sub, extra] = ruta.split('/');
-    if (base === 'pasillo') return pasillo(sub === 'sonido');
+    const [base, sub, extra, extra2] = ruta.split('/');
+    if (SALAS[base]) return pasillo(base, sub === 'sonido');
     if (base === 'mapa') return mapa();
     const st = ESTACIONES[base];
     if (st) {
+      if (sub === 'pieza') return lamina(st, Number(extra) || 1, extra2 === 'audio');
       if (!sub) return resumen(st, false);
       if (sub === 'audio') return resumen(st, true);
       if (sub === 'historia') return historia(st);
@@ -110,8 +111,9 @@
     const partes = ruta.split('/');
     const st = ESTACIONES[partes[0]];
     const activo = partes[partes.length - 1] === 'audio' && st;
-    // El visor y la vista 2D tienen el audio de su pieza; el resto, el de la estación.
-    const fuente = activo && (partes[1] === 'visor' || partes[1] === '2d') ? st.pieza : st;
+    // El visor y la vista 2D tienen el audio de su pieza; la lámina, el del punto elegido; el resto, el de la estación.
+    const fuente = !activo ? st : partes[1] === 'pieza' ? st.pieza.puntos[Number(partes[2]) - 1]
+      : partes[1] === 'visor' || partes[1] === '2d' ? st.pieza : st;
     if (!activo || !fuente.audioSrc) { audio.pause(); subs = null; return; }
     subs = fuente.subs;
     if (!audio.src.endsWith(fuente.audioSrc)) audio.src = fuente.audioSrc;

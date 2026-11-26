@@ -47,30 +47,31 @@ function menuInferior(activo, destinos) {
    después el pasillo queda libre. Se recuerda mientras la pestaña siga abierta, aunque se recargue. */
 let avisoVisto = (() => { try { return sessionStorage.getItem('avisoVisto') === '1'; } catch (e) { return false; } })();
 
-/* ---------- 01 · Sala Núcleo / Pasillo (232:5933) y 01B con sonido (232:6003) ---------- */
-function pasillo(sonido) {
-  const puntos = [[282, 413, 1], [57, 384, 2], [89, 283, 3], [227, 304, 4]]; // [x, y, estación], como en Figma: el aviso señala la 1
+/* ---------- 01 · Sala Núcleo / Pasillo (232:5933) y 01B con sonido (232:6003) ----------
+   Las Salas 1–4 (guion del Drive) usan el mismo pasillo con su fondo y sus puntos (SALAS en datos.js). */
+function pasillo(id, sonido) {
+  const sala = SALAS[id], puntos = sala.puntos;
   const destMenu = {
     inicio: { r: 'portada', d: 0.3, t: 'dissolve' },
     salas: { r: 'mapa' }, mapa: { r: 'mapa' }, info: { r: 'mapa' },
   };
   return `
   <section class="pantalla">
-    ${fondo(`<img class="cubre" src="assets/img/pasillo.jpg" alt="Pasillo de la Sala Núcleo con vitrinas de instrumentos y retratos" style="height:672px">`)}
+    ${fondo(`<img class="cubre" src="${sala.fondo}" alt="${sala.alt}" style="height:672px">`)}
     <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))" data-vt="degradado-sup"></div>
     <div class="a" style="${px(0, 517, 375, 150)}background:linear-gradient(180deg,rgba(36,22,17,0),rgba(36,22,17,.68))"></div>
     <header class="barra-sup" style="left:16px;opacity:.9;padding:0 10px 0 12px" data-vt="barra-pasillo">
-      <div class="izq"><img src="${S}ubicacion.svg" alt="" width="20" height="20"><h1 class="titulo-barra">Sala Núcleo</h1></div>
+      <div class="izq"><img src="${S}ubicacion.svg" alt="" width="20" height="20"><h1 class="titulo-barra">${sala.titulo}</h1></div>
       <div class="der">
-        <span class="insignia" style="background:rgba(36,22,17,.1)" aria-label="0 de 4 estaciones visitadas">0/4</span>
-        <button class="parlante hov" aria-label="${sonido ? 'Silenciar' : 'Activar sonido'}" aria-pressed="${sonido}" ${go(sonido ? 'pasillo' : 'pasillo/sonido', 0.2)}><img src="${S}${sonido ? 'parlante-sonido.svg' : 'parlante-silencio.svg'}" alt="" width="26" height="26"></button>
+        <span class="insignia" style="background:rgba(36,22,17,.1)" aria-label="0 de ${puntos.length} estaciones visitadas">0/${puntos.length}</span>
+        <button class="parlante hov" aria-label="${sonido ? 'Silenciar' : 'Activar sonido'}" aria-pressed="${sonido}" ${go(sonido ? id : id + '/sonido', 0.2)}><img src="${S}${sonido ? 'parlante-sonido.svg' : 'parlante-silencio.svg'}" alt="" width="26" height="26"></button>
       </div>
     </header>
     <button class="a" ${go('mapa')} style="${px(16, 54, 343, 34)}background:var(--sobre-marca);border-radius:12px;box-shadow:0 3px 8px rgba(36,22,17,.18);display:flex;align-items:center;gap:8px;padding:0 12px">
       <img src="${S}buscar.svg" alt="" width="18" height="18">
       <span style="font-size:12px;color:var(--texto-2)">Buscar sala, instrumento o juglar...</span>
     </button>
-    ${avisoVisto ? '' : `<button class="a" ${go('e1', 0.35)} style="${px(184, 362, 176, 54)}" aria-label="Toca un punto dorado. Ejemplo: Tríada Instrumental">
+    ${avisoVisto || !sala.aviso ? '' : `<button class="a" ${go('e1', 0.35)} style="${px(184, 362, 176, 54)}" aria-label="Toca un punto dorado. Ejemplo: Tríada Instrumental">
       <span class="a" style="left:0;top:0;background:rgba(36,22,17,.92);border:1px solid var(--acento);border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;padding:7px 12px 7px 10px">
         <img src="${S}toque-ar.svg" alt="" style="width:12.6px;height:19.25px;margin:1.4px 4.6px 1.4px 4.8px">
         <span style="display:flex;flex-direction:column;gap:1px;font-size:10px;white-space:nowrap;text-align:left">
@@ -80,26 +81,27 @@ function pasillo(sonido) {
       </span>
       <img class="a" src="${S}puntero-aviso.svg" alt="" style="${px(106.8, 41, 10.4, 5.25)}transform:rotate(180deg)">
     </button>`}
-    ${puntos.map(([x, y, n]) => `<button class="a hov" aria-label="Estación ${n}" ${go('e' + n, 0.35)} style="${px(x, y, 28, 28)}"><img src="${S}punto-dorado.svg" alt="" width="28" height="28"></button>`).join('')}
+    ${puntos.map(([x, y, est]) => `<button class="a hov" aria-label="Estación ${ESTACIONES[est].n}" ${go(est, 0.35)} style="${px(x, y, 28, 28)}"><img src="${S}punto-dorado.svg" alt="" width="28" height="28"></button>`).join('')}
     ${menuInferior('inicio', destMenu)}
   </section>`;
 }
 
 /* ---------- 02 · Sala Núcleo / Mapa de Salas (232:6069) ---------- */
 function mapa() {
+  // Salas del guion Act 1.2 (Drive), por orden de Kevin (26 nov.); sin destino = aún no construida.
   const salas = [
-    ['SALA 01 · 4 ESTACIONES', 'Instrumentos Tradicionales', 'Acordeón diatónico, caja y guacharaca.', 'e1'],
-    ['SALA 02 · 4 ESTACIONES', 'Juglares y Dinastías', 'Alejo Durán, Zuleta, Leandro y Escalona.', 'e2'],
-    ['SALA 03 · 4 ESTACIONES', 'Los Cuatro Aires', 'Paseo, Merengue, Son y Puya.', 'e3'],
-    ['SALA 04 · 4 ESTACIONES', 'Reyes y Piloneras', 'Tarima Francisco el Hombre desde 1968.', 'e4'],
+    ['SALA 01 · 2 ESTACIONES', 'Fundación 1968', 'El triunvirato creador y el primer Rey.', 's1'],
+    ['SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', null],
+    ['SALA 03 · 4 ESTACIONES', 'Los 4 Aires', 'Paseo, merengue, son y puya.', null],
+    ['SALA 04 · 2 ESTACIONES', 'Danza del Pilón', 'Del patio campesino al desfile.', null],
   ];
   const tarjeta = (top, eti, colEti, tit, desc, dest, fondo, extra) => `
-      <button class="a" ${go(dest, 0.35)} style="${px(48.8, top, 265, 72)}background:${fondo};border-radius:14px;overflow:hidden">
+      <${dest ? `button class="a" ${go(dest, 0.35)}` : 'div class="a" aria-disabled="true"'} style="${px(48.8, top, 265, 72)}background:${fondo};border-radius:14px;overflow:hidden${dest ? '' : ';opacity:.7'}">
         <span class="a b nw" style="${px(14, 10)}color:${colEti};font-size:8.5px">${eti}</span>
         <span class="a fr b nw" style="${px(14, 24)}font-size:14px">${tit}</span>
         <span class="a nw" style="${px(14, 46)}color:var(--texto-2);font-size:10px">${desc}</span>
         ${extra}
-      </button>`;
+      </${dest ? 'button' : 'div'}>`;
   const destMenu = { inicio: { r: 'pasillo' }, salas: { r: 'e1' } };
   return `
   <section class="pantalla">
@@ -120,7 +122,9 @@ function mapa() {
         `<span class="a sb nw" style="${px(196, 23, 55, 26)}background:var(--primario);border-radius:13px;color:var(--sobre-marca);font-size:9.5px;display:flex;align-items:center;justify-content:center;line-height:1">Actual</span>`)}
       ${salas.map(([eti, tit, desc, dest], i) => `
       <img class="a" src="${S}elipse.svg" alt="" style="${px(23.8, 215.8 + i * 86, 14, 14)}">
-      ${tarjeta(186.8 + i * 86, eti, 'var(--secundario)', tit, desc, dest, 'rgba(255,255,255,.85)', `<img class="a" src="${S}flecha-sala.svg" alt="" style="${px(219, 20, 32, 32)}">`)}`).join('')}
+      ${tarjeta(186.8 + i * 86, eti, 'var(--secundario)', tit, desc, dest, 'rgba(255,255,255,.85)', dest
+        ? `<img class="a" src="${S}flecha-sala.svg" alt="" style="${px(219, 20, 32, 32)}">`
+        : `<span class="a sb nw" style="${px(196, 23, 55, 26)}background:var(--crema);border-radius:13px;font-size:9.5px;display:flex;align-items:center;justify-content:center;line-height:1">Pronto</span>`)}`).join('')}
     </div>
     ${menuInferior('mapa', destMenu)}
   </section>`;
@@ -129,11 +133,11 @@ function mapa() {
 /* ---------- Piezas compartidas de las estaciones ---------- */
 function encabezadoEstacion(st, sonando, destSonido) {
   return `
-    <button class="a hov" aria-label="Volver al pasillo" ${go('pasillo')} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
+    <button class="a hov" aria-label="Volver al pasillo" ${go(st.pasillo || 'pasillo')} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <header class="barra-sup" style="left:58px;padding:0 10px" data-vt="barra-sup">
-      <div class="izq"><img src="${S}ubicacion-18.svg" alt="" width="18" height="18"><h1 class="titulo-barra">Sala Núcleo · Est. ${st.n}</h1></div>
+      <div class="izq"><img src="${S}ubicacion-18.svg" alt="" width="18" height="18"><h1 class="titulo-barra">${st.sala || 'Sala Núcleo'} · Est. ${st.n}</h1></div>
       <div class="der">
-        <span class="insignia" style="background:var(--primario);color:var(--sobre-marca)" aria-label="Estación ${st.n} de 4">${st.n}/4</span>
+        <span class="insignia" style="background:var(--primario);color:var(--sobre-marca)" aria-label="Estación ${st.n} de ${st.total || 4}">${st.n}/${st.total || 4}</span>
         <button class="parlante hov" aria-label="${sonando ? 'Pausar audio' : 'Reproducir audio'}" ${go(destSonido, 0.25)}><img src="${S}${sonando ? 'parlante-sonido.svg' : 'parlante-silencio.svg'}" alt="" width="26" height="26"></button>
       </div>
     </header>`;
@@ -146,7 +150,7 @@ function flechasEstacion(st) {
 }
 
 function pildoraInmersiva(st) {
-  return `<button class="a sb hov" ${go(st.id + '/visor', 0.35)} style="${px(...(st.pildoraXY || [118, 336, 148]), 28)}background:rgba(36,22,17,.9);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:0 0 0 16px;white-space:pre" data-vt="pildora${st.pildoraXY ? '-360' : ''}">${st.pildora}</button>`;
+  return `<button class="a sb hov" ${go(st.id + '/' + (st.pildoraRuta || 'visor'), 0.35)} style="${px(...(st.pildoraXY || [118, 336, 148]), 28)}background:rgba(36,22,17,.9);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:0 0 0 16px;white-space:pre" data-vt="pildora${st.pildoraXY ? '-360' : ''}">${st.pildora}</button>`;
 }
 
 function selectorPestanas(st, actual) {

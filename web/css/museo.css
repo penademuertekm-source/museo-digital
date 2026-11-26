@@ -117,3 +117,13 @@ model-viewer { --poster-color: transparent; --progress-bar-color: var(--acento);
 .lectura { overflow-x: hidden; overflow-y: auto; scrollbar-width: none; }
 .lectura::-webkit-scrollbar { display: none; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* Disco del tocadiscos (pieza 2D): gira solo mientras suena el audio */
+.disco {
+  border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,.35);
+  background: conic-gradient(from 0deg, rgba(255,255,255,.16), transparent 12%, transparent 50%, rgba(255,255,255,.16) 56%, transparent 68%),
+    radial-gradient(circle, var(--sobre-marca) 0 4%, var(--primario) 5% 30%, #1c1310 31% 36%, #2a1d18 37% 40%, #1c1310 41% 52%, #2a1d18 53% 56%, #1c1310 57%);
+}
+.disco.gira { animation: girar 1.8s linear infinite; }
+@keyframes girar { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) { .disco.gira { animation: none; } }

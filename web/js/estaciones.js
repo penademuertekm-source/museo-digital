@@ -169,3 +169,39 @@ function vista2d(st, sonando) {
     ${panelPieza(st, sonando, dest, p.sub2d, 'var(--secundario)')}
   </section>`;
 }
+
+/* ---------- Pieza 2D de las Salas 1–4 (ruta id/pieza/N, N = punto elegido; id/pieza/N/audio suena) ----------
+   Misma composición que la Vista 2D: lámina fija con puntos 1·2·3, tarjetas de cada parte y el panel inferior.
+   Cada punto lleva su propio audio y subtítulos; cambiar de punto detiene el sonido (nada suena solo).
+   pieza.disco: un disco que gira solo mientras suena (se queda quieto con «reducir movimiento»). */
+function lamina(st, n, sonando) {
+  const p = st.pieza, pt = p.puntos[n - 1], ruta = i => st.id + '/pieza/' + i;
+  const dest = sonando ? ruta(n) : ruta(n) + '/audio';
+  return `
+  <section class="pantalla" style="background:#ebe1cd">
+    <button class="a hov" aria-label="Salir de la pieza" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
+    <p class="a sb nw" style="${px(58, 16, 301, 34)}background:var(--primario);border:1px solid rgba(224,169,46,.4);border-radius:17px;color:var(--sobre-marca);font-size:10.5px;${centro}" data-vt="modo">● ${p.modo}</p>
+    <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
+      <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(12, 12, 307, 216)}object-fit:cover;object-position:50% ${p.encuadre};border-radius:14px">
+      ${p.disco ? `<span class="a disco${sonando ? ' gira' : ''}" aria-hidden="true" style="${px(...p.disco, 64, 64)}"></span>` : ''}
+      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">${p.etiqueta || '✓ Lámina fija · Sin giros ni cámara'}</span>
+      ${p.puntos.map((q, i) => `<button class="a" aria-label="Punto ${i + 1}: ${q.nombre}" aria-pressed="${i === n - 1}" ${go(ruta(i + 1), 0.25)} style="${px(q.xy[0] - 22, q.xy[1] - 22, 44, 44)}${centro}">
+        <span class="b" style="width:26px;height:26px;border-radius:13px;border:2px solid var(--sobre-marca);font-size:10.5px;${centro}${i === n - 1 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--acento);color:var(--texto)'}">${i + 1}</span></button>`).join('')}
+      ${p.puntos.map((q, i) => `
+      <button class="a" ${go(ruta(i + 1), 0.25)} aria-label="${q.nombre}: ${q.parte[1]}" aria-pressed="${i === n - 1}" style="${px(12 + i * 105, 242, 97, 80)}background:rgba(237,227,206,.65);border-radius:12px;text-align:left;${i === n - 1 ? 'box-shadow:inset 0 0 0 2px var(--primario)' : ''}">
+        <span class="a b" style="${px(10, 10, 20, 20)}background:var(--primario);border-radius:10px;color:var(--sobre-marca);font-size:9.5px;${centro}">${i + 1}</span>
+        <span class="a b nw" style="${px(10, 36)}font-size:11px">${q.parte[0]}</span>
+        <span class="a nw" style="${px(10, 53)}color:var(--texto-2);font-size:9.5px">${q.parte[1]}</span>
+      </button>`).join('')}
+    </div>
+    <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
+    <nav class="a" aria-label="Puntos de la pieza" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.puntos.map((q, i) => i === n - 1
+      ? `<span class="sb nw" aria-current="true" style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}background:var(--primario);color:var(--sobre-marca)">${i + 1}. ${q.nombre}</span>`
+      : `<button class="sb nw" ${go(ruta(i + 1), 0.25)} style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}background:var(--crema)">${i + 1}. ${q.nombre}</button>`).join('')}</nav>
+    <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
+    <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
+    <p class="a sb nw" style="${px(33, 512)}color:var(--primario);font-size:11px">${pt.sub}</p>
+    ${reproductor(pt, sonando, dest, 536)}
+    ${subtitulos(pt, sonando, 596)}
+  </section>`;
+}
