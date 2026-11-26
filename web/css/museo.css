@@ -89,6 +89,9 @@ button:focus-visible, a.btn:focus-visible {
 /* Onda acústica del reproductor */
 .onda { position: absolute; left: 78px; top: 537px; width: 206px; height: 18px; }
 .onda i { position: absolute; display: block; }
+/* Barra de progreso: área táctil de 48 px de alto sin cambiar el dibujo; el dedo no desplaza la página al arrastrar. */
+.onda[role=slider] { cursor: pointer; touch-action: none; }
+.onda[role=slider]::before { content: ''; position: absolute; left: 0; right: 0; top: -15px; bottom: -15px; }
 
 /* Transiciones (View Transitions API ≈ Smart Animate / Disolver de Figma) */
 ::view-transition-group(*),

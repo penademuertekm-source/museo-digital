@@ -165,7 +165,10 @@ function onda(sonando, dest, top = 537) {
   const barras = sonando
     ? ALTURAS.map((h, i) => `<i data-i="${i}" style="left:${(i * 6.8).toFixed(1)}px;top:${Math.ceil((18 - h) / 2)}px;width:3.2px;height:${h}px;border-radius:1.6px;background:${i < 15 ? 'var(--primario)' : i === 15 ? 'var(--acento)' : 'var(--linea)'}"></i>`).join('')
     : ALTURAS.map((_, i) => `<i data-i="${i}" style="left:${Math.round(i * 6.8)}px;top:7px;width:8px;height:3.5px;background:${i < 2 ? 'var(--primario)' : 'var(--linea)'}"></i>`).join('');
-  return `<button class="onda" aria-label="${sonando ? 'Pausar audio' : 'Reproducir audio'}" ${go(dest, 0.25)} style="top:${top}px">${barras}</button>`;
+  // Sonando, la onda es la barra de progreso: tocar o arrastrar mueve el audio (app.js). En pausa, un toque lo reproduce.
+  return sonando
+    ? `<div class="onda" role="slider" tabindex="0" aria-label="Posición del audio" aria-valuemin="0" aria-valuemax="0" aria-valuenow="0" style="top:${top}px">${barras}</div>`
+    : `<button class="onda" aria-label="Reproducir audio" ${go(dest, 0.25)} style="top:${top}px">${barras}</button>`;
 }
 
 /* Reproductor del panel (Rectángulo 19 + botón + onda + tiempo) */

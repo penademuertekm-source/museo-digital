@@ -121,6 +121,12 @@
       const k = Math.floor(p * 30);
       b.style.background = i < k ? 'var(--primario)' : i === k ? 'var(--acento)' : 'var(--linea)';
     });
+    const barra = app.querySelector('.onda[role=slider]');
+    if (barra && audio.duration) {
+      barra.setAttribute('aria-valuemax', Math.round(audio.duration));
+      barra.setAttribute('aria-valuenow', Math.round(audio.currentTime));
+      barra.setAttribute('aria-valuetext', t ? t.textContent : '');
+    }
     const s = app.querySelector('[data-sub]');
     if (s && subs) {
       const texto = subs.filter(c => c[0] <= audio.currentTime).pop()[1];
@@ -128,6 +134,29 @@
     }
   });
 
+  // Barra de progreso: tocar o arrastrar con el dedo o el cursor mueve el audio sin pausarlo.
+  function buscar(e, barra) {
+    if (!audio.duration) return;
+    const r = barra.getBoundingClientRect();
+    audio.currentTime = Math.min(Math.max((e.clientX - r.left) / r.width, 0), 1) * audio.duration;
+  }
+  app.addEventListener('pointerdown', e => {
+    const barra = e.target.closest('.onda[role=slider]');
+    if (!barra) return;
+    e.preventDefault();
+    barra.setPointerCapture(e.pointerId);
+    buscar(e, barra);
+    const mover = ev => buscar(ev, barra);
+    barra.addEventListener('pointermove', mover);
+    barra.addEventListener('lostpointercapture', () => barra.removeEventListener('pointermove', mover), { once: true });
+  });
+  // Con teclado: flechas, 5 s por paso.
+  app.addEventListener('keydown', e => {
+    const paso = { ArrowRight: 5, ArrowUp: 5, ArrowLeft: -5, ArrowDown: -5 }[e.key];
+    if (!paso || !audio.duration || !e.target.closest('.onda[role=slider]')) return;
+    e.preventDefault();
+    audio.currentTime = Math.min(Math.max(audio.currentTime + paso, 0), audio.duration);
+  });
 
   mostrar();
 })();
