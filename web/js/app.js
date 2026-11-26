@@ -52,7 +52,13 @@
   let transicion = null;
 
   function pintar(ruta) {
+    // Al pasar de visor a visor con audio la pantalla se vuelve a pintar: se conserva el mismo modelo 3D
+    // para que no se recargue ni pierda el giro ni el punto elegido.
+    const mvViejo = app.querySelector('model-viewer');
     app.innerHTML = pantallaDe(ruta);
+    const mv = app.querySelector('model-viewer');
+    if (mv && mvViejo && mvViejo.getAttribute('src') === mv.getAttribute('src')) { mv.replaceWith(mvViejo); marcarChip(Number(mvViejo.dataset.activo || 0)); }
+    if (mv) cargarVisor3D();
     if (!avisoVisto && ESTACIONES[ruta.split('/')[0]]) {
       avisoVisto = true;
       try { sessionStorage.setItem('avisoVisto', '1'); } catch (e) { /* sin almacenamiento: se recuerda hasta recargar */ }
@@ -156,6 +162,53 @@
     if (!paso || !audio.duration || !e.target.closest('.onda[role=slider]')) return;
     e.preventDefault();
     audio.currentTime = Math.min(Math.max(audio.currentTime + paso, 0), audio.duration);
+  });
+
+  /* Visor 3D (pieza.modelo). model-viewer se carga solo la primera vez que se abre un visor con modelo. */
+  function cargarVisor3D() {
+    if (customElements.get('model-viewer') || document.getElementById('model-viewer-js')) return;
+    const js = document.createElement('script');
+    js.id = 'model-viewer-js'; js.type = 'module';
+    js.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js';
+    js.onerror = () => ayuda('No se pudo cargar el visor 3D. Revisa la conexión.', 0);
+    document.head.appendChild(js);
+  }
+  // Chips 1·2·3 del panel y puntos del modelo: el activo va en vino, como en Figma.
+  function marcarChip(i) {
+    app.querySelectorAll('[data-chip]').forEach((c, k) => {
+      c.style.background = k === i ? 'var(--primario)' : 'var(--crema)';
+      c.style.color = k === i ? 'var(--sobre-marca)' : '';
+    });
+    app.querySelectorAll("button[data-punto]").forEach((b, k) => {
+      const img = b.querySelector('img'), t = k === i ? 34 : 28;
+      img.src = 'assets/svg/' + (k === i ? 'hotspot-activo' : 'hotspot') + '.svg'; img.width = img.height = t;
+      b.setAttribute('aria-pressed', k === i);
+    });
+  }
+  let avisoAyuda = null;
+  function ayuda(texto, ms = 3500) { // mensaje breve en la cápsula de ayuda del visor
+    const p = app.querySelector('[data-ayuda]'); if (!p) return;
+    if (!p.dataset.original) p.dataset.original = p.textContent;
+    p.textContent = texto; clearTimeout(avisoAyuda);
+    if (ms) avisoAyuda = setTimeout(() => { p.textContent = p.dataset.original; }, ms);
+  }
+  app.addEventListener('click', e => {
+    const mv = app.querySelector('model-viewer'); if (!mv) return;
+    const punto = e.target.closest("button[data-punto]"), zoom = e.target.closest('[data-zoom]');
+    const anillo = app.querySelector('[data-anillo]'); // el anillo del piso solo cuadra con la vista inicial
+    if (anillo && (punto || zoom)) anillo.style.opacity = 0;
+    if (punto) {
+      const i = Number(punto.dataset.punto);
+      mv.dataset.activo = i; marcarChip(i);
+      mv.cameraTarget = punto.dataset.position; mv.cameraOrbit = punto.dataset.orbita;
+    } else if (zoom && mv.zoom) mv.zoom(Number(zoom.dataset.zoom));
+    else if (e.target.closest('[data-reiniciar]')) {
+      mv.cameraTarget = 'auto auto auto'; mv.cameraOrbit = mv.dataset.orbitaInicial; mv.fieldOfView = 'auto';
+      mv.dataset.activo = 0; marcarChip(0); if (anillo) anillo.style.opacity = 1;
+    } else if (e.target.closest('[data-ra]')) {
+      if (mv.canActivateAR) mv.activateAR();
+      else ayuda(mv.loaded ? 'La realidad aumentada se abre desde un celular compatible.' : 'Espera a que cargue el modelo…');
+    }
   });
 
   mostrar();

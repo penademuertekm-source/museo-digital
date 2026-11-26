@@ -93,6 +93,14 @@ button:focus-visible, a.btn:focus-visible {
 .onda[role=slider] { cursor: pointer; touch-action: none; }
 .onda[role=slider]::before { content: ''; position: absolute; left: 0; right: 0; top: -15px; bottom: -15px; }
 
+/* Visor 3D: puntos 1·2·3 pegados al modelo (área táctil de 48 px) y botones + / − / ↺ */
+model-viewer { --poster-color: transparent; --progress-bar-color: var(--acento); background: transparent; }
+.punto { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; position: relative; transition: opacity .2s; }
+.punto img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
+.punto span { position: relative; font-size: 10px; line-height: 1; color: var(--texto); }
+.punto[aria-pressed=true] span { color: var(--sobre-marca); }
+.ctrl::before { content: ''; position: absolute; left: -8px; right: -8px; top: 0; bottom: 0; }
+
 /* Transiciones (View Transitions API ≈ Smart Animate / Disolver de Figma) */
 ::view-transition-group(*),
 ::view-transition-old(*),

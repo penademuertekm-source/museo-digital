@@ -70,6 +70,11 @@ Object.assign(ESTACIONES.e1, {
     nota: 'Toca cualquier fotografía para ampliar su detalle artesanal.' },
   pieza: { modo: 'Visor 3D / AR', chips: ['1. Acordeón', '2. Caja', '3. Guacharaca'],
     titulo: 'Acordeón diatónico', sub: '31 botones melódicos · Fuelle de cuero y 12 bajos',
+    modelo: 'assets/modelos/trio-vallenato.glb', altModelo: 'Escultura en bronce del trío vallenato: acordeón, caja y guacharaca sobre un pedestal',
+    puntos: [
+      { pos: '-0.017m 0.578m 0.029m', nor: '0.79m 0.12m 0.60m', orbita: '0deg 75deg 1.1m', nombre: 'Acordeón' },
+      { pos: '-0.242m 0.293m 0.215m', nor: '-0.67m -0.19m 0.72m', orbita: '-40deg 80deg 0.9m', nombre: 'Caja' },
+      { pos: '0.200m 0.451m 0.184m', nor: '-0.15m 0.14m 0.98m', orbita: '15deg 80deg 0.9m', nombre: 'Guacharaca' }],
     audio: 'Audio pieza 1: Solo de acordeón',
     subtitulos: 'Escucha el fraseo de los pitos agudos mientras los bajos marcan el compás de cuatro tiempos.',
     partes: [['Diapasón', '31 pitos agudos'], ['Fuelle', 'Abanico de cuero'], ['Cabezal', '12 bajos rítmicos']],
@@ -106,6 +111,13 @@ Object.assign(ESTACIONES.e3, {
     nota: 'Toca cualquier fotografía para ampliar la imagen de archivo.' },
   pieza: { modo: 'Visor 3D / AR', chips: ['1. Cacique Upar', '2. Corona', '3. Tarima'],
     titulo: 'Trofeo Cacique Upar', sub: 'Máximo galardón otorgado al Rey Vallenato desde 1968',
+    // Modelo 3D del visor (GLB optimizado). Textos del panel pendientes: el grupo decide si pasan a hablar del busto.
+    modelo: 'assets/modelos/consuelo-araujo.glb', altModelo: 'Busto en bronce de Consuelo Araújo, con una flor en el pelo y collares de perlas',
+    // Puntos 1·2·3 sobre el modelo (metros, glTF) y la vista a la que va la cámara al tocarlos.
+    puntos: [
+      { pos: '0.062m 0.780m 0.114m', nor: '0.68m 0m 0.73m', orbita: '10deg 75deg 1m', nombre: 'Rostro' },
+      { pos: '-0.125m 0.875m 0.095m', nor: '-0.90m 0.29m 0.34m', orbita: '-69deg 73deg 0.9m', nombre: 'Flor en el pelo' },
+      { pos: '0.017m 0.539m 0.102m', nor: '-0.34m -0.04m 0.94m', orbita: '-20deg 88deg 0.95m', nombre: 'Collares' }],
     audio: 'Audio 3D/2D: Puya de competencia',
     subtitulos: 'Redoble vertiginoso de puya en la final de la tarima Francisco el Hombre.',
     partes: [['Estatuilla', 'Cacique de oro'], ['Pedestal', 'Madera tallada'], ['Placa', 'Reyes desde 1968']],

@@ -93,7 +93,7 @@ function panelPieza(st, sonando, dest, sub, colorSub) {
   const p = st.pieza;
   return `
     <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
-    <div class="a" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.chips.map((c, i) => `<span class="sb nw" style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${c}</span>`).join('')}</div>
+    <div class="a" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.chips.map((c, i) => `<span class="sb nw" data-chip="${i}" style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${c}</span>`).join('')}</div>
     <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
     <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
     <p class="a sb nw" style="${px(33, 512)}color:${colorSub};font-size:11px">${sub}</p>
@@ -102,34 +102,44 @@ function panelPieza(st, sonando, dest, sub, colorSub) {
 }
 
 /* ---------- 6. Visor 3D-AR / 360° (232:6546) y 6B. Visor Audio Activo (232:9639) ----------
-   En Figma el visor es una lámina fija: los puntos 1·2·3, el zoom y el giro todavía no hacen nada.
-   Aquí entrará el modelo 3D / la foto 360° cuando el equipo entregue los assets. */
+   Con modelo (pieza.modelo): <model-viewer> gira con el dedo, los puntos 1·2·3 llevan la cámara a cada parte,
+   + / − / ↺ acercan, alejan y vuelven al inicio, y la píldora «Visor 3D / AR» abre la RA (app.js).
+   Sin modelo sigue la lámina fija del Figma (temporal) hasta que el equipo entregue el GLB o la foto 360°. */
 function visor(st, sonando) {
-  const p = st.pieza, dest = sonando ? st.id + '/visor' : st.id + '/visor/audio';
+  const p = st.pieza, dest = sonando ? st.id + '/visor' : st.id + '/visor/audio', m = p.modelo;
+  const punto = (pt, i) => `<button class="punto" slot="hotspot-${i + 1}" data-punto="${i}" data-position="${pt.pos}" data-normal="${pt.nor}" data-orbita="${pt.orbita}" aria-label="Punto ${i + 1}: ${pt.nombre}" aria-pressed="${i === 0}"><img src="${S}${i === 0 ? 'hotspot-activo' : 'hotspot'}.svg" alt="" width="${i === 0 ? 34 : 28}" height="${i === 0 ? 34 : 28}"><span class="b">${i + 1}</span></button>`;
   return `
   <section class="pantalla" style="background:#140c09">
-    ${fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover">`)}
-    <div class="a" style="${px(0, 0, 375, 460)}background:linear-gradient(180deg,rgba(18,11,8,.65) 0%,rgba(18,11,8,.1) 35%,rgba(18,11,8,.18) 75%,rgba(18,11,8,.78) 100%)" data-vt="degradado-sup"></div>
+    ${m ? fondo('<div class="a" style="inset:0;background:radial-gradient(ellipse at 50% 38%,#f4ead6 0%,#d8ccb6 48%,#8a7a66 100%)"></div>')
+        : fondo(`<img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(-20, -45, 414, 742)}object-fit:cover">`)}
+    ${m ? `<img class="a" data-anillo src="${S}anillo-360.svg" alt="" style="${px(44, 286, 286, 68)}transition:opacity .3s">
+    <model-viewer class="a" src="${m}" alt="${p.altModelo}" camera-controls touch-action="pan-y" camera-orbit="0deg 80deg auto" min-camera-orbit="auto auto 0.45m"
+      interaction-prompt="none" shadow-intensity="1" exposure="1.5" ar ar-modes="webxr scene-viewer quick-look" ar-placement="floor" ar-scale="auto"
+      data-orbita-inicial="0deg 80deg auto" style="${px(0, 40, 375, 388)}">
+      ${p.puntos.map(punto).join('')}
+      <span slot="ar-button" hidden></span>
+    </model-viewer>` : ''}
+    <div class="a" style="${px(0, 0, 375, 460)}pointer-events:none;background:${m ? 'linear-gradient(180deg,rgba(18,11,8,.55) 0%,rgba(18,11,8,0) 22%)' : 'linear-gradient(180deg,rgba(18,11,8,.65) 0%,rgba(18,11,8,.1) 35%,rgba(18,11,8,.18) 75%,rgba(18,11,8,.78) 100%)'}" data-vt="degradado-sup"></div>
     <button class="a hov" aria-label="Salir del visor" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <nav class="a" aria-label="Modo de vista" style="${px(58, 16, 301, 34)}background:rgba(237,227,206,.94);border:1px solid rgba(224,169,46,.4);border-radius:17px;overflow:hidden" data-vt="modo">
-      <span class="a sb nw" aria-current="page" style="${px(2, 2, 144, 28)}background:var(--primario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;${centro}">● ${p.modo}</span>
+      ${m ? `<button class="a sb nw" data-ra aria-current="page" aria-label="${p.modo}: toca para ver la pieza en realidad aumentada"` : `<span class="a sb nw" aria-current="page"`} style="${px(2, 2, 144, 28)}background:var(--primario);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;${centro}">● ${p.modo}${m ? '</button>' : '</span>'}
       <button class="a sb nw" ${go(st.id + '/2d')} style="${px(151, 2, 146, 28)}background:rgba(247,243,236,.85);border-radius:14px;font-size:10.5px;${centro}">Ver en 2D</button>
     </nav>
-    <img class="a" src="${S}anillo-360.svg" alt="" style="${px(44, 286, 286, 68)}">
+    ${m ? '' : `<img class="a" src="${S}anillo-360.svg" alt="" style="${px(44, 286, 286, 68)}">
     <img class="a" src="${S}hotspot-activo.svg" alt="" style="${px(168, 182, 34, 34)}">
     <span class="a b" style="${px(168, 182, 34, 34)}${centro}color:var(--sobre-marca);font-size:10px">1</span>
     <img class="a" src="${S}hotspot.svg" alt="" style="${px(84, 248, 28, 28)}">
     <span class="a b" style="${px(84, 248, 28, 28)}${centro}font-size:9.5px">2</span>
     <img class="a" src="${S}hotspot.svg" alt="" style="${px(246, 234, 28, 28)}">
-    <span class="a b" style="${px(246, 234, 28, 28)}${centro}font-size:9.5px">3</span>
-    <div class="a b" aria-hidden="true" style="${px(327, 168, 32, 96)}background:rgba(28,17,13,.78);border:1px solid rgba(224,169,46,.4);border-radius:16px;overflow:hidden;color:var(--sobre-marca)">
-      <span class="a" style="${px(9, 5)}font-size:14px">+</span>
+    <span class="a b" style="${px(246, 234, 28, 28)}${centro}font-size:9.5px">3</span>`}
+    <div class="a b" ${m ? 'role="group" aria-label="Zoom del modelo"' : 'aria-hidden="true"'} style="${px(327, 168, 32, 96)}background:rgba(28,17,13,.78);border:1px solid rgba(224,169,46,.4);border-radius:16px;${m ? '' : 'overflow:hidden;'}color:var(--sobre-marca)">
+      ${m ? `<button class="a ctrl" data-zoom="3" aria-label="Acercar" style="${px(0, 0, 32, 31)}font-size:14px;${centro}">+</button>` : `<span class="a" style="${px(9, 5)}font-size:14px">+</span>`}
       <span class="a" style="${px(4, 30, 20, 1)}background:rgba(244,234,214,.18)"></span>
-      <span class="a" style="${px(9, 37)}font-size:14px">−</span>
+      ${m ? `<button class="a ctrl" data-zoom="-3" aria-label="Alejar" style="${px(0, 31, 32, 31)}font-size:14px;${centro}">−</button>` : `<span class="a" style="${px(9, 37)}font-size:14px">−</span>`}
       <span class="a" style="${px(4, 62, 20, 1)}background:rgba(244,234,214,.18)"></span>
-      <span class="a" style="${px(8, 68)}font-size:12.5px;color:var(--acento)">↺</span>
+      ${m ? `<button class="a ctrl" data-reiniciar aria-label="Volver a la vista inicial" style="${px(0, 63, 32, 32)}font-size:12.5px;color:var(--acento);${centro}">↺</button>` : `<span class="a" style="${px(8, 68)}font-size:12.5px;color:var(--acento)">↺</span>`}
     </div>
-    <p class="a m nw" style="${px(52, 378, 271, 28)}background:rgba(28,17,13,.84);border:1px solid rgba(224,169,46,.45);border-radius:14px;color:var(--sobre-marca);font-size:10px;${centro}">↻ Inicio quieto · Arrastra 360° o toca 1, 2, 3</p>
+    <p class="a m nw" ${m ? 'data-ayuda role="status"' : ''} style="${px(52, 378, 271, 28)}background:rgba(28,17,13,.84);border:1px solid rgba(224,169,46,.45);border-radius:14px;color:var(--sobre-marca);font-size:10px;${centro}">↻ Inicio quieto · Arrastra 360° o toca 1, 2, 3</p>
     ${panelPieza(st, sonando, dest, p.sub, 'var(--primario)')}
   </section>`;
 }
