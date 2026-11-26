@@ -91,7 +91,7 @@ function mapa() {
   // Salas del guion Act 1.2 (Drive), por orden de Kevin (26 nov.); sin destino = aún no construida.
   const salas = [
     ['SALA 01 · 2 ESTACIONES', 'Fundación 1968', 'El triunvirato creador y el primer Rey.', 's1'],
-    ['SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', null],
+    ['SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', 's2'],
     ['SALA 03 · 4 ESTACIONES', 'Los 4 Aires', 'Paseo, merengue, son y puya.', null],
     ['SALA 04 · 2 ESTACIONES', 'Danza del Pilón', 'Del patio campesino al desfile.', null],
   ];
