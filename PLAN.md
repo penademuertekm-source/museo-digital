@@ -21,11 +21,11 @@
 
 | Tarea | Quién | Listo cuando |
 |---|---|---|
-| A1 · Pasar a código las 40 pantallas **tal cual**: maquetación, textos, conexiones y transiciones de los 3 flows (Recorrido completo, Sala Núcleo desde el pasillo, Pieza inmersiva 3D vs 2D) | Claude Code | ⏳ Las 40 pantallas y sus conexiones funcionan en el navegador del teléfono |
-| A2 · Publicar en Firebase Hosting (`*.web.app`) | Kevin crea la cuenta institucional · Claude Code publica | El enlace abre en el teléfono sin iniciar sesión |
-| A3 · Prueba crítica y lista de errores | Kevin · Claude | Lista priorizada; **se corrige solo cuando Kevin lo diga** |
-| A4 · Integrar los elementos 3D e interactivos (visor 3D/RA y 360° de la estación 4) | Equipo entrega los assets en GLB / foto 360 · Claude Code integra | Funciona en Android e iPhone, con la vista 2D como alternativa |
-| A5 · Audios definitivos (hoy: pista de YouTube temporal) | Equipo | Archivos propios con subtítulos; reemplazan la pista temporal |
+| A1 · Pasar a código las 40 pantallas **tal cual**: maquetación, textos, conexiones y transiciones de los 3 flows (Recorrido completo, Sala Núcleo desde el pasillo, Pieza inmersiva 3D vs 2D) | Claude Code | ✅ Las 40 pantallas y sus conexiones funcionan en el navegador del teléfono. Además: Sala 1 y Sala 2 |
+| A2 · Publicar en Firebase Hosting (`*.web.app`) | Kevin crea la cuenta institucional · Claude Code publica | ✅ `museo-digital-34cb3.web.app` (QR en `/qr`) |
+| A3 · Prueba crítica y lista de errores | Kevin · Claude | ⏳ Lista del 26 nov.: franjas oscuras en celulares altos, áreas de toque pequeñas y alt faltante en Est. 2–4. Kevin aprobó corregirlas |
+| A4 · Integrar los elementos 3D e interactivos (visor 3D/RA y 360° de la estación 4) | Equipo entrega los assets en GLB / foto 360 · Claude Code integra | ⏳ Visor 3D/RA con los 5 modelos del equipo (Est. 1–4 y Sala 2); falta probar en Android e iPhone. Sin foto 360° |
+| A5 · Audios | Claude Code recorta y subtitula · Kevin aprueba | ✅ Archivos propios con subtítulos y crédito (uso académico aprobado por la docente) |
 | A6 · Pasaporte en código (registro de quién entró y qué estaciones visitó) | Claude Code | Pendiente de que Kevin defina qué guarda |
 
 **En espera hasta nuevo aviso (⏸️):** la RA del acordeón de Canicule, los demás elementos 3D/RA que propusimos, la Plaza, el contador D3 y los íconos propuestos (Material Icons) del Figma propio.

@@ -24,26 +24,29 @@ Si una instrucción choca con estos documentos, **detente y pregunta**. Si dos c
 ## Reglas duras
 
 - **Figma de la profesora = solo lectura** (`7PTatcnprqstUq7NNzXgR3`, SYSTEM-DESING). Nunca escribas en él (G1). No unifiques nada con el Figma de clase hasta que Kevin lo ordene.
-- **Prototipo en un Figma nuevo**, dentro de un **proyecto de equipo** (en Borradores no se suben videos).
+- **El diseño final es el Figma de la docente.** El Figma propio (`TufL7J0OTmhs7cytKHZuPP`) queda descartado, solo como referencia. Lo que esté en los Cortes 1 o 2 y no aparezca en el Figma, o no lo han metido todavía o se descartó: pregunta antes de agregarlo.
 - **No mezclar** con el sistema de diseño anterior del estudiante (descartado).
 - **Primero Figma, después código** (G3). La vista previa congelada es el Figma de la docente: la web app lo copia **tal cual** (pantallas, textos, transiciones y conexiones de sus flows). Las correcciones se hacen solo después de la prueba crítica y cuando Kevin lo diga.
 - **Nada suena solo; el sonido nunca va solo** (A1, A2).
-- **Móvil primero:** frames 375 × 812, área táctil 48 × 48, texto mínimo 13 px, relato 16 px, críticos dentro de ~640 px (D1).
+- **Móvil primero:** lienzo de 375 × 667 como el Figma de la docente (D1 de 375 × 812 queda sin efecto), escalado al teléfono; área táctil mínima 44–48 px (se puede ampliar el área de toque sin cambiar el aspecto), texto mínimo 13 px.
+- **Cambios permitidos:** soluciones estéticas acordes a la UI de la app (visto bueno del líder). Lo que cambie el diseño se define en equipo.
 - **Todo asset con licencia y crédito**; lo provisional va marcado como *temporal* (E1). Toda ayuda de IA se declara (F1).
 - **Commits:** mensajes en español, un tema por commit. No subas secretos.
 
-## Estado actual (24 nov. 2026)
+## Estado actual (26 nov. 2026)
 
 - **Nuevo rol: Equipo de Apoyo.** Tras el cambio de grupos, el diseño final es el Figma de la docente. Nos toca: 1) pasarlo a una web app en código, 2) corregir sus errores y 3) integrar los elementos 3D e interactivos que entregue el equipo. **Entrega: jueves 26 nov. 2026.**
 - ✅ Etapas 0 y 1 (documentos y guion). El Figma propio (`TufL7J0OTmhs7cytKHZuPP`) queda solo como referencia.
-- ⏳ Web app en `web/`: las 40 pantallas del prototipo de la docente con sus conexiones y transiciones.
-- **Visor 3D y RA activos (26 nov. 2026, por orden de Kevin):** `<model-viewer>` en el visor de la Est. 1 (trío vallenato) y la Est. 3 (busto de Consuelo). Las Est. 2 y 4 siguen con su lámina del Figma hasta que llegue su modelo o foto 360°. Los textos del panel de la Est. 3 (trofeo vs. busto) esperan la decisión del grupo.
+- ✅ Web app en `web/`, publicada en Firebase (`museo-digital-34cb3.web.app`, QR en `/qr`): las 40 pantallas del prototipo con sus conexiones y transiciones, más la **Sala 1** (Fundación 1968) y la **Sala 2** (Tríada instrumental).
+- ✅ **Audios reales** en las estaciones, con subtítulos que siguen la voz (uso académico aprobado por la docente con crédito; detalle en `docs/assets.md`).
+- ✅ **Visor 3D y RA** con `<model-viewer>` y modelos del equipo 3D: trío (Est. 1), juglar bajo el palo de mango (Est. 2), busto de Consuelo (Est. 3), cuadro de Valledupar (Est. 4, en RA se cuelga en la pared) y acordeón en pedestal (Sala 2). La foto 360° quedó sin usar. Los textos del panel de la Est. 3 (trofeo vs. busto) esperan la decisión del grupo.
+- ⏳ **Bugs por corregir** (revisión con Playwright, 26 nov.): franjas oscuras arriba y abajo en celulares altos (el lienzo de 375 × 667 no llena la pantalla), áreas de toque de 12 a 34 px y escenarios de las Est. 2–4 sin texto alternativo.
 - **En espera hasta nuevo aviso:** la Plaza y el contador del Corte 2.
 - **Se mantiene para hacer en código:** el Pasaporte (registro de quién entró y qué visitó).
 - **Provisionales:**
-  - Audio: sigue la pista de referencia de YouTube hasta que lleguen los audios definitivos; lo más probable es que pasen de enlace embebido a archivos propios en el sitio.
+  - Audio: fragmentos de YouTube y otros archivos, recortados y servidos desde el sitio con crédito visible. Para publicar fuera del curso (Alcaldía) hacen falta licencias.
   - Fotos e ilustraciones: salen del Figma de la docente (origen por confirmar: otro grupo o IA); por ahora el crédito es para la docente.
-  - Modelos 3D: los entrega el equipo, en **GLB** (ver "Herramientas").
+  - Modelos 3D: los entrega el equipo y se convierten a **GLB** (ver "Herramientas"); su origen (¿IA?) está por confirmar.
 
 ## Herramientas
 
