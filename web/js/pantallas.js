@@ -103,7 +103,7 @@ function mapa() {
   // Salas del guion Act 1.2 (Drive), por orden de Kevin (26 nov.): [clave de SALAS, etiqueta, título, descripción, destino].
   // La sala donde está el visitante va en rojo con «Actual» y fondo amarillo; las demás, en verde con flecha (Kevin, 26 nov.).
   const salas = [
-    ['pasillo', 'SALA NÚCLEO · 4 ESTACIONES', 'El Festival y la Leyenda', 'Tríada, orígenes, historia y territorio.', 'e1'],
+    ['pasillo', 'SALA NÚCLEO · 4 ESTACIONES', 'El Festival y la Leyenda', 'Tríada, orígenes, historia y territorio.', 'pasillo'],
     ['s1', 'SALA 01 · 2 ESTACIONES', 'Fundación 1968', 'El triunvirato creador y el primer Rey.', 's1'],
     ['s2', 'SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', 's2'],
     ['s3', 'SALA 03 · 4 ESTACIONES', 'Los 4 Aires', 'Paseo, merengue, son y puya.', 's3'],
