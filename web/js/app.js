@@ -85,17 +85,37 @@
     pendiente = null;
     const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (reducir || document.hidden || !app.innerHTML) { pintar(ruta); return; }
-    if (!document.startViewTransition) { // navegadores sin View Transitions: al menos un fundido de la pantalla nueva
-      pintar(ruta);
-      app.firstElementChild.animate([{ opacity: 0 }, { opacity: 1 }], { duration: t.d * 1000, easing: 'cubic-bezier(.42,0,.58,1)' });
-      return;
-    }
+    // Fundido de la pantalla nueva: para navegadores sin View Transitions y cuando el navegador cancela la transición
+    // (pasaba en un Android real: la pantalla saltaba sin animación).
+    const fundido = () => app.firstElementChild.animate([{ opacity: 0, translate: (t.dir === 'izq' ? 18 : t.dir === 'der' ? -18 : 0) + 'px 0' }, { opacity: 1, translate: '0 0' }],
+      { duration: t.d * 1000, easing: 'cubic-bezier(.42,0,.58,1)' });
+    if (!document.startViewTransition) { pintar(ruta); fundido(); anotar('sin View Transitions: fundido'); return; }
     document.documentElement.style.setProperty('--vt-dur', t.d + 's');
     const smart = t.t === 'smart';
     nombrar(smart); // Disolver = fundido de la pantalla completa, sin capas
     const vt = transicion = document.startViewTransition(() => { pintar(ruta); nombrar(smart); });
-    vt.ready.catch(() => {}); // si el navegador cancela la animación, la pantalla igual cambia
-    vt.finished.finally(() => { if (transicion === vt) nombrar(false); });
+    vt.ready.then(() => anotar('transición ok → ' + ruta), e => {
+      anotar('transición cancelada (' + e.name + ': ' + e.message + ') → fundido');
+      vt.updateCallbackDone.then(() => { if (transicion === vt) fundido(); });
+    });
+    vt.finished.finally(() => {
+      if (transicion !== vt) return;
+      nombrar(false); document.documentElement.dataset.desliza = '';
+      anotar('fin ' + Math.round(performance.now() - t0) + ' ms');
+    });
+  }
+
+  /* Diagnóstico en pantalla con ?diag en la dirección (para revisar en un teléfono real sin computador). */
+  const diag = /[?&]diag\b/.test(location.search) ? document.body.appendChild(document.createElement('pre')) : null;
+  function anotar(txt) {
+    if (!diag) return;
+    diag.textContent = (txt + '\n' + diag.textContent).slice(0, 900);
+  }
+  if (diag) {
+    diag.style.cssText = 'position:fixed;left:4px;right:4px;bottom:4px;max-height:38vh;overflow:auto;z-index:9;margin:0;padding:6px 8px;background:rgba(0,0,0,.82);color:#9f9;font:11px/1.35 monospace;white-space:pre-wrap;pointer-events:none';
+    anotar(navigator.userAgent + '\nreducir movimiento: ' + matchMedia('(prefers-reduced-motion: reduce)').matches
+      + ' · View Transitions: ' + !!document.startViewTransition + ' · ancho ' + innerWidth + ' · escala ' + getComputedStyle(document.documentElement).getPropertyValue('--s'));
+    const t0 = performance.now();
   }
 
   app.addEventListener('click', e => {
