@@ -139,8 +139,8 @@ function visor(st, sonando) {
       <span class="a" style="${px(4, 62, 20, 1)}background:rgba(244,234,214,.18)"></span>
       ${m ? `<button class="a ctrl" data-reiniciar aria-label="Volver a la vista inicial" style="${px(0, 63, 32, 32)}font-size:12.5px;color:var(--acento);${centro}">↺</button>` : `<span class="a" style="${px(8, 68)}font-size:12.5px;color:var(--acento)">↺</span>`}
     </div>
-    <p class="a m nw" ${m ? 'data-ayuda role="status"' : ''} style="${px(52, 378, 271, 28)}background:rgba(28,17,13,.84);border:1px solid rgba(224,169,46,.45);border-radius:14px;color:var(--sobre-marca);font-size:10px;${centro}">↻ Inicio quieto · Arrastra 360° o toca 1, 2, 3</p>
-    ${panelPieza(st, sonando, dest, p.sub, 'var(--primario)')}
+    <p class="a m nw" ${m ? 'data-ayuda role="status" ' + pista('visor') : ''} style="${px(52, 378, 271, 28)}background:rgba(28,17,13,.84);border:1px solid rgba(224,169,46,.45);border-radius:14px;color:var(--sobre-marca);font-size:10px;${centro}">↻ Inicio quieto · Arrastra 360° o toca 1, 2, 3</p>
+    ${panelPieza(st, sonando, dest, p.sub, 'var(--primario)', !!m)}
   </section>`;
 }
 
@@ -157,7 +157,7 @@ function vista2d(st, sonando) {
     </nav>
     <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
       <img class="a" src="${p.foto2d}" alt="${p.titulo}" style="${px(12, 12, 307, 216)}object-fit:cover;border-radius:14px">
-      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">✓ Lámina fija · Sin giros ni cámara</span>
+      <span class="a m nw" ${pista(st.id + ':2d', true)} style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">✓ Lámina fija · Sin giros ni cámara</span>
       ${marcas.map(([x, y], i) => `<span class="a b" aria-hidden="true" style="${px(x - 1, y - 1, 26, 26)}background:var(--primario);border:2px solid var(--sobre-marca);border-radius:13px;color:var(--sobre-marca);font-size:10.5px;${centro}">${i + 1}</span>`).join('')}
       ${p.partes.map(([n, d], i) => `
       <div class="a" style="${px(12 + i * 105, 242, 97, 80)}background:rgba(237,227,206,.65);border-radius:12px">
@@ -185,7 +185,7 @@ function lamina(st, n, sonando) {
     <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
       <img class="a" src="${p.lamina || st.escenario}" alt="${p.altLamina || st.altEscenario}" style="${px(12, 12, 307, 216)}object-fit:cover;object-position:50% ${p.encuadre};border-radius:14px">
       ${p.disco ? `<span class="a disco${sonando ? ' gira' : ''}" aria-hidden="true" style="${px(...p.disco, 64, 64)}"></span>` : ''}
-      ${p.etiqueta === '' ? '' : `<span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">${p.etiqueta || '✓ Lámina fija · Sin giros ni cámara'}</span>`}
+      ${p.etiqueta === '' ? '' : `<span class="a m nw" ${pista(st.id + ':lamina', !p.etiqueta)} style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">${p.etiqueta || '✓ Lámina fija · Sin giros ni cámara'}</span>`}
       ${p.puntos.map((q, i) => `<button class="a" aria-label="Punto ${i + 1}: ${q.nombre}" aria-pressed="${i === n - 1}" ${go(ir(i + 1), 0.25)} style="${px(q.xy[0] - 22, q.xy[1] - 22, 44, 44)}${centro}">
         <span class="b" style="width:26px;height:26px;border-radius:13px;border:2px solid var(--sobre-marca);font-size:10.5px;${centro}${i === n - 1 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--acento);color:var(--texto)'}">${i + 1}</span></button>`).join('')}
       ${p.puntos.map((q, i) => `
@@ -219,7 +219,7 @@ function consola(st, sonando) {
     <p class="a sb nw" style="${px(58, 16, 301, 34)}background:var(--primario);border:1px solid rgba(224,169,46,.4);border-radius:17px;color:var(--sobre-marca);font-size:10.5px;${centro}" data-vt="modo">● Consola multipista · Compás ${p.compas}</p>
     <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
       <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(12, 12, 307, 150)}object-fit:cover;object-position:50% ${p.encuadre};border-radius:14px">
-      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">✓ Toca un canal para silenciarlo</span>
+      <span class="a m nw" ${pista(st.id + ':consola')} style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">✓ Toca un canal para silenciarlo</span>
       <p class="a b nw" style="${px(14, 174)}font-size:11px">${p.aire} · Compás ${p.compas}</p>
       <div class="a" data-pulsos="${p.pulsos}" data-bpm="${p.bpm}" aria-hidden="true" style="${px(321 - p.pulsos * 18, 172, p.pulsos * 18, 16)}display:flex;gap:6px;align-items:center">${'<i class="pulso"></i>'.repeat(p.pulsos)}</div>
       ${p.pistas.map((c, i) => `<button class="a canal" data-canal="${i}" aria-pressed="${!mudos.has(i)}" aria-label="Canal ${c.nombre}" style="${px(12 + (i % 2) * 159, 198 + Math.floor(i / 2) * 66, 151, 58)}">

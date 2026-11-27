@@ -180,6 +180,10 @@ function info() {
 }
 const centroFlex = 'display:flex;align-items:center;justify-content:center;line-height:1;';
 
+/* Pistas de uso («✓ Lámina fija…», «↻ Inicio quieto…»): con auto se desvanecen solas al entrar; sin auto, al primer
+   toque sobre la pieza (app.js). Las ya vistas no vuelven en la misma visita aunque la pantalla se vuelva a pintar. */
+const pistasVistas = new Set();
+const pista = (clave, auto) => `data-pista="${clave}"${pistasVistas.has(clave) ? ' data-vista' : auto ? ' data-auto' : ''}`;
 
 /* ---------- Piezas compartidas de las estaciones ---------- */
 function encabezadoEstacion(st, sonando, destSonido) {

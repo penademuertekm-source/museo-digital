@@ -284,12 +284,19 @@
     });
   }
   let avisoAyuda = null;
-  function ayuda(texto, ms = 3500) { // mensaje breve en la cápsula de ayuda del visor
+  function ayuda(texto, ms = 3500) { // mensaje breve en la cápsula de ayuda del visor (reaparece aunque ya se haya ido)
     const p = app.querySelector('[data-ayuda]'); if (!p) return;
     if (!p.dataset.original) p.dataset.original = p.textContent;
-    p.textContent = texto; clearTimeout(avisoAyuda);
-    if (ms) avisoAyuda = setTimeout(() => { p.textContent = p.dataset.original; }, ms);
+    p.textContent = texto; delete p.dataset.vista; clearTimeout(avisoAyuda);
+    if (ms) avisoAyuda = setTimeout(() => { p.textContent = p.dataset.original; if (pistasVistas.has(p.dataset.pista)) p.dataset.vista = ''; }, ms);
   }
+  // Pistas de uso: las que no se van solas se desvanecen con el primer toque sobre la pieza.
+  const TOCA_PIEZA = 'model-viewer, [data-punto], [data-chip], [data-zoom], [data-reiniciar], [data-canal], [data-solo], [aria-pressed], .onda, [aria-label^=Reproducir], [aria-label^=Pausar]';
+  app.addEventListener('pointerdown', e => {
+    if (!e.target.closest(TOCA_PIEZA)) return;
+    app.querySelectorAll('[data-pista]:not([data-auto]):not([data-vista])').forEach(p => { pistasVistas.add(p.dataset.pista); p.dataset.vista = ''; });
+  });
+  app.addEventListener('animationend', e => { if (e.animationName === 'pista-fuera') pistasVistas.add(e.target.dataset.pista); });
   app.addEventListener('click', e => {
     const mv = app.querySelector('model-viewer'); if (!mv) return;
     const punto = e.target.closest("button[data-punto]"), zoom = e.target.closest('[data-zoom]');

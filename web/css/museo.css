@@ -125,6 +125,12 @@ html[data-desliza=der]::view-transition-old(*):only-child { animation-name: vt-s
   .hov, .hov:hover { transition: none; transform: none; }
 }
 
+/* Pistas de uso: se desvanecen solas (data-auto) o al primer toque (data-vista, lo pone app.js) */
+[data-pista] { transition: opacity .6s ease; }
+[data-pista][data-vista] { opacity: 0; pointer-events: none; }
+[data-pista][data-auto] { animation: pista-fuera .6s ease 2.5s forwards; }
+@keyframes pista-fuera { to { opacity: 0; } }
+
 /* Lectura con desplazamiento de la Historia: barra propia como en Figma */
 .lectura { overflow-x: hidden; overflow-y: auto; scrollbar-width: none; }
 .lectura::-webkit-scrollbar { display: none; }
