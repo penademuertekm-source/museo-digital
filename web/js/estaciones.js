@@ -234,7 +234,7 @@ function consola(st, sonando) {
     </div>
     <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
     <nav class="a" aria-label="Mezclas rápidas" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.solos.map(([t, canales]) =>
-      `<button class="sb nw" data-solo="${canales.join(',')}" style="height:26px;border-radius:13px;font-size:10px;padding:0 12px;${centro}background:var(--crema)">${t}</button>`).join('')}</nav>
+      `<button class="sb nw" data-solo="${canales.join(',')}" aria-pressed="${p.pistas.every((c, i) => canales.includes(i) !== mudos.has(i))}" style="height:26px;border-radius:13px;font-size:10px;padding:0 12px;${centro}">${t}</button>`).join('')}</nav>
     <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
     <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
     <p class="a sb nw" style="${px(33, 512)}color:var(--primario);font-size:11px">${p.sub}</p>

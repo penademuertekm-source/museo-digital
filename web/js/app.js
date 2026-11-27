@@ -191,6 +191,9 @@
     audio.muted = mudos.has(0);
     extras.forEach((a, i) => { a.muted = mudos.has(i + 1); });
     app.querySelectorAll('[data-canal]').forEach(b => b.setAttribute('aria-pressed', !mudos.has(Number(b.dataset.canal))));
+    // Mezcla rápida activa (en rojo): la que deja sonar exactamente los canales que suenan ahora.
+    app.querySelectorAll('[data-solo]').forEach(b => { const deja = b.dataset.solo.split(',').map(Number);
+      b.setAttribute('aria-pressed', [...app.querySelectorAll('[data-canal]')].every((c, i) => deja.includes(i) !== mudos.has(i))); });
   }
   const activas = () => enConsola ? extras.slice(0, enConsola.pieza.pistas.length - 1) : [];
   audio.addEventListener('play', () => { activas().forEach(a => { a.currentTime = audio.currentTime; a.play().catch(() => {}); }); latir(); });

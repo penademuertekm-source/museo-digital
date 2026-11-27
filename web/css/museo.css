@@ -168,6 +168,9 @@ html[data-desliza=der]::view-transition-old(*):only-child { animation-name: vt-s
 .canal[aria-pressed="false"] .b { color: var(--texto-2); }
 .canal[aria-pressed="false"] .estado { background: var(--linea); color: var(--texto); }
 .canal[aria-pressed="false"] .estado::after { content: 'Mudo'; }
+/* Mezclas rápidas («Todos», «Solo pitos»…): la activa en rojo y las demás en beige, como las fichas del tablero de la Sala 2 */
+[data-solo] { background: var(--crema); }
+[data-solo][aria-pressed="true"] { background: var(--primario); color: var(--sobre-marca); }
 .pulso { width: 12px; height: 12px; border-radius: 6px; background: var(--linea); transition: transform .08s; }
 .pulso.on { background: var(--acento); transform: scale(1.25); }
 .pulso.on:first-child { background: var(--primario); }
