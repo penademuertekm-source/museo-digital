@@ -35,7 +35,7 @@ body {
   transform: scale(var(--s));
   overflow: hidden;
 }
-.pantalla { position: absolute; inset: 0; overflow: hidden; background: #f5f5f5; }
+.pantalla { position: absolute; inset: 0; overflow: hidden; background: #f5f5f5; touch-action: pan-y pinch-zoom; } /* el deslizar horizontal lo maneja app.js */
 
 /* Utilidades */
 .a { position: absolute; }
@@ -110,6 +110,16 @@ model-viewer { --poster-color: transparent; --progress-bar-color: var(--acento);
   animation-duration: var(--vt-dur, .3s);
   animation-timing-function: cubic-bezier(.42, 0, .58, 1); /* EASE_IN_AND_OUT */
 }
+/* Cambio de pestaña (Resumen · Historia · Galería) deslizando o con los puntos: lo que cambia entra desde el lado
+   hacia donde se avanza; lo que es igual en las dos pantallas (escenario, encabezado) se queda quieto. */
+html[data-desliza=izq]::view-transition-new(*):only-child { animation-name: vt-entra-der; }
+html[data-desliza=izq]::view-transition-old(*):only-child { animation-name: vt-sale-izq; }
+html[data-desliza=der]::view-transition-new(*):only-child { animation-name: vt-entra-izq; }
+html[data-desliza=der]::view-transition-old(*):only-child { animation-name: vt-sale-der; }
+@keyframes vt-entra-der { from { opacity: 0; transform: translateX(28px); } }
+@keyframes vt-entra-izq { from { opacity: 0; transform: translateX(-28px); } }
+@keyframes vt-sale-izq { to { opacity: 0; transform: translateX(-28px); } }
+@keyframes vt-sale-der { to { opacity: 0; transform: translateX(28px); } }
 @media (prefers-reduced-motion: reduce) {
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
   .hov, .hov:hover { transition: none; transform: none; }

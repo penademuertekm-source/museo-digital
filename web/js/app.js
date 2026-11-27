@@ -93,6 +93,7 @@
     document.documentElement.style.setProperty('--vt-dur', t.d + 's');
     const smart = t.t === 'smart';
     nombrar(smart); // Disolver = fundido de la pantalla completa, sin capas
+    document.documentElement.dataset.desliza = t.dir || '';
     const vt = transicion = document.startViewTransition(() => { pintar(ruta); nombrar(smart); });
     vt.ready.then(() => anotar('transición ok → ' + ruta), e => {
       anotar('transición cancelada (' + e.name + ': ' + e.message + ') → fundido');
@@ -122,7 +123,7 @@
     const el = e.target.closest('[data-go]');
     if (!el) return;
     e.preventDefault();
-    pendiente = { t: el.dataset.t, d: parseFloat(el.dataset.d) || 0.3 };
+    pendiente = { t: el.dataset.t, d: parseFloat(el.dataset.d) || 0.3, dir: el.dataset.dir };
     const destino = '#/' + el.dataset.go;
     if (location.hash === destino) { pendiente = null; return; }
     location.hash = destino;
@@ -131,6 +132,29 @@
 
   /* Audio (A1: solo suena tras un toque; A3: un solo audio a la vez).
      Las rutas que terminan en /audio son las pantallas "Audio Activo" de Figma. */
+  /* Deslizar el panel de la estación pasa entre Resumen, Historia y Galería, igual que los puntos de abajo. */
+  let dedo = null, tragarClic = -1;
+  app.addEventListener('pointerdown', e => {
+    dedo = null;
+    if (!e.isPrimary || e.target.closest('.onda, model-viewer')) return;
+    const r = app.getBoundingClientRect(), s = r.height / 667;
+    if ((e.clientY - r.top) / s >= 372) dedo = { x: e.clientX, y: e.clientY, t: e.timeStamp, s }; // solo sobre el panel
+  });
+  app.addEventListener('pointerup', e => {
+    const d = dedo; dedo = null;
+    if (!d) return;
+    const dx = (e.clientX - d.x) / d.s, dy = (e.clientY - d.y) / d.s;
+    if (Math.abs(dx) < 50 || Math.abs(dx) < 1.5 * Math.abs(dy) || e.timeStamp - d.t > 600) return;
+    const [id, sub = ''] = location.hash.replace(/^#\/?/, '').split('/');
+    const i = ['', 'historia', 'galeria'].indexOf(sub === 'audio' ? '' : sub), j = i + (dx < 0 ? 1 : -1);
+    if (!Object.hasOwn(ESTACIONES, id) || i < 0 || j < 0 || j > 2) return;
+    tragarClic = e.timeStamp; // el clic que sigue al gesto no debe abrir nada
+    pendiente = { t: 'smart', d: 0.3, dir: dx < 0 ? 'izq' : 'der' };
+    location.hash = '#/' + [id, id + '/historia', id + '/galeria'][j];
+  });
+  app.addEventListener('pointercancel', () => { dedo = null; });
+  app.addEventListener('click', e => { if (e.timeStamp - tragarClic < 500) { e.stopPropagation(); e.preventDefault(); } }, true);
+
   function sonido(ruta) {
     const partes = ruta.split('/');
     const st = ESTACIONES[partes[0]];
