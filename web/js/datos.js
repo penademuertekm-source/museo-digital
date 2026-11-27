@@ -659,3 +659,40 @@ Object.assign(ESTACIONES, {
       ] },
   },
 });
+
+/* Créditos completos por sala, visibles en «Acerca del museo» (E1). Detalle con enlaces y tramos en docs/assets.md.
+   ♪ audio (casi todos recortados de videos de YouTube) · ▣ fotos e imágenes · ◆ modelos 3D. */
+const CREDITOS = [
+  ['Sala Núcleo', [
+    ['♪', 'Est. 1: «La cachucha bacana», Alejandro Durán (canal Alejandro Durán - Topic) y «Pedazo de acordeón», Alejo Durán en el Festival Rey de Reyes 1987.'],
+    ['♪', 'Est. 2: «Paseo (El mejoral)», parranda de Alejo Durán (canal OSCARMOSKITA PARR); narración sobre los cantos de vaquería (canal Patrimonio, Cultura y Memoria, 2018) y canto de Ismael Herrera, disco «Colombie: El Vallenato» (Ocora Radio France).'],
+    ['♪', 'Est. 3: voz de Consuelo Araújo Noguera, discurso de clausura como ministra de Cultura (iVoox), y Ciro Meza Reales con la puya «La bizca», final del Festival 2003 (canal Checheo Suárez).'],
+    ['♪', 'Est. 4: ambiente de la Plaza Alfonso López (Super Vallenatos en Parranda, 2023), río Guatapurí (Protección Ambiental Valledupar, 2018), «Frente al río Guatapurí», Roque Gullo y Julián Peña (canal Julio Benjamin Arias Macias), y «River», Antonio_Lai (Freesound, CC0).'],
+    ['▣', 'Fotos e ilustraciones del Figma de la docente del curso (origen por confirmar).'],
+    ['◆', 'Trío vallenato, juglar bajo el palo de mango, busto de Consuelo Araújo y cuadro de Valledupar: equipo 3D del museo.'],
+  ]],
+  ['Sala 1 · Fundación 1968', [
+    ['♪', 'Est. 1.1: Alfonso López Michelsen, «El vallenato» (HJCK, 1969), y Rafael Escalona y conjunto, «Festival Leyenda Vallenata» (HJCK, 1974), del archivo de RTVC Señal Memoria; voz de Consuelo Araújo (iVoox).'],
+    ['♪', 'Est. 1.2: «Alicia adorada» (Juancho Polo Valencia) por Alejo Durán, en el documental «Inmortales» (RTVC Señal Memoria, 1996) y en disco (Discos Fuentes); testimonio de la final de 1968 y voz de Alejo Durán, del mismo documental.'],
+    ['▣', 'Fotos: Arhivele Naționale ale României, J.iguaran y Zero Gravity (Wikimedia Commons); fotogramas de «Inmortales» (RTVC Señal Memoria) y una foto <b>temporal</b> del Figma del grupo.'],
+  ]],
+  ['Sala 2 · Tríada instrumental', [
+    ['♪', 'Est. 2.1: tutoriales de Enrique Madera Niño («Escala diatónica abriendo y cerrando fuelle») y del canal Profesor de Acordeón («Partes del acordeón»).'],
+    ['♪', 'Est. 2.2: Ferny Tolosa, «Los 7 sonidos de la caja vallenata» (Cumbia Vallenato TV).'],
+    ['♪', 'Est. 2.3: canal Puro Vallenato, «Cómo tocar la guacharaca vallenata» y «Guacharaca vallenata: repiques».'],
+    ['◆', 'Acordeón en pedestal: equipo 3D del museo.'],
+    ['▣', 'Fotos <b>temporales</b> del Figma del grupo.'],
+  ]],
+  ['Sala 3 · Los 4 aires', [
+    ['♪', 'Final del Festival 2019 (canal Pase Vallenato): Alfonso Manuel Monsalvo Bauté, el Manón Calderón y el Ñame Mendoza tocan «Mujer de dorado pelo» (Juancho Polo Valencia), «El leñazo» (Alejo Durán), «Amor irresistible» (Luis Enrique Martínez) y «La sanguijuela». Las pistas de la consola se separaron con IA.'],
+    ['▣', 'Fotos <b>temporales</b> del Figma del grupo.'],
+  ]],
+  ['Sala 4 · Danza del Pilón', [
+    ['♪', 'Est. 4.1: Señal Colombia (crónica «Piloneritos», 2009), LeoMarti · Voces y Leyendas (Pilón Cañaguate, 2026), Red+ Noticias («La tradición no muere con los piloneritos», 2017) y RTA News Channel («Desfile de Piloneras 2», 2019).'],
+    ['♪', 'Est. 4.2: Fundación Atenart («Aprende a bailar Pilón Vallenato», con Keivis Narváez) y Kristina García (documental «Traje típico de Valledupar», 2022).'],
+    ['▣', 'Mapa: © colaboradores de OpenStreetMap (ODbL). Fotos <b>temporales</b> del Figma del grupo.'],
+  ]],
+  ['Todo el museo', [
+    ['▣', 'Fondos de pasillos y escenarios: equipo del museo (origen por confirmar).'],
+  ]],
+];

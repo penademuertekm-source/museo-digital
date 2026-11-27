@@ -171,7 +171,8 @@ function info() {
           ['▣', 'Fotos de Wikimedia Commons (licencias CC), Señal Memoria y fotos <b>temporales</b> del Figma del grupo. Las ilustraciones salen del Figma de la docente.'],
           ['♪', 'Audios con derechos de autor, de uso académico autorizado por la docente, siempre con su crédito.'],
           ['◆', 'Modelos 3D del equipo 3D. Tipografías Fraunces y Work Sans (licencia OFL).'],
-          ['✦', 'Con ayuda de IA (Claude Code y Demucs), revisada por el equipo.']])}
+          ['✦', 'Con ayuda de IA, revisada por el equipo: Claude Code (programación y montaje), Whisper (transcripción de subtítulos), Demucs (pistas de la consola) y Real-ESRGAN (nitidez de fotos pequeñas).']])}
+        ${CREDITOS.map(([sala, items]) => `<h3 class="sb" style="font-size:13px;color:var(--primario);margin:14px 0 7px">${sala}</h3>${lista(items)}`).join('')}
         <p style="margin-top:14px;font-size:11px;color:var(--texto-2)">Diseño de Interfaces Físicas · Areandina, Valledupar · 2026-2</p>
       </div>
     </div>
