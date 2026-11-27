@@ -43,6 +43,22 @@ function menuInferior(activo, destinos) {
   }).join('')}</nav>`;
 }
 
+/* Sala donde está el visitante (clave de SALAS). app.js la fija al pintar un pasillo o una estación;
+   el mapa la marca como «Actual» y el ícono Salas del menú lleva a su pasillo. */
+let salaActual = (() => { try { const s = sessionStorage.getItem('sala'); return s && Object.hasOwn(SALAS, s) ? s : 'pasillo'; } catch (e) { return 'pasillo'; } })();
+function fijarSala(id) {
+  salaActual = id;
+  try { sessionStorage.setItem('sala', id); } catch (e) { /* sin almacenamiento: se recuerda hasta recargar */ }
+}
+/* Menú del museo (Kevin, 26 nov.): Inicio → Portada · Salas → pasillo de la sala actual (Corte 2: «Sala actual») ·
+   Mapa → Mapa de Salas · Información → Acerca del museo. El ícono de la pantalla en la que se está no navega. */
+const menuMuseo = activo => menuInferior(activo, {
+  inicio: { r: 'portada', d: 0.3, t: 'dissolve' },
+  salas: activo === 'salas' ? null : { r: salaActual, d: 0.35 },
+  mapa: activo === 'mapa' ? null : { r: 'mapa' },
+  info: activo === 'info' ? null : { r: 'info' },
+});
+
 /* El aviso "Toca un punto dorado" se muestra hasta que el visitante entra a su primera estación (por el aviso, un punto o el mapa);
    después el pasillo queda libre. Se recuerda mientras la pestaña siga abierta, aunque se recargue. */
 let avisoVisto = (() => { try { return sessionStorage.getItem('avisoVisto') === '1'; } catch (e) { return false; } })();
@@ -51,10 +67,6 @@ let avisoVisto = (() => { try { return sessionStorage.getItem('avisoVisto') === 
    Las Salas 1–4 (guion del Drive) usan el mismo pasillo con su fondo y sus puntos (SALAS en datos.js). */
 function pasillo(id, sonido) {
   const sala = SALAS[id], puntos = sala.puntos;
-  const destMenu = {
-    inicio: { r: 'portada', d: 0.3, t: 'dissolve' },
-    salas: { r: 'mapa' }, mapa: { r: 'mapa' }, info: { r: 'mapa' },
-  };
   return `
   <section class="pantalla">
     ${fondo(`<img class="cubre" src="${sala.fondo}" alt="${sala.alt}" style="height:672px">`)}
@@ -82,19 +94,22 @@ function pasillo(id, sonido) {
       <img class="a" src="${S}puntero-aviso.svg" alt="" style="${px(106.8, 41, 10.4, 5.25)}transform:rotate(180deg)">
     </button>`}
     ${puntos.map(([x, y, est]) => `<button class="a hov" aria-label="Estación ${ESTACIONES[est].n}" ${go(est, 0.35)} style="${px(x, y, 28, 28)}"><img src="${S}punto-dorado.svg" alt="" width="28" height="28"></button>`).join('')}
-    ${menuInferior('inicio', destMenu)}
+    ${menuMuseo('salas')}
   </section>`;
 }
 
 /* ---------- 02 · Sala Núcleo / Mapa de Salas (232:6069) ---------- */
 function mapa() {
-  // Salas del guion Act 1.2 (Drive), por orden de Kevin (26 nov.); sin destino = aún no construida.
+  // Salas del guion Act 1.2 (Drive), por orden de Kevin (26 nov.): [clave de SALAS, etiqueta, título, descripción, destino].
+  // La sala donde está el visitante va en rojo con «Actual» y fondo amarillo; las demás, en verde con flecha (Kevin, 26 nov.).
   const salas = [
-    ['SALA 01 · 2 ESTACIONES', 'Fundación 1968', 'El triunvirato creador y el primer Rey.', 's1'],
-    ['SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', 's2'],
-    ['SALA 03 · 4 ESTACIONES', 'Los 4 Aires', 'Paseo, merengue, son y puya.', 's3'],
-    ['SALA 04 · 2 ESTACIONES', 'Danza del Pilón', 'Del patio campesino al desfile.', 's4'],
+    ['pasillo', 'SALA NÚCLEO · 4 ESTACIONES', 'El Festival y la Leyenda', 'Tríada, orígenes, historia y territorio.', 'e1'],
+    ['s1', 'SALA 01 · 2 ESTACIONES', 'Fundación 1968', 'El triunvirato creador y el primer Rey.', 's1'],
+    ['s2', 'SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', 's2'],
+    ['s3', 'SALA 03 · 4 ESTACIONES', 'Los 4 Aires', 'Paseo, merengue, son y puya.', 's3'],
+    ['s4', 'SALA 04 · 2 ESTACIONES', 'Danza del Pilón', 'Del patio campesino al desfile.', 's4'],
   ];
+  const aqui = SALAS[salaActual];
   const tarjeta = (top, eti, colEti, tit, desc, dest, fondo, extra) => `
       <${dest ? `button class="a" ${go(dest, 0.35)}` : 'div class="a" aria-disabled="true"'} style="${px(48.8, top, 265, 72)}background:${fondo};border-radius:14px;overflow:hidden${dest ? '' : ';opacity:.7'}">
         <span class="a b nw" style="${px(14, 10)}color:${colEti};font-size:8.5px">${eti}</span>
@@ -102,33 +117,69 @@ function mapa() {
         <span class="a nw" style="${px(14, 46)}color:var(--texto-2);font-size:10px">${desc}</span>
         ${extra}
       </${dest ? 'button' : 'div'}>`;
-  const destMenu = { inicio: { r: 'pasillo' }, salas: { r: 'e1' } };
   return `
   <section class="pantalla">
-    ${fondo(`<img class="cubre" src="assets/img/pasillo.jpg" alt="" style="height:672px">`)}
+    ${fondo(`<img class="cubre" src="${aqui.fondo}" alt="" style="height:672px">`)}
     <div class="a" style="${px(0, 0, 375, 115)}background:linear-gradient(180deg,rgba(36,22,17,.52),rgba(36,22,17,0))" data-vt="degradado-sup"></div>
     <div class="a" style="${px(0, 517, 375, 150)}background:linear-gradient(180deg,rgba(36,22,17,0),rgba(36,22,17,.68))"></div>
-    ${[[62, 389], [94, 288], [232, 309], [287, 418]].map(([x, y]) => `<img class="a" src="${S}punto-interactivo.svg" alt="" style="${px(x - 6, y - 6, 30, 30)}">`).join('')}
+    ${aqui.puntos.map(([x, y]) => `<img class="a" src="${S}punto-interactivo.svg" alt="" style="${px(x - 1, y - 1, 30, 30)}">`).join('')}
     <div class="a" style="${px(0, 0, 375, 667)}background:rgba(20,12,9,.8)"></div>
     <div class="a" role="dialog" aria-labelledby="titulo-mapa" style="${px(18, 28, 339, 546)}background:#f7f3ec;border:1.2px solid rgba(224,169,46,.45);border-radius:24px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.35)">
       <div class="a" style="${px(22.8, 24.8, 3, 12)}background:var(--acento);border-radius:1.5px"></div>
       <p class="a b nw" style="${px(31.8, 23.8)}color:var(--primario);font-size:9.5px">RECORRIDO DEL MUSEO</p>
       <h1 id="titulo-mapa" class="a fr b nw" style="${px(22.8, 41.8)}font-size:22px">Mapa de Salas</h1>
-      <button class="a hov" aria-label="Cerrar mapa" ${go('pasillo')} style="${px(279.8, 24.8, 34, 34)}"><img src="${S}cerrar-mapa.svg" alt="" width="34" height="34"></button>
+      <button class="a hov" aria-label="Cerrar mapa" ${go(salaActual)} style="${px(279.8, 24.8, 34, 34)}"><img src="${S}cerrar-mapa.svg" alt="" width="34" height="34"></button>
       <div class="a" style="${px(22.8, 82.8, 291, 1)}background:var(--crema)"></div>
       <div class="a" style="${px(29.8, 130.8, 2, 368)}background:rgba(224,169,46,.45)"></div>
-      <img class="a" src="${S}elipse-actual.svg" alt="" style="${px(23.8, 129.8, 14, 14)}">
-      ${tarjeta(100.8, 'SALA NÚCLEO · 1/4 ESTACIONES', 'var(--primario)', 'El Festival y la Leyenda', 'Tríada, orígenes, historia y territorio.', 'e1', 'rgba(237,227,206,.95)',
-        `<span class="a sb nw" style="${px(196, 23, 55, 26)}background:var(--primario);border-radius:13px;color:var(--sobre-marca);font-size:9.5px;display:flex;align-items:center;justify-content:center;line-height:1">Actual</span>`)}
-      ${salas.map(([eti, tit, desc, dest], i) => `
-      <img class="a" src="${S}elipse.svg" alt="" style="${px(23.8, 215.8 + i * 86, 14, 14)}">
-      ${tarjeta(186.8 + i * 86, eti, 'var(--secundario)', tit, desc, dest, 'rgba(255,255,255,.85)', dest
-        ? `<img class="a" src="${S}flecha-sala.svg" alt="" style="${px(219, 20, 32, 32)}">`
-        : `<span class="a sb nw" style="${px(196, 23, 55, 26)}background:var(--crema);border-radius:13px;font-size:9.5px;display:flex;align-items:center;justify-content:center;line-height:1">Pronto</span>`)}`).join('')}
+      ${salas.map(([clave, eti, tit, desc, dest], i) => {
+        const actual = clave === salaActual;
+        return `
+      <img class="a" src="${S}${actual ? 'elipse-actual' : 'elipse'}.svg" alt="" style="${px(23.8, 129.8 + i * 86, 14, 14)}">
+      ${tarjeta(100.8 + i * 86, eti, actual ? 'var(--primario)' : 'var(--secundario)', tit, desc, dest, actual ? 'rgba(237,227,206,.95)' : 'rgba(255,255,255,.85)', actual
+        ? `<span class="a sb nw" aria-label="Sala actual" style="${px(196, 23, 55, 26)}background:var(--primario);border-radius:13px;color:var(--sobre-marca);font-size:9.5px;display:flex;align-items:center;justify-content:center;line-height:1">Actual</span>`
+        : `<img class="a" src="${S}flecha-sala.svg" alt="" style="${px(219, 20, 32, 32)}">`)}`;
+      }).join('')}
     </div>
-    ${menuInferior('mapa', destMenu)}
+    ${menuMuseo('mapa')}
   </section>`;
 }
+
+/* ---------- Información · Acerca del museo (no está en ningún Figma; pedido de Kevin el 26 nov., placa por aprobar) ----------
+   Misma ventana que el Mapa de Salas: cómo se recorre y los créditos resumidos (E1: créditos visibles; F1: IA declarada). */
+function info() {
+  const lista = items => `<ul style="list-style:none;display:flex;flex-direction:column;gap:7px">${items.map(([ic, t]) =>
+    `<li style="display:flex;gap:9px;align-items:flex-start;font-size:13px;line-height:17.5px;color:var(--texto)"><span aria-hidden="true" style="flex:none;width:22px;height:22px;border-radius:11px;background:var(--crema);color:var(--primario);font-size:11px;font-weight:700;font-variant-emoji:text;${centroFlex}">${ic}&#xFE0E;</span><span>${t}</span></li>`).join('')}</ul>`;
+  const titulo = t => `<h2 class="fr b" style="font-size:15px;margin:14px 0 8px">${t}</h2>`;
+  return `
+  <section class="pantalla">
+    ${fondo(`<img class="cubre" src="${SALAS[salaActual].fondo}" alt="" style="height:672px">`)}
+    <div class="a" style="${px(0, 0, 375, 667)}background:rgba(20,12,9,.8)"></div>
+    <div class="a" role="dialog" aria-labelledby="titulo-info" style="${px(18, 28, 339, 546)}background:#f7f3ec;border:1.2px solid rgba(224,169,46,.45);border-radius:24px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.35)">
+      <div class="a" style="${px(22.8, 24.8, 3, 12)}background:var(--acento);border-radius:1.5px"></div>
+      <p class="a b nw" style="${px(31.8, 23.8)}color:var(--primario);font-size:9.5px">INFORMACIÓN</p>
+      <h1 id="titulo-info" data-titulo class="a fr b nw" style="${px(22.8, 41.8)}font-size:22px">Acerca del museo</h1>
+      <button class="a hov" aria-label="Cerrar información" ${go(salaActual)} style="${px(279.8, 24.8, 34, 34)}"><img src="${S}cerrar-mapa.svg" alt="" width="34" height="34"></button>
+      <div class="a" style="${px(22.8, 82.8, 291, 1)}background:var(--crema)"></div>
+      <div class="a lectura" tabindex="0" role="region" aria-label="Cómo recorrerlo y créditos" style="${px(22.8, 84, 296, 450)}padding-bottom:16px">
+        ${titulo('Cómo recorrerlo')}
+        ${lista([['●', 'Toca un <b>punto dorado</b> del pasillo para entrar a cada estación.'],
+          ['↔', 'Desliza o toca los puntos de abajo para pasar por <b>Resumen, Historia y Galería</b>.'],
+          ['▶', '<b>Nada suena solo:</b> tú das play, y cada audio trae subtítulos.'],
+          ['⤢', 'Toca una foto de la galería para <b>ampliarla</b>.']])}
+        ${titulo('Créditos')}
+        ${lista([['✎', 'Diseño: prototipo de la docente del curso (Figma). Web app: Equipo de Apoyo.'],
+          ['▣', 'Fotos de Wikimedia Commons (licencias CC), Señal Memoria y fotos <b>temporales</b> del Figma del grupo. Las ilustraciones salen del Figma de la docente.'],
+          ['♪', 'Audios con derechos de autor, de uso académico autorizado por la docente, siempre con su crédito.'],
+          ['◆', 'Modelos 3D del equipo 3D. Tipografías Fraunces y Work Sans (licencia OFL).'],
+          ['✦', 'Con ayuda de IA (Claude Code y Demucs), revisada por el equipo.']])}
+        <p style="margin-top:14px;font-size:11px;color:var(--texto-2)">Diseño de Interfaces Físicas · Areandina, Valledupar · 2026-2</p>
+      </div>
+    </div>
+    ${menuMuseo('info')}
+  </section>`;
+}
+const centroFlex = 'display:flex;align-items:center;justify-content:center;line-height:1;';
+
 
 /* ---------- Piezas compartidas de las estaciones ---------- */
 function encabezadoEstacion(st, sonando, destSonido) {

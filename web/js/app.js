@@ -14,10 +14,12 @@
 
   function pantallaDe(ruta) {
     const [base, sub, extra, extra2] = ruta.split('/');
-    if (SALAS[base]) return pasillo(base, sub === 'sonido');
+    if (SALAS[base]) { fijarSala(base); return pasillo(base, sub === 'sonido'); }
     if (base === 'mapa') return mapa();
+    if (base === 'info') return info();
     const st = ESTACIONES[base];
     if (st) {
+      fijarSala(st.pasillo || 'pasillo');
       if (sub === 'pieza') return lamina(st, Number(extra) || 1, extra2 === 'audio');
       if (!sub) return resumen(st, false);
       if (sub === 'audio') return resumen(st, true);
@@ -66,7 +68,7 @@
       try { sessionStorage.setItem('avisoVisto', '1'); } catch (e) { /* sin almacenamiento: se recuerda hasta recargar */ }
     }
     sonido(ruta);
-    const titulo = app.querySelector('h2') || app.querySelector('h1');
+    const titulo = app.querySelector('[data-titulo]') || app.querySelector('h2') || app.querySelector('h1');
     document.title = (titulo ? titulo.innerText.replace(/\s+/g, ' ').trim() + ' · ' : '') + 'Museo Festival de la Leyenda Vallenata';
     // Barra de desplazamiento propia de la Historia (riel de 174 px, indicador de 58 px)
     const lectura = app.querySelector('.lectura'), riel = app.querySelector('.riel');
@@ -80,7 +82,7 @@
     let ruta = location.hash.replace(/^#\/?/, '') || 'portada';
     const base = ruta.split('/')[0];
     // Solo claves propias: «#/constructor» o «#/__proto__» llevarían a objetos heredados y romperían la pantalla.
-    if (base !== 'mapa' && !Object.hasOwn(SALAS, base) && !Object.hasOwn(ESTACIONES, base)) ruta = 'portada';
+    if (base !== 'mapa' && base !== 'info' && !Object.hasOwn(SALAS, base) && !Object.hasOwn(ESTACIONES, base)) ruta = 'portada';
     const t = pendiente || { t: 'smart', d: 0.3 };
     pendiente = null;
     const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
