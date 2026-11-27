@@ -85,7 +85,7 @@ function pasillo(id, sonido) {
     </button>
     ${avisoVisto || !sala.aviso ? '' : `<button class="a" ${go('e1', 0.35)} style="${px(184, 362, 176, 54)}" aria-label="Toca un punto dorado. Ejemplo: Tríada Instrumental">
       <span class="a" style="left:0;top:0;background:rgba(36,22,17,.92);border:1px solid var(--acento);border-radius:10px;box-shadow:0 4px 10px rgba(0,0,0,.25);display:flex;align-items:center;gap:8px;padding:7px 12px 7px 10px">
-        <img src="${S}toque-ar.svg" alt="" style="width:12.6px;height:19.25px;margin:1.4px 4.6px 1.4px 4.8px">
+        <span style="margin:1.4px 4.6px 1.4px 4.8px">${iconoToque}</span>
         <span style="display:flex;flex-direction:column;gap:1px;font-size:10px;white-space:nowrap;text-align:left">
           <span class="b" style="color:var(--acento)">Toca un punto dorado</span>
           <span class="m" style="color:var(--sobre-marca)">Ej: Tríada Instrumental</span>
@@ -205,8 +205,13 @@ function flechasEstacion(st) {
 }
 
 function pildoraInmersiva(st) {
-  return `<button class="a sb hov" ${go(st.id + '/' + (st.pildoraRuta || 'visor'), 0.35)} style="${px(...(st.pildoraXY || [118, 336, 148]), 28)}background:rgba(36,22,17,.9);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;padding:0 0 0 16px;white-space:pre" data-vt="pildora${st.pildoraXY ? '-360' : ''}">${st.pildora}</button>`;
+  // Centrada en la misma caja del Figma y con ancho según el texto (antes: ancho fijo y texto pegado a la izquierda).
+  const [x, y, w] = st.pildoraXY || [118, 336, 148];
+  return `<button class="a sb hov nw" ${go(st.id + '/' + (st.pildoraRuta || 'visor'), 0.35)} style="${px(x + w / 2, y)}height:28px;translate:-50% 0;display:flex;align-items:center;gap:7px;padding:0 14px 0 12px;background:rgba(36,22,17,.9);border-radius:14px;color:var(--sobre-marca);font-size:10.5px;line-height:1" data-vt="pildora${st.pildoraXY ? '-360' : ''}">${iconoToque}${st.pildora}</button>`;
 }
+
+/* Ícono que alterna Toque ↔ Toque-AR como un GIF (Figma de la docente, «Icono / Toque» y «Icono / Toque-AR»). */
+const iconoToque = `<span class="toque" aria-hidden="true"><img src="${S}toque.svg" alt=""><img src="${S}toque-ar.svg" alt=""></span>`;
 
 function selectorPestanas(st, actual) {
   const rutas = [st.id, st.id + '/historia', st.id + '/galeria'];

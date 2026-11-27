@@ -125,6 +125,14 @@ html[data-desliza=der]::view-transition-old(*):only-child { animation-name: vt-s
   .hov, .hov:hover { transition: none; transform: none; }
 }
 
+/* Ícono Toque ↔ Toque-AR: cambio seco cada 0,45 s, como un GIF; nunca se ven los dos a la vez (Kevin, 26 nov.).
+   Con «reducir movimiento» queda quieto en Toque-AR. */
+.toque { position: relative; display: block; flex: none; width: 13px; height: 19px; }
+.toque img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; animation: toque-alterna .9s steps(1, end) infinite; }
+.toque img + img { animation-delay: -.45s; }
+@keyframes toque-alterna { 50% { visibility: hidden; } }
+@media (prefers-reduced-motion: reduce) { .toque img { animation: none; } .toque img:first-child { visibility: hidden; } }
+
 /* Pistas de uso: se desvanecen solas (data-auto) o al primer toque (data-vista, lo pone app.js) */
 [data-pista] { transition: opacity .6s ease; }
 [data-pista][data-vista] { opacity: 0; pointer-events: none; }
