@@ -12,7 +12,7 @@ La música con IA se descartó (no convenció a Kevin). El 25 nov. la docente au
 | E1-A | `e1-paseo-cachucha.mp3` | Paseo «La cachucha bacana», Alejo Durán: acordeón, caja y guacharaca | 35 s |
 | E1-B | `e1-solo-acordeon.mp3` | Acordeón de Alejo Durán en «Pedazo de acordeón», Rey de Reyes 1987 | 28 s |
 | E2-A | `e2-parranda-el-mejoral.mp3` | Parranda: Alejo Durán toca y canta el paseo «El mejoral» (vuelve el 26 nov.; la Carta Vallenata se retira) | 38 s |
-| E2-B | `e2-paseo-039.mp3` | Paseo «039», Alejo Durán | 35 s |
+| E2-B | `e2-vaqueria.mp3` | Narración sobre el origen en los cantos de vaquería + canto de vaquería de Ismael Herrera (Ocora). Reemplaza el 26 nov. al paseo «039» de Alejo Durán, como pide el guion Act 1.2 | 49 s |
 | E3-A | `e3-consuelo.mp3` | Voz real de Consuelo Araújo (discurso de clausura como ministra, iVoox), dos frases unidas con una pausa | 21 s |
 | E3-B | `e3-puya-final-2003.mp3` | Puya «La bizca», Ciro Meza Reales en la final de 2003 (tarima Francisco el Hombre) | 35 s |
 | E4-A | `e4-plaza-rio.mp3` | Ambiente del Festival en la Plaza Alfonso López, lejano, + río Guatapurí de fondo | 34 s |
