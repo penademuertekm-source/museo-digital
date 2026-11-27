@@ -317,5 +317,50 @@
     }
   });
 
+  /* Foto ampliada: al tocar una foto de la galería crece desde su sitio hasta una caja redondeada sobre fondo oscuro.
+     Se cierra tocando, con la X o con Escape, y al cambiar de pantalla. Con «reducir movimiento» solo se funde. */
+  let ampliada = null;
+  app.addEventListener('click', e => {
+    const boton = e.target.closest('[data-ampliar]');
+    if (!boton || ampliada) return;
+    const img = boton.querySelector('img'), pant = app.querySelector('.pantalla'), s = app.getBoundingClientRect().width / 375;
+    const o = boton.getBoundingClientRect(), p = pant.getBoundingClientRect();
+    const desde = { left: (o.left - p.left) / s, top: (o.top - p.top) / s, width: o.width / s, height: o.height / s };
+    const w = 335, h = Math.min(w * (img.naturalHeight / img.naturalWidth || .75), 440);
+    const hasta = { left: 20, top: Math.round((667 - h) / 2) - 24, width: w, height: h };
+    const capa = document.createElement('div');
+    capa.className = 'foto-ampliada';
+    capa.setAttribute('role', 'dialog'); capa.setAttribute('aria-modal', 'true'); capa.setAttribute('aria-label', 'Foto ampliada');
+    capa.innerHTML = `<div class="velo"></div><figure class="a"><img class="cubre" alt=""></figure>
+      <p class="a pie" style="left:20px;top:${hasta.top + h + 12}px;width:335px"></p>
+      <button class="a cerrar hov" aria-label="Cerrar foto" style="left:321px;top:${Math.max(hasta.top - 46, 16)}px"><img src="assets/svg/cerrar-mapa.svg" alt="" width="34" height="34"></button>`;
+    const fig = capa.querySelector('figure'), grande = fig.querySelector('img');
+    grande.src = img.currentSrc || img.src; grande.alt = img.alt; grande.style.objectPosition = img.style.objectPosition;
+    capa.querySelector('.pie').textContent = (boton.querySelector('[data-pie]') || {}).textContent || img.alt;
+    Object.entries(hasta).forEach(([k, v]) => { fig.style[k] = v + 'px'; });
+    pant.appendChild(capa);
+    const quieto = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const marco = r => Object.fromEntries(Object.entries(r).map(([k, v]) => [k, v + 'px']));
+    const ida = quieto ? [{ opacity: 0 }, { opacity: 1 }] : [{ ...marco(desde), borderRadius: getComputedStyle(boton).borderRadius }, { ...marco(hasta), borderRadius: '16px' }];
+    const fundir = (el, sentido, ms) => el.animate([{ opacity: 0 }, { opacity: 1 }], { duration: ms, direction: sentido, fill: 'forwards' });
+    fig.animate(ida, { duration: 260, easing: 'cubic-bezier(.2,.8,.2,1)' });
+    capa.querySelectorAll('.velo, .pie, .cerrar').forEach(el => fundir(el, 'normal', 220));
+    const cerrar = rapido => {
+      if (ampliada !== cerrar) return;
+      ampliada = null; removeEventListener('keydown', tecla);
+      if (rapido) { capa.remove(); return; }
+      const vuelta = fig.animate(ida, { duration: 200, easing: 'cubic-bezier(.4,0,.6,1)', direction: 'reverse', fill: 'forwards' });
+      capa.querySelectorAll('.velo, .pie, .cerrar').forEach(el => fundir(el, 'reverse', 180));
+      vuelta.finished.then(() => capa.remove(), () => capa.remove());
+      if (boton.isConnected) boton.focus({ preventScroll: true });
+    };
+    const tecla = ev => { if (ev.key === 'Escape') cerrar(); else if (ev.key === 'Tab') { ev.preventDefault(); capa.querySelector('.cerrar').focus(); } };
+    ampliada = cerrar;
+    capa.addEventListener('click', ev => { ev.stopPropagation(); cerrar(); });
+    addEventListener('keydown', tecla);
+    capa.querySelector('.cerrar').focus({ preventScroll: true });
+  });
+  addEventListener('hashchange', () => { if (ampliada) ampliada(true); });
+
   mostrar();
 })();

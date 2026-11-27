@@ -133,6 +133,14 @@ html[data-desliza=der]::view-transition-old(*):only-child { animation-name: vt-s
 @keyframes toque-alterna { 50% { visibility: hidden; } }
 @media (prefers-reduced-motion: reduce) { .toque img { animation: none; } .toque img:first-child { visibility: hidden; } }
 
+/* Foto ampliada de la galería (app.js) */
+.foto-ampliada { position: absolute; inset: 0; z-index: 5; cursor: zoom-out; }
+.foto-ampliada .velo { position: absolute; inset: 0; background: rgba(20, 12, 9, .84); }
+.foto-ampliada figure { overflow: hidden; border-radius: 16px; box-shadow: 0 14px 34px rgba(0, 0, 0, .45); background: #2a1d18; }
+.foto-ampliada .pie { color: var(--sobre-marca); font-size: 13px; line-height: 18px; text-align: center; }
+.foto-ampliada .cerrar { width: 34px; height: 34px; }
+.foto-ampliada .cerrar::before { content: ''; position: absolute; inset: -7px; }
+
 /* Pistas de uso: se desvanecen solas (data-auto) o al primer toque (data-vista, lo pone app.js) */
 [data-pista] { transition: opacity .6s ease; }
 [data-pista][data-vista] { opacity: 0; pointer-events: none; }

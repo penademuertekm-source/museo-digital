@@ -61,12 +61,16 @@ function historia(st) {
 /* ---------- 4. Galería (232:6296) ---------- */
 function galeria(st) {
   const g = st.galeria;
-  const foto = (i, l, t, w, h, r, gh, fs, fw, tx, ty) => `
-    <figure class="a" style="${px(l, t, w, h)}border-radius:${r}px;overflow:hidden">
-      <img class="cubre" src="assets/img/${st.id}-galeria-${i}.jpg" alt="${g.fotos[i - 1].replace(/^\d\/3 · /, '')}">
-      <div class="a" style="${px(0, h - gh, w, gh)}background:linear-gradient(180deg,rgba(24,14,10,0),rgba(24,14,10,${i === 1 ? .85 : .82}))"></div>
-      <figcaption class="a nw" style="${px(tx, ty)}color:var(--sobre-marca);font-size:${fs}px;font-weight:${fw}">${g.fotos[i - 1]}</figcaption>
-    </figure>`;
+  // Cada foto es un botón: al tocarla se amplía (app.js, «Foto ampliada»).
+  const foto = (i, l, t, w, h, r, gh, fs, fw, tx, ty) => {
+    const alt = g.fotos[i - 1].replace(/^\d\/3 · /, '');
+    return `
+    <button class="a hov" data-ampliar aria-label="Ampliar foto: ${alt}" style="${px(l, t, w, h)}border-radius:${r}px;overflow:hidden">
+      <img class="cubre" src="assets/img/${st.id}-galeria-${i}.jpg" alt="${alt}"${g.pos && g.pos[i - 1] ? ` style="object-position:${g.pos[i - 1]}"` : ''}>
+      <span class="a" style="${px(0, h - gh, w, gh)}background:linear-gradient(180deg,rgba(24,14,10,0),rgba(24,14,10,${i === 1 ? .85 : .82}))"></span>
+      <span class="a nw" data-pie style="${px(tx, ty)}color:var(--sobre-marca);font-size:${fs}px;font-weight:${fw}">${g.fotos[i - 1]}</span>
+    </button>`;
+  };
   return marcoEstacion(st, false, `
     ${cabeceraPanel(st, g.sub)}
     ${foto(1, 24, 444, 190, 148, 12, 52, 10.5, 600, 10, 124)}
