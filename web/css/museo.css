@@ -99,6 +99,8 @@ model-viewer { --poster-color: transparent; --progress-bar-color: var(--acento);
 .punto img { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); }
 .punto span { position: relative; font-size: 10px; line-height: 1; color: var(--texto); }
 .punto[aria-pressed=true] span { color: var(--sobre-marca); }
+/* Puntos de pestaña (12 px): área táctil invisible de 21 × 37 px; no se pisan porque van cada 21 px */
+.pest::before { content: ''; position: absolute; left: -4.5px; right: -4.5px; top: -10px; bottom: -15px; }
 .ctrl::before { content: ''; position: absolute; left: -8px; right: -8px; top: 0; bottom: 0; }
 
 /* Transiciones (View Transitions API ≈ Smart Animate / Disolver de Figma) */

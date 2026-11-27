@@ -156,10 +156,10 @@ function pildoraInmersiva(st) {
 function selectorPestanas(st, actual) {
   const rutas = [st.id, st.id + '/historia', st.id + '/galeria'];
   const nombres = ['Resumen', 'Historia', 'Galería'];
-  return `<nav class="a" aria-label="Pestañas de la estación" style="${px(151, 632, 74, 20)}background:rgba(237,227,206,.92);border-radius:10px;overflow:hidden" data-vt="pestanas">
+  return `<nav class="a" aria-label="Pestañas de la estación" style="${px(151, 632, 74, 20)}background:rgba(237,227,206,.92);border-radius:10px" data-vt="pestanas">
     ${[0, 1, 2].map(i => i === actual
       ? `<span class="a" aria-current="page" aria-label="${nombres[i]}" style="${px(10 + i * 21, 4, 12, 12)}background:var(--primario);border-radius:6px"></span>`
-      : `<button class="a hov" aria-label="${nombres[i]}" ${go(rutas[i])} style="${px(10 + i * 21, 4, 12, 12)}background:var(--linea);border-radius:6px"></button>`).join('')}
+      : `<button class="a hov pest" aria-label="${nombres[i]}" ${go(rutas[i])} style="${px(10 + i * 21, 4, 12, 12)}background:var(--linea);border-radius:6px"></button>`).join('')}
   </nav>`;
 }
 
