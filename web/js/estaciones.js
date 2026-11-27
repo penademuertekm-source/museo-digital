@@ -89,11 +89,11 @@ function contraida(st) {
 const centro = 'display:flex;align-items:center;justify-content:center;line-height:1;';
 
 /* Panel inferior del visor y de la vista 2D: fichas 1·2·3, título, reproductor y subtítulos (desde y = 428). */
-function panelPieza(st, sonando, dest, sub, colorSub) {
-  const p = st.pieza;
+function panelPieza(st, sonando, dest, sub, colorSub, conModelo) {
+  const p = st.pieza, tag = conModelo ? 'button' : 'span'; // con modelo 3D las fichas llevan la cámara a su punto (app.js)
   return `
     <div class="a" style="${px(0, 428, 375, 239)}background:var(--papel);border-radius:24px 24px 0 0"></div>
-    <div class="a" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.chips.map((c, i) => `<span class="sb nw" data-chip="${i}" style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${c}</span>`).join('')}</div>
+    <div class="a" style="${px(24, 446, 327, 26)}display:flex;gap:8px">${p.chips.map((c, i) => `<${tag} class="sb nw" data-chip="${i}"${conModelo ? ` aria-label="Ver ${c.replace(/^\d+\.\s*/, '')} en el modelo"` : ''} style="height:26px;border-radius:13px;font-size:10px;padding:0 14px;${centro}${i === 0 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--crema)'}">${c}</${tag}>`).join('')}</div>
     <h2 class="a fr b nw" style="${px(24, 484)}font-size:19px">${p.titulo}</h2>
     <div class="a" style="${px(24, 513, 3, 13)}background:var(--acento);border-radius:1.5px"></div>
     <p class="a sb nw" style="${px(33, 512)}color:${colorSub};font-size:11px">${sub}</p>

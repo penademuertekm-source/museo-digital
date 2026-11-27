@@ -299,7 +299,8 @@
   app.addEventListener('animationend', e => { if (e.animationName === 'pista-fuera') pistasVistas.add(e.target.dataset.pista); });
   app.addEventListener('click', e => {
     const mv = app.querySelector('model-viewer'); if (!mv) return;
-    const punto = e.target.closest("button[data-punto]"), zoom = e.target.closest('[data-zoom]');
+    const chip = e.target.closest('button[data-chip]'); // las fichas «1. Acordeón…» hacen lo mismo que su punto
+    const punto = e.target.closest("button[data-punto]") || (chip && app.querySelector(`button[data-punto="${chip.dataset.chip}"]`)), zoom = e.target.closest('[data-zoom]');
     const anillo = app.querySelector('[data-anillo]'); // el anillo del piso solo cuadra con la vista inicial
     if (anillo && (punto || zoom)) anillo.style.opacity = 0;
     if (punto) {
