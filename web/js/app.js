@@ -77,7 +77,10 @@
   }
 
   function mostrar() {
-    const ruta = location.hash.replace(/^#\/?/, '') || 'portada';
+    let ruta = location.hash.replace(/^#\/?/, '') || 'portada';
+    const base = ruta.split('/')[0];
+    // Solo claves propias: «#/constructor» o «#/__proto__» llevarían a objetos heredados y romperían la pantalla.
+    if (base !== 'mapa' && !Object.hasOwn(SALAS, base) && !Object.hasOwn(ESTACIONES, base)) ruta = 'portada';
     const t = pendiente || { t: 'smart', d: 0.3 };
     pendiente = null;
     const reducir = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -216,6 +219,9 @@
     const js = document.createElement('script');
     js.id = 'model-viewer-js'; js.type = 'module';
     js.src = 'https://cdn.jsdelivr.net/npm/@google/model-viewer@4.0.0/dist/model-viewer.min.js';
+    // SRI: el navegador no ejecuta el archivo si el CDN lo cambia (hash publicado por jsDelivr para 4.0.0).
+    js.integrity = 'sha384-sr9b4Ux0WhAUGclJ0ym0FSY2zSOMmNSn0bP/SA0e6bNCrpn/5W3QL8mm+LdlQMKw';
+    js.crossOrigin = 'anonymous'; js.referrerPolicy = 'no-referrer';
     js.onerror = () => ayuda('No se pudo cargar el visor 3D. Revisa la conexión.', 0);
     document.head.appendChild(js);
   }

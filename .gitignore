@@ -1,0 +1,6 @@
+.env*
+*.pem
+*.key
+/.firebase/
+/assets/
+.playwright-mcp/
