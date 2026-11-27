@@ -183,9 +183,9 @@ function lamina(st, n, sonando) {
     <button class="a hov" aria-label="Salir de la pieza" ${go(st.id)} style="${px(16, 16, 34, 34)}" data-vt="regresar"><img src="${S}regresar.svg" alt="" width="34" height="34"></button>
     <p class="a sb nw" style="${px(58, 16, 301, 34)}background:var(--primario);border:1px solid rgba(224,169,46,.4);border-radius:17px;color:var(--sobre-marca);font-size:10.5px;${centro}" data-vt="modo">● ${p.modo}</p>
     <div class="a" style="${px(20, 68, 335, 340)}background:#f7f3ec;border:1px solid rgba(224,169,46,.45);border-radius:20px;overflow:hidden;box-shadow:0 8px 20px rgba(36,22,17,.08)">
-      <img class="a" src="${st.escenario}" alt="${st.altEscenario}" style="${px(12, 12, 307, 216)}object-fit:cover;object-position:50% ${p.encuadre};border-radius:14px">
+      <img class="a" src="${p.lamina || st.escenario}" alt="${p.altLamina || st.altEscenario}" style="${px(12, 12, 307, 216)}object-fit:cover;object-position:50% ${p.encuadre};border-radius:14px">
       ${p.disco ? `<span class="a disco${sonando ? ' gira' : ''}" aria-hidden="true" style="${px(...p.disco, 64, 64)}"></span>` : ''}
-      <span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">${p.etiqueta || '✓ Lámina fija · Sin giros ni cámara'}</span>
+      ${p.etiqueta === '' ? '' : `<span class="a m nw" style="${px(22, 22, 196, 24)}background:rgba(36,22,17,.82);border-radius:12px;color:var(--sobre-marca);font-size:9.5px;${centro}">${p.etiqueta || '✓ Lámina fija · Sin giros ni cámara'}</span>`}
       ${p.puntos.map((q, i) => `<button class="a" aria-label="Punto ${i + 1}: ${q.nombre}" aria-pressed="${i === n - 1}" ${go(ir(i + 1), 0.25)} style="${px(q.xy[0] - 22, q.xy[1] - 22, 44, 44)}${centro}">
         <span class="b" style="width:26px;height:26px;border-radius:13px;border:2px solid var(--sobre-marca);font-size:10.5px;${centro}${i === n - 1 ? 'background:var(--primario);color:var(--sobre-marca)' : 'background:var(--acento);color:var(--texto)'}">${i + 1}</span></button>`).join('')}
       ${p.puntos.map((q, i) => `

@@ -93,7 +93,7 @@ function mapa() {
     ['SALA 01 · 2 ESTACIONES', 'Fundación 1968', 'El triunvirato creador y el primer Rey.', 's1'],
     ['SALA 02 · 3 ESTACIONES', 'Tríada Instrumental', 'Acordeón, caja y guacharaca.', 's2'],
     ['SALA 03 · 4 ESTACIONES', 'Los 4 Aires', 'Paseo, merengue, son y puya.', 's3'],
-    ['SALA 04 · 2 ESTACIONES', 'Danza del Pilón', 'Del patio campesino al desfile.', null],
+    ['SALA 04 · 2 ESTACIONES', 'Danza del Pilón', 'Del patio campesino al desfile.', 's4'],
   ];
   const tarjeta = (top, eti, colEti, tit, desc, dest, fondo, extra) => `
       <${dest ? `button class="a" ${go(dest, 0.35)}` : 'div class="a" aria-disabled="true"'} style="${px(48.8, top, 265, 72)}background:${fondo};border-radius:14px;overflow:hidden${dest ? '' : ';opacity:.7'}">
