@@ -63,12 +63,13 @@ function galeria(st) {
   const g = st.galeria;
   // Cada foto es un botón: al tocarla se amplía (app.js, «Foto ampliada»).
   const foto = (i, l, t, w, h, r, gh, fs, fw, tx, ty) => {
-    const alt = g.fotos[i - 1].replace(/^\d\/3 · /, '');
+    const alt = g.fotos[i - 1].replace(/^\d\/3 · /, '').replace('\n', ' ');
+    const dos = g.fotos[i - 1].includes('\n'); // pie en dos líneas, como en el Figma nuevo (Est. 4.1)
     return `
     <button class="a hov" data-ampliar aria-label="Ampliar foto: ${alt}" style="${px(l, t, w, h)}border-radius:${r}px;overflow:hidden">
       <img class="cubre" src="assets/img/${st.id}-galeria-${i}.jpg" alt="${alt}"${g.pos && g.pos[i - 1] ? ` style="object-position:${g.pos[i - 1]}"` : ''}>
       <span class="a" style="${px(0, h - gh, w, gh)}background:linear-gradient(180deg,rgba(24,14,10,0),rgba(24,14,10,${i === 1 ? .85 : .82}))"></span>
-      <span class="a nw" data-pie style="${px(tx, ty)}color:var(--sobre-marca);font-size:${fs}px;font-weight:${fw}">${g.fotos[i - 1]}</span>
+      <span class="a nw" data-pie style="${px(tx, dos ? (i === 1 ? 119 : 45) : ty)}color:var(--sobre-marca);font-size:${fs}px;font-weight:${fw}${dos ? ';white-space:pre;line-height:12px' : ''}">${g.fotos[i - 1]}</span>
     </button>`;
   };
   return marcoEstacion(st, false, `
