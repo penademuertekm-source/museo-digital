@@ -93,9 +93,10 @@
       { duration: t.d * 1000, easing: 'cubic-bezier(.42,0,.58,1)' });
     if (!document.startViewTransition) { pintar(ruta); fundido(); anotar('sin View Transitions: fundido'); return; }
     document.documentElement.style.setProperty('--vt-dur', t.d + 's');
+    document.documentElement.dataset.desliza = t.dir || '';
     const smart = t.t === 'smart';
     nombrar(smart); // Disolver = fundido de la pantalla completa, sin capas
-    document.documentElement.dataset.desliza = t.dir || '';
+    const t0 = performance.now();
     const vt = transicion = document.startViewTransition(() => { pintar(ruta); nombrar(smart); });
     vt.ready.then(() => anotar('transición ok → ' + ruta), e => {
       anotar('transición cancelada (' + e.name + ': ' + e.message + ') → fundido');
@@ -118,7 +119,6 @@
     diag.style.cssText = 'position:fixed;left:4px;right:4px;bottom:4px;max-height:38vh;overflow:auto;z-index:9;margin:0;padding:6px 8px;background:rgba(0,0,0,.82);color:#9f9;font:11px/1.35 monospace;white-space:pre-wrap;pointer-events:none';
     anotar(navigator.userAgent + '\nreducir movimiento: ' + matchMedia('(prefers-reduced-motion: reduce)').matches
       + ' · View Transitions: ' + !!document.startViewTransition + ' · ancho ' + innerWidth + ' · escala ' + getComputedStyle(document.documentElement).getPropertyValue('--s'));
-    const t0 = performance.now();
   }
 
   app.addEventListener('click', e => {
@@ -132,8 +132,6 @@
   });
   addEventListener('hashchange', mostrar);
 
-  /* Audio (A1: solo suena tras un toque; A3: un solo audio a la vez).
-     Las rutas que terminan en /audio son las pantallas "Audio Activo" de Figma. */
   /* Deslizar el panel de la estación pasa entre Resumen, Historia y Galería, igual que los puntos de abajo. */
   let dedo = null, tragarClic = -1;
   app.addEventListener('pointerdown', e => {
@@ -157,6 +155,8 @@
   app.addEventListener('pointercancel', () => { dedo = null; });
   app.addEventListener('click', e => { if (e.timeStamp - tragarClic < 500) { e.stopPropagation(); e.preventDefault(); } }, true);
 
+  /* Audio (A1: solo suena tras un toque; A3: un solo audio a la vez).
+     Las rutas que terminan en /audio son las pantallas "Audio Activo" de Figma. */
   function sonido(ruta) {
     const partes = ruta.split('/');
     const st = ESTACIONES[partes[0]];
